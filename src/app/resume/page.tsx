@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Download, Mail } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Mail } from "lucide-react";
 import { siteConfig } from "@/lib/data/site";
 import { skillCategories } from "@/lib/data/skills";
 import { Card } from "@/components/ui/card";
