@@ -11,151 +11,93 @@ export type Project = {
   results: string[];
   featured: boolean;
   gradient: string;
+  github?: string;
+  status?: "Implemented" | "Research in progress" | "Documentation / planning";
 };
 
 export const projects: Project[] = [
   {
+    slug: "hyperparameter-optimization-xai",
+    title: "Explainable Hyperparameter Optimization for Imbalanced Classification",
+    subtitle: "Bank Marketing · model selection · threshold analysis · SHAP",
+    description: "Research framework using the UCI Bank Marketing dataset to study class imbalance, Optuna-based hyperparameter optimization, multi-objective evaluation, threshold selection, robustness, and SHAP explanation stability.",
+    tags: ["Machine Learning", "Explainable AI", "Analytics"],
+    metrics: [],
+    technologies: ["Python", "Pandas", "Scikit-learn", "Optuna", "SHAP", "SMOTENC"],
+    challenges: ["The positive subscription class is a minority class, so accuracy alone is not an adequate evaluation measure.", "Threshold selection and explanation stability need to be assessed alongside predictive performance."],
+    solutions: ["Compared class weighting and SMOTENC, with resampling restricted to training data.", "Included F1, precision, recall, PR-AUC, ROC-AUC, threshold analysis, robustness checks, and SHAP."],
+    results: ["The repository documents the experimental workflow and research questions; numerical findings should be taken from final notebook outputs."],
+    featured: true,
+    gradient: "from-cyan-600/30 via-indigo-500/20 to-violet-500/30",
+    github: "https://github.com/harshkhamkar26/Hyperparameter-Optimization-XAI",
+    status: "Implemented",
+  },
+  {
     slug: "student-performance-xai",
-    title: "Student Performance Analysis using Explainable AI",
-    subtitle: "SHAP-driven interpretability for educational outcomes",
-    description:
-      "Built an end-to-end ML pipeline predicting student performance with full model interpretability using SHAP values, enabling educators to understand feature impact.",
-    tags: ["Machine Learning", "SHAP", "XAI", "Education"],
-    metrics: [
-      { label: "Model Accuracy", value: "91.2%" },
-      { label: "Features Analyzed", value: "24" },
-      { label: "SHAP Insights", value: "100+" },
-    ],
-    technologies: ["Python", "Scikit-learn", "SHAP", "Pandas", "Streamlit"],
-    challenges: [
-      "Black-box models lacked trust from academic stakeholders.",
-      "High-dimensional feature interactions were difficult to explain.",
-    ],
-    solutions: [
-      "Implemented TreeSHAP for global and local explanations.",
-      "Built interactive dashboards surfacing top predictive drivers.",
-    ],
-    results: [
-      "Achieved 91.2% prediction accuracy with full transparency.",
-      "Enabled data-driven intervention strategies for at-risk students.",
-    ],
+    title: "Student Performance Prediction & Explainability",
+    subtitle: "UCI student datasets · Random Forest regression · SHAP",
+    description: "Combines the UCI Mathematics and Portuguese student datasets, creates an average final-grade target, excludes grade fields that would leak target information, and uses SHAP to explain model predictions.",
+    tags: ["Machine Learning", "Explainable AI"],
+    metrics: [],
+    technologies: ["Python", "Pandas", "Scikit-learn", "SHAP", "Jupyter"],
+    challenges: ["Combining subject-specific datasets while keeping a clear target definition.", "Avoiding target leakage and making model behaviour interpretable."],
+    solutions: ["Merged records on shared student attributes and engineered an average final-grade target.", "Excluded intermediate and final grade columns from model features and documented SHAP explanations."],
+    results: ["The repository documents preprocessing and explainability. Do not display an accuracy percentage for this regression task without a validated classification evaluation."],
     featured: true,
-    gradient: "from-violet-600/40 via-indigo-500/20 to-cyan-500/30",
+    gradient: "from-violet-600/30 via-blue-500/20 to-cyan-500/30",
+    github: "https://github.com/harshkhamkar26/Student_Performance_XAI",
+    status: "Implemented",
   },
   {
-    slug: "financial-analytics-dashboard",
-    title: "Financial Analytics Dashboard",
-    subtitle: "Real-time executive intelligence platform",
-    description:
-      "Designed a Power BI and Python-powered financial analytics suite delivering real-time KPIs, variance analysis, and drill-down capabilities for leadership.",
-    tags: ["Power BI", "Finance", "Dashboard", "SQL"],
-    metrics: [
-      { label: "KPIs Tracked", value: "35+" },
-      { label: "Report Time Saved", value: "60%" },
-      { label: "Data Sources", value: "8" },
-    ],
-    technologies: ["Power BI", "SQL", "Python", "DAX", "Azure"],
-    challenges: [
-      "Fragmented financial data across multiple systems.",
-      "Manual reporting consumed 15+ hours weekly.",
-    ],
-    solutions: [
-      "Unified ETL pipeline consolidating disparate sources.",
-      "Automated refresh schedules with anomaly detection alerts.",
-    ],
-    results: [
-      "Reduced reporting cycle from days to real-time.",
-      "Improved forecast accuracy by 23% through unified metrics.",
-    ],
+    slug: "multimodal-deepfake-detection",
+    title: "Multimodal Deepfake Detection",
+    subtitle: "Audio-visual evidence · reliability-aware temporal fusion",
+    description: "Research project investigating audio and visual baselines, temporal fusion, modality reliability, disagreement analysis, robustness, and cross-manipulation generalisation. Proposed architecture and hypotheses require controlled experimental validation.",
+    tags: ["Machine Learning", "Deep Learning", "Research"],
+    metrics: [],
+    technologies: ["Python", "Deep Learning", "Audio-Visual ML", "Experiment Design"],
+    challenges: ["Ensuring leakage-resistant splits and reliable audio-video alignment.", "Separating proposed research hypotheses from experimentally demonstrated results."],
+    solutions: ["Documents an experimental ladder from unimodal baselines to fusion, ablation, and robustness evaluation.", "Plans chunked, resumable preprocessing and reproducibility metadata."],
+    results: ["Research in progress; the repository explicitly treats the proposed fusion improvements as hypotheses to be tested."],
     featured: true,
-    gradient: "from-emerald-600/40 via-teal-500/20 to-cyan-500/30",
+    gradient: "from-fuchsia-600/30 via-purple-500/20 to-cyan-500/30",
+    github: "https://github.com/harshkhamkar26/multimodal-deepfake-detection",
+    status: "Research in progress",
   },
   {
-    slug: "customer-segmentation-ml",
-    title: "Customer Segmentation using Machine Learning",
-    subtitle: "RFM + clustering for precision marketing",
-    description:
-      "Developed unsupervised and supervised segmentation models combining RFM analysis with K-Means and hierarchical clustering for targeted campaigns.",
-    tags: ["Clustering", "Marketing", "RFM", "Python"],
-    metrics: [
-      { label: "Segments Identified", value: "6" },
-      { label: "Campaign ROI Lift", value: "34%" },
-      { label: "Customers Analyzed", value: "50K+" },
-    ],
-    technologies: ["Python", "Scikit-learn", "Pandas", "Plotly", "SQL"],
-    challenges: [
-      "Homogeneous customer base masked high-value micro-segments.",
-      "Marketing spend was not optimized by customer lifetime value.",
-    ],
-    solutions: [
-      "Engineered RFM features with PCA dimensionality reduction.",
-      "Validated clusters with silhouette scores and business rules.",
-    ],
-    results: [
-      "Increased campaign conversion by 34% through targeted outreach.",
-      "Identified 3 previously hidden high-LTV customer segments.",
-    ],
+    slug: "sentinel-x",
+    title: "SENTINEL-X — Agentic SOC Research",
+    subtitle: "Evidence-grounded investigation · controlled response · auditability",
+    description: "Cybersecurity platform concept documenting event ingestion, detection and correlation, agentic investigation, explainable findings, approval-gated response, and auditable workflows.",
+    tags: ["AI", "Cybersecurity", "Research"],
+    metrics: [],
+    technologies: ["Agentic AI", "Security Analytics", "Explainable ML", "SOAR Concepts"],
+    challenges: ["Maintaining evidence-grounded findings and safe boundaries for automated response.", "Separating architecture and planning from a validated, implemented system."],
+    solutions: ["Documents architecture, requirements, threat model, dataset planning, UML, and verification strategy.", "Defines allow-listed, reversible, auditable response actions as a safety boundary."],
+    results: ["The README identifies the project as Phase 0: requirements, architecture, UML, and dataset planning."],
     featured: true,
-    gradient: "from-pink-600/40 via-rose-500/20 to-orange-500/30",
+    gradient: "from-emerald-600/30 via-teal-500/20 to-cyan-500/30",
+    github: "https://github.com/harshkhamkar26/SENTINEL-X",
+    status: "Documentation / planning",
   },
   {
-    slug: "sales-forecasting-system",
-    title: "Sales Forecasting System",
-    subtitle: "Time-series ML for revenue prediction",
-    description:
-      "Architected a production-grade forecasting system using ARIMA, Prophet, and gradient boosting ensembles with automated model selection.",
-    tags: ["Forecasting", "Time Series", "ML", "Analytics"],
-    metrics: [
-      { label: "MAPE Reduction", value: "28%" },
-      { label: "Horizon", value: "12 mo" },
-      { label: "Models Ensembled", value: "4" },
-    ],
-    technologies: ["Python", "Prophet", "XGBoost", "Statsmodels", "FastAPI"],
-    challenges: [
-      "Seasonality and promotional spikes degraded single-model accuracy.",
-      "Stakeholders needed confidence intervals, not point estimates.",
-    ],
-    solutions: [
-      "Built stacked ensemble with weighted model selection.",
-      "Delivered probabilistic forecasts with 95% confidence bands.",
-    ],
-    results: [
-      "Reduced MAPE from 18.4% to 13.2% across product lines.",
-      "Enabled inventory optimization saving an estimated 15% in holding costs.",
-    ],
-    featured: true,
-    gradient: "from-amber-600/40 via-yellow-500/20 to-lime-500/30",
-  },
-  {
-    slug: "ai-analytics-assistant",
-    title: "AI-Powered Analytics Assistant",
-    subtitle: "Natural language interface for business data",
-    description:
-      "Created an AI assistant enabling non-technical users to query datasets in natural language, generating SQL, visualizations, and narrative insights automatically.",
-    tags: ["AI", "NLP", "LLM", "Analytics"],
-    metrics: [
-      { label: "Query Accuracy", value: "87%" },
-      { label: "Time to Insight", value: "-75%" },
-      { label: "Users Supported", value: "25+" },
-    ],
-    technologies: ["Python", "LangChain", "OpenAI API", "SQL", "Streamlit"],
-    challenges: [
-      "Business users lacked SQL skills for self-serve analytics.",
-      "Ad-hoc data requests created bottlenecks for the analytics team.",
-    ],
-    solutions: [
-      "RAG pipeline over schema documentation and sample queries.",
-      "Guardrails for SQL validation and result explanation.",
-    ],
-    results: [
-      "Reduced average time-to-insight from 2 hours to 30 minutes.",
-      "Democratized analytics access across 25+ business users.",
-    ],
-    featured: true,
-    gradient: "from-blue-600/40 via-indigo-500/20 to-violet-500/30",
+    slug: "sports-analytics-research",
+    title: "Sports Analytics Research",
+    subtitle: "A growing research and analysis repository",
+    description: "A public repository for sports analytics research. Specific methods, datasets, and results should be added to this case study only after reviewing the repository contents.",
+    tags: ["Analytics", "Research"],
+    metrics: [],
+    technologies: ["Data Analysis"],
+    challenges: [],
+    solutions: [],
+    results: ["Explore the repository for current contents and implementation status."],
+    featured: false,
+    gradient: "from-amber-600/30 via-orange-500/20 to-pink-500/30",
+    github: "https://github.com/harshkhamkar26/Sports-Analytics-Research",
+    status: "Research in progress",
   },
 ];
 
 export function getProject(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
+  return projects.find((project) => project.slug === slug);
 }
