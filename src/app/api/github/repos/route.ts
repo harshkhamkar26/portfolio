@@ -19,7 +19,7 @@ export async function GET() {
       return NextResponse.json({ error: "GitHub repository data is temporarily unavailable.", repositories: [] }, { status: 502 });
     }
     const repositories = (await response.json()) as GitHubRepository[];
-    const safeRepositories = repositories.filter((repo) => !repo.fork && !repo.archived).map((repo) => ({
+    const safeRepositories = repositories.filter((repo) => Boolean(repo.html_url)).map((repo) => ({
       id: repo.id, name: repo.name, fullName: repo.full_name,
       description: repo.description ?? "No repository description has been added yet.",
       url: repo.html_url, demoUrl: repo.homepage, language: repo.language,
