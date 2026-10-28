@@ -89,8 +89,7 @@ export function ProjectsSection() {
           <div className="mt-6 grid gap-8 md:grid-cols-2">
             {featured.map((project, i) => (
               <Reveal key={project.slug} delay={i * 0.06}>
-                <Link href={`/projects/${project.slug}`} className="group block h-full">
-                  <motion.article
+                <motion.article
                     className={`relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${project.gradient} p-[1px] transition-all duration-500 hover:border-cyan-500/40 hover:shadow-[0_0_40px_rgba(34,211,238,0.16)]`}
                     whileHover={{ y: -6 }}
                     transition={{ type: "spring", stiffness: 280 }}
@@ -100,7 +99,7 @@ export function ProjectsSection() {
                         {project.tags.slice(0, 3).map((tag) => <Badge key={tag}>{tag}</Badge>)}
                         {project.status && <span className="rounded-full border border-white/10 px-2.5 py-1 text-xs text-zinc-300">{project.status}</span>}
                       </div>
-                      <h4 className="mt-5 text-xl font-bold text-white group-hover:text-cyan-100">{project.title}</h4>
+                      <h4 className="mt-5 text-xl font-bold text-white group-hover:text-cyan-100"><Link href={`/projects/${project.slug}`}>{project.title}</Link></h4>
                       <p className="mt-2 text-sm text-cyan-200/80">{project.subtitle}</p>
                       <p className="mt-4 text-sm leading-6 text-zinc-400">{project.description}</p>
                       <div className="mt-5 flex flex-wrap gap-2">
@@ -116,8 +115,7 @@ export function ProjectsSection() {
                         </a>
                       )}
                     </div>
-                  </motion.article>
-                </Link>
+                </motion.article>
               </Reveal>
             ))}
           </div>
