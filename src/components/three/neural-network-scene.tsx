@@ -5,6 +5,11 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Line, Sphere } from "@react-three/drei";
 import * as THREE from "three";
 
+function seededRandom(seed: number) {
+  const value = Math.sin(seed * 12.9898) * 43758.5453;
+  return value - Math.floor(value);
+}
+
 function NeuralCore({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number }> }) {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -12,9 +17,9 @@ function NeuralCore({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: n
     const nodeCount = 28;
     const nodes: THREE.Vector3[] = [];
     for (let i = 0; i < nodeCount; i++) {
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = 1.2 + Math.random() * 0.8;
+      const theta = seededRandom(i * 3 + 1) * Math.PI * 2;
+      const phi = Math.acos(2 * seededRandom(i * 3 + 2) - 1);
+      const r = 1.2 + seededRandom(i * 3 + 3) * 0.8;
       nodes.push(
         new THREE.Vector3(
           r * Math.sin(phi) * Math.cos(theta),

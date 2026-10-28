@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Linkedin, Github, Send, ArrowUpRight } from "lucide-react";
+import { Mail, Linkedin, Github, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/lib/data/site";
 import { Reveal } from "@/components/animations/reveal";
 import { Card } from "@/components/ui/card";
