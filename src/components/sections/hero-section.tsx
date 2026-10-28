@@ -85,10 +85,7 @@ export function HeroSection() {
               </MagneticButton>
               <MagneticButton>
                 <Button variant="outline" size="lg" asChild>
-                  <Link href={siteConfig.resumeUrl} download>
-                    <Download className="h-4 w-4" />
-                    Download Resume
-                  </Link>
+                  <Link href={siteConfig.resumeUrl}><Download className="h-4 w-4" />View Resume &amp; ATS</Link>
                 </Button>
               </MagneticButton>
               <MagneticButton>
