@@ -6,7 +6,7 @@ export const siteConfig = {
   email: "harshkhamkar26@gmail.com",
   linkedin: "https://www.linkedin.com/in/harsh-khamkar-b4a54a32a/",
   github: "https://github.com/harshkhamkar26",
-  resumeUrl: "/resume/Harsh_Khamkar_Resume.pdf",
+  resumeUrl: "/resume",
   keywords: ["Harsh Khamkar", "Data Science", "Artificial Intelligence", "Machine Learning", "Python", "SQL", "Explainable AI", "SHAP", "Power BI", "Zoho Analytics", "Mumbai", "Universal AI University"],
 };
 
