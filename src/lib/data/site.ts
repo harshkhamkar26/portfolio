@@ -1,172 +1,84 @@
 export const siteConfig = {
   name: "Harsh Khamkar",
-  title: "Data Scientist | AI/ML Engineer | Data Analyst",
-  tagline:
-    "Transforming Data into Intelligence through Machine Learning, Analytics, and AI Systems.",
+  title: "AI/ML & Data Science Undergraduate | Data Analyst",
+  tagline: "Turning noise into signal through applied machine learning, explainable AI, analytics, and useful software.",
   location: "Mumbai, India",
-  email: "harsh.khamkar@email.com",
-  linkedin: "https://linkedin.com/in/harshkhamkar",
-  github: "https://github.com/harshkhamkar",
-  resumeUrl: "/resume/Harsh_Khamkar_Resume.pdf",
-  keywords: [
-    "Data Scientist",
-    "Machine Learning Engineer",
-    "AI Engineer",
-    "Data Analyst",
-    "Business Analyst",
-    "Python Developer",
-    "SQL Analyst",
-    "Power BI Developer",
-    "Mumbai",
-    "Explainable AI",
-    "SHAP",
-    "Predictive Analytics",
-  ],
+  email: "harshkhamkar26@gmail.com",
+  linkedin: "https://www.linkedin.com/in/harsh-khamkar-b4a54a32a/",
+  github: "https://github.com/harshkhamkar26",
+  resumeUrl: "/resume",
+  keywords: ["Harsh Khamkar", "Data Science", "Artificial Intelligence", "Machine Learning", "Python", "SQL", "Explainable AI", "SHAP", "Power BI", "Zoho Analytics", "Mumbai", "Universal AI University"],
 };
 
 export const metrics = [
-  { label: "Internships", value: "2+", suffix: "" },
-  { label: "Projects", value: "5+", suffix: "" },
-  { label: "Specialization", value: "AI/ML", suffix: "" },
-  { label: "Analytics", value: "Proven", suffix: " Experience" },
+  { label: "Industry Internships", value: "2", suffix: "" },
+  { label: "Public Work", value: "GitHub", suffix: "" },
+  { label: "Focus", value: "AI/ML", suffix: "" },
+  { label: "Analytics", value: "BI", suffix: " & Data" },
 ];
 
 export const journeyTimeline = [
-  {
-    year: "2021",
-    role: "Student",
-    description:
-      "Built foundations in statistics, programming, and analytical thinking at university.",
-  },
-  {
-    year: "2023",
-    role: "Technology Intern",
-    description:
-      "One Globe Build Con LLP — delivered innovation-focused technology solutions and automation.",
-  },
-  {
-    year: "2024",
-    role: "Data Analyst",
-    description:
-      "Choice India — transformed business data into actionable insights through analytics and reporting.",
-  },
-  {
-    year: "2025+",
-    role: "Future AI Leader",
-    description:
-      "Architecting intelligent systems at the intersection of ML, analytics, and product strategy.",
-  },
+  { year: "2024–2028", role: "B.Tech — Data Science", description: "Universal AI University, School of AI & Future Technologies. Expected graduation in 2028." },
+  { year: "Apr–Jul 2025", role: "Technology & Innovation Intern", description: "One Globe Build Con LLP — frontend development, Python-based ML exposure, and data visualisation." },
+  { year: "May–Jul 2026", role: "Data Analyst & Business Analyst Intern", description: "Choice India — business data preparation, SQL/Zoho Analytics, dashboards, reporting, and workflow automation exposure." },
 ];
 
 export const experiences = [
   {
-    company: "Choice India",
+    company: "Choice India (The Joy of Earning)",
     role: "Data Analyst & Business Analyst Intern",
-    period: "2024",
-    location: "Mumbai, India",
+    period: "May–July 2026",
+    location: "India",
     highlights: [
-      "Built executive dashboards and KPI frameworks for business stakeholders.",
-      "Performed segmentation, cohort analysis, and hypothesis-driven analytics.",
-      "Translated complex datasets into strategic recommendations.",
-    ],
+      "Prepared and validated a reported travel-sector dataset of approximately 128,000 records; confirm this figure before publicising it.",
+      "Used SQL and Zoho Analytics for business and financial data analysis and reporting.",
+      "Built and maintained Power BI dashboards and automated reports; the resume records 11 dashboards.",
+      "Supported AiSensy-based WhatsApp automation workflows across B2B, B2C, and B2G verticals."
+    ]
   },
   {
     company: "One Globe Build Con LLP",
     role: "Technology & Innovation Intern",
-    period: "2023",
-    location: "Mumbai, India",
+    period: "April–July 2025",
+    location: "Nagpur, India",
     highlights: [
-      "Developed technology solutions supporting operational efficiency.",
-      "Collaborated on innovation initiatives and digital transformation workflows.",
-      "Applied data-driven approaches to process optimization.",
-    ],
-  },
+      "Built responsive frontend interfaces with HTML, CSS, JavaScript, and React.",
+      "Gained practical exposure to Python, Scikit-learn, data preprocessing, and model workflows.",
+      "Created data visualisations and analytical dashboards with Pandas, Matplotlib, Excel, and Power BI."
+    ]
+  }
 ];
 
 export const certifications = [
-  {
-    name: "Google Data Analytics Professional Certificate",
-    issuer: "Google / Coursera",
-    year: "2024",
-  },
-  {
-    name: "Machine Learning Specialization",
-    issuer: "Stanford Online / Coursera",
-    year: "2024",
-  },
-  {
-    name: "IBM Data Science Professional Certificate",
-    issuer: "IBM / Coursera",
-    year: "2023",
-  },
-  {
-    name: "Power BI Data Analyst Associate",
-    issuer: "Microsoft",
-    year: "2024",
-  },
+  { name: "Understanding Prompt Engineering", issuer: "DataCamp", year: "2024" },
+  { name: "HCLTech certification", issuer: "HCLTech", year: "2024" },
+  { name: "Climate Change: Carbon Capture and Storage", issuer: "edX", year: "2024" },
+  { name: "SDG Academy", issuer: "SDG Academy", year: "2024" },
 ];
 
 export const leadership = [
-  {
-    title: "President – Sports Club",
-    org: "University Sports Club",
-    description: "Led club operations, events, and athlete development programs.",
-  },
-  {
-    title: "Head of Operations – SMART Project",
-    org: "SMART Initiative",
-    description: "Orchestrated cross-functional teams and operational excellence.",
-  },
-  {
-    title: "Event Head – Rush4Rush",
-    org: "Rush4Rush",
-    description: "Managed large-scale event logistics and stakeholder coordination.",
-  },
-  {
-    title: "National & State Basketball Player",
-    org: "Competitive Athletics",
-    description: "Demonstrated discipline, teamwork, and performance under pressure.",
-  },
+  { title: "President — UAI Sports Club", org: "Universal AI University", description: "Led student sports-club operations and supported university-wide sports events and participation." },
+  { title: "Vice-Captain — University Football Team", org: "GSA Tournament", description: "Supported team coordination, preparation, and on-field leadership." },
+  { title: "Sports Event Leadership", org: "UAI", description: "Contributed to event operations, marketing, sponsorship, and coordination, including the Undergrad Premier League Futsal." },
+  { title: "National-level Basketball Player", org: "Competitive Sports", description: "Developed teamwork, discipline, and performance under pressure through competitive sport." },
 ];
 
 export const labItems = [
-  { label: "Models Built", value: 12, icon: "brain" },
-  { label: "Datasets Analyzed", value: 28, icon: "database" },
-  { label: "Visualizations", value: 45, icon: "chart" },
-  { label: "Experiments", value: 18, icon: "flask" },
-  { label: "Research Notes", value: 9, icon: "book" },
+  { label: "Public repositories", value: 12, icon: "database" },
+  { label: "Research & ML projects", value: 4, icon: "brain" },
+  { label: "Analytics & BI", value: 1, icon: "chart" },
+  { label: "Software projects", value: 3, icon: "code" },
 ];
 
 export const atsKeywords = [
-  { keyword: "Data Scientist", coverage: 98 },
-  { keyword: "Machine Learning", coverage: 95 },
   { keyword: "Python", coverage: 100 },
-  { keyword: "SQL", coverage: 96 },
-  { keyword: "Power BI", coverage: 92 },
-  { keyword: "TensorFlow / Scikit-learn", coverage: 88 },
-  { keyword: "Statistical Analysis", coverage: 94 },
-  { keyword: "Business Analytics", coverage: 97 },
-  { keyword: "A/B Testing", coverage: 85 },
-  { keyword: "ETL / Data Pipelines", coverage: 82 },
+  { keyword: "SQL", coverage: 100 },
+  { keyword: "Pandas / NumPy", coverage: 100 },
+  { keyword: "Scikit-learn", coverage: 100 },
+  { keyword: "Explainable AI / SHAP", coverage: 100 },
+  { keyword: "Power BI / Zoho Analytics", coverage: 100 },
+  { keyword: "Data Cleaning & Validation", coverage: 100 },
+  { keyword: "Git / GitHub", coverage: 100 },
 ];
 
-export const githubStats = {
-  contributions: 847,
-  repositories: 24,
-  stars: 156,
-  languages: [
-    { name: "Python", percent: 42 },
-    { name: "TypeScript", percent: 22 },
-    { name: "Jupyter", percent: 18 },
-    { name: "SQL", percent: 12 },
-    { name: "Other", percent: 6 },
-  ],
-  activity: [
-    { month: "Jan", commits: 32 },
-    { month: "Feb", commits: 45 },
-    { month: "Mar", commits: 38 },
-    { month: "Apr", commits: 52 },
-    { month: "May", commits: 61 },
-    { month: "Jun", commits: 48 },
-  ],
-};
+export const githubStats = { profile: "https://github.com/harshkhamkar26" };
