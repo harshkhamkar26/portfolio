@@ -1,148 +1,63 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Download, ArrowLeft, CheckCircle2 } from "lucide-react";
-import { siteConfig, atsKeywords } from "@/lib/data/site";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Download, Mail } from "lucide-react";
+import { siteConfig } from "@/lib/data/site";
 import { skillCategories } from "@/lib/data/skills";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Resume & ATS Optimization | Harsh Khamkar",
-  description:
-    "ATS-optimized resume for Data Scientist, Machine Learning Engineer, AI Engineer, Data Analyst, and Business Analyst roles. Download resume and view keyword coverage.",
+  title: "Resume & Recruiter Profile | Harsh Khamkar",
+  description: "Recruiter profile, technical skills, experience, and resume contact for Data Science, AI/ML, and analytics opportunities.",
   keywords: siteConfig.keywords,
 };
 
-const ATS_SCORE = 94;
+const strengths = [
+  "Python, Pandas and NumPy",
+  "SQL and data preparation",
+  "Scikit-learn and model evaluation",
+  "Explainable AI and SHAP",
+  "Power BI and Zoho Analytics",
+  "Data visualization and reporting",
+  "Git and GitHub",
+  "React and frontend fundamentals",
+];
 
 export default function ResumePage() {
   return (
-    <div className="min-h-screen bg-zinc-950">
-      <div className="mx-auto max-w-5xl px-6 py-24">
-        <Link
-          href="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-cyan-400"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to portfolio
-        </Link>
+    <main className="min-h-screen bg-[#09090d] text-[#f4f1e8]">
+      <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
+        <Link href="/" className="mb-10 inline-flex items-center gap-2 text-sm text-white/55 transition hover:text-[#c7ff3d]"><ArrowLeft size={16} /> Back to portfolio</Link>
+        <p className="font-mono text-xs uppercase tracking-[.24em] text-[#c7ff3d]">Recruiter desk / profile</p>
+        <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-6xl">Resume &amp; technical profile</h1>
+        <p className="mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-lg">B.Tech Data Science undergraduate at Universal AI University, expected graduation 2028. Interested in Data Science, AI/ML, and data analytics internships.</p>
 
-        <header className="mb-12">
-          <h1 className="text-4xl font-bold text-white sm:text-5xl">
-            Resume & ATS Optimization
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-zinc-400">
-            Recruiter-friendly resume optimized for Applicant Tracking Systems
-            targeting Data Scientist, ML Engineer, AI Engineer, and Analytics
-            roles.
-          </p>
-        </header>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href={`mailto:${siteConfig.email}?subject=${encodeURIComponent("Request for latest resume")}&body=${encodeURIComponent("Hello, I found your portfolio and would like to request your latest resume.")}`} className="inline-flex min-h-12 items-center gap-3 bg-[#c7ff3d] px-5 py-3 text-sm font-bold text-[#101015] transition hover:bg-white"><Mail size={17} /> Request resume PDF <ArrowUpRight size={16} /></a>
+          <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-3 border border-white/20 px-5 py-3 text-sm text-white transition hover:border-[#c7ff3d] hover:text-[#c7ff3d]">LinkedIn profile <ArrowUpRight size={16} /></a>
+        </div>
+        <p className="mt-4 max-w-2xl text-xs leading-5 text-white/40">A downloadable PDF is not linked until the actual resume file is added to the project. This page intentionally avoids inventing an ATS score or claiming that a message has been sent.</p>
 
-        <div className="grid gap-8 lg:grid-cols-3">
-          <Card className="lg:col-span-1 text-center">
-            <p className="text-sm uppercase tracking-widest text-zinc-500">
-              ATS Compatibility Score
-            </p>
-            <div className="relative mx-auto mt-6 flex h-40 w-40 items-center justify-center">
-              <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="42"
-                  fill="none"
-                  stroke="rgba(255,255,255,0.08)"
-                  strokeWidth="8"
-                />
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="42"
-                  fill="none"
-                  stroke="url(#atsGrad)"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                  strokeDasharray={`${ATS_SCORE * 2.64} 264`}
-                />
-                <defs>
-                  <linearGradient id="atsGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#22d3ee" />
-                    <stop offset="100%" stopColor="#8b5cf6" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <span className="absolute text-4xl font-bold text-white">{ATS_SCORE}%</span>
-            </div>
-            <p className="mt-4 text-sm text-emerald-400">
-              <CheckCircle2 className="mr-1 inline h-4 w-4" />
-              Excellent ATS match
-            </p>
-            <Button className="mt-6 w-full" asChild>
-              <Link href={siteConfig.resumeUrl} download>
-                <Download className="h-4 w-4" />
-                Download Resume (PDF)
-              </Link>
-            </Button>
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <Card className="border-white/10 bg-white/[.03]">
+            <h2 className="text-xl font-bold">ATS-friendly skill keywords</h2>
+            <p className="mt-2 text-sm text-white/45">Core skills to help recruiters quickly scan the profile. These are not a measured ATS match score.</p>
+            <div className="mt-5 flex flex-wrap gap-2">{strengths.map((skill) => <span key={skill} className="border border-[#c7ff3d]/20 bg-[#c7ff3d]/[.06] px-3 py-2 text-xs text-white/80"><CheckCircle2 size={13} className="mr-1.5 inline text-[#c7ff3d]" />{skill}</span>)}</div>
           </Card>
-
-          <Card className="lg:col-span-2">
-            <h2 className="text-xl font-semibold text-white">Keyword Coverage Dashboard</h2>
-            <p className="mt-2 text-sm text-zinc-500">
-              Optimized for recruiter searches: Data Scientist, Machine Learning
-              Engineer, AI Engineer, Python Developer, SQL Analyst, Power BI Developer
-            </p>
-            <div className="mt-8 space-y-5">
-              {atsKeywords.map((kw) => (
-                <div key={kw.keyword}>
-                  <div className="mb-2 flex justify-between text-sm">
-                    <span className="text-zinc-300">{kw.keyword}</span>
-                    <span className="text-cyan-400">{kw.coverage}%</span>
-                  </div>
-                  <Progress value={kw.coverage} />
-                </div>
-              ))}
+          <Card className="border-white/10 bg-white/[.03]">
+            <h2 className="text-xl font-bold">Professional experience</h2>
+            <div className="mt-5 space-y-5">
+              <div className="border-l-2 border-[#c7ff3d] pl-4"><p className="text-xs font-mono text-[#c7ff3d]">MAY–JUL 2026</p><h3 className="mt-1 font-semibold">Choice India</h3><p className="mt-1 text-sm text-white/55">Business analysis, Zoho Analytics, dashboards, SQL and workflow automation exposure.</p></div>
+              <div className="border-l-2 border-[#ff572e] pl-4"><p className="text-xs font-mono text-[#ff8a6f]">APR–JUL 2025</p><h3 className="mt-1 font-semibold">One Globe Build Con LLP</h3><p className="mt-1 text-sm text-white/55">Technology &amp; Innovation internship involving frontend development and Python/ML exposure.</p></div>
             </div>
           </Card>
         </div>
 
-        <Card className="mt-8">
-          <h2 className="text-xl font-semibold text-white">Skills Match Visualization</h2>
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {skillCategories.map((cat) => (
-              <div
-                key={cat.id}
-                className="rounded-xl border border-white/10 bg-white/[0.03] p-4"
-              >
-                <h3 className="font-medium" style={{ color: cat.color }}>
-                  {cat.name}
-                </h3>
-                <ul className="mt-3 space-y-1">
-                  {cat.skills.map((s) => (
-                    <li key={s.name} className="flex justify-between text-sm text-zinc-400">
-                      <span>{s.name}</span>
-                      <span>{s.level}%</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+        <Card className="mt-6 border-white/10 bg-white/[.03]">
+          <h2 className="text-xl font-bold">Technical skill groups</h2>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{skillCategories.map((category) => <div key={category.id} className="border border-white/10 p-4"><h3 className="font-semibold" style={{ color: category.color }}>{category.name}</h3><ul className="mt-3 space-y-2">{category.skills.map((skill) => <li key={skill.name} className="text-sm text-white/60">{skill.name}</li>)}</ul></div>)}</div>
         </Card>
-
-        <article className="prose-invert mt-12 max-w-none">
-          <h2 className="text-2xl font-bold text-white">ATS-Optimized Professional Summary</h2>
-          <p className="mt-4 leading-relaxed text-zinc-400">
-            Results-driven <strong className="text-white">Data Scientist</strong> and{" "}
-            <strong className="text-white">Machine Learning Engineer</strong> with
-            hands-on experience as a <strong className="text-white">Data Analyst</strong>{" "}
-            and <strong className="text-white">Business Analyst</strong>. Proficient in
-            Python, SQL, statistical modeling, Power BI, and explainable AI (SHAP).
-            Proven track record delivering predictive analytics, customer segmentation,
-            financial dashboards, and AI-powered analytics solutions that drive measurable
-            business outcomes.
-          </p>
-        </article>
+        <div className="mt-10 border-t border-white/10 pt-6 text-sm text-white/45">For the latest resume, use the direct email action above or connect via LinkedIn. <Link href="/" className="text-[#c7ff3d] hover:underline">Return to portfolio</Link>.</div>
       </div>
-    </div>
+    </main>
   );
 }
