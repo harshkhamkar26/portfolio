@@ -9,7 +9,6 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://harshkhamkar.dev"),
   title: {
     default: `${siteConfig.name} | Data Scientist & AI/ML Engineer`,
     template: `%s | ${siteConfig.name}`,
@@ -21,7 +20,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://harshkhamkar.dev",
     title: `${siteConfig.name} | Data Scientist & AI Engineer`,
     description: siteConfig.tagline,
     siteName: siteConfig.name,
@@ -37,7 +35,6 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   alternates: {
-    canonical: "https://harshkhamkar.dev",
   },
 };
 
