@@ -17,17 +17,23 @@ export function ParticleField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationId: number;
     const particles: Particle[] = [];
-    const count = 80;
+    const count = window.innerWidth < 768 ? 40 : 80;
+    let visible = true;
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     const init = () => {
@@ -45,6 +51,10 @@ export function ParticleField() {
     };
 
     const draw = () => {
+      if (!visible) {
+        animationId = requestAnimationFrame(draw);
+        return;
+      }
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, w, h);
@@ -79,14 +89,24 @@ export function ParticleField() {
     init();
     draw();
 
-    window.addEventListener("resize", () => {
+    const onResize = () => {
       resize();
       init();
-    });
+    };
+    window.addEventListener("resize", onResize);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
+      observer.disconnect();
     };
   }, []);
 

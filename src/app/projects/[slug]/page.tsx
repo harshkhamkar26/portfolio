@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowLeft, Github } from "lucide-react";
 import { projects, getProject } from "@/lib/data/projects";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -17,13 +15,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProject(slug);
   if (!project) return { title: "Project Not Found" };
   return {
-    title: `${project.title} | Harsh Khamkar`,
+    title: `${project.title} · Harsh Khamkar`,
     description: project.description,
     keywords: [
       ...project.tags,
       "Data Scientist",
       "Machine Learning",
-      "Case Study",
+      "Explainable AI",
+      "Universal AI University",
     ],
   };
 }
@@ -43,90 +42,117 @@ export default async function ProjectPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-[#16181c] text-[#ece5d5]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
       />
-      <div className={`bg-gradient-to-b ${project.gradient} pb-px`}>
-        <div className="bg-zinc-950/90 backdrop-blur-xl">
-          <div className="mx-auto max-w-5xl px-6 py-24">
-            <Link
-              href="/#projects"
-              className="mb-8 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-cyan-400"
+      <div className="border-b border-white/10 bg-[#121316]">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <Link
+            href="/#depot"
+            className="mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#ece5d5]/60 hover:text-[#ff6a1a]"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Project Fleet
+          </Link>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <span
+              className="font-mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 border"
+              style={{
+                borderColor: `${project.accent}50`,
+                color: project.accent,
+                backgroundColor: `${project.accent}10`,
+              }}
             >
-              <ArrowLeft className="h-4 w-4" />
-              All projects
-            </Link>
+              {project.domain}
+            </span>
+            <span className="font-mono text-xs text-white/50">{project.status}</span>
+          </div>
 
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <Badge key={tag}>{tag}</Badge>
-              ))}
-            </div>
+          <h1 className="mt-4 font-display text-3xl sm:text-5xl font-black uppercase text-white">
+            {project.title}
+          </h1>
+          <p className="mt-2 font-mono text-sm sm:text-base font-bold" style={{ color: project.accent }}>
+            {project.subtitle}
+          </p>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#ece5d5]/80">{project.description}</p>
 
-            <h1 className="mt-6 text-4xl font-bold text-white sm:text-5xl">
-              {project.title}
-            </h1>
-            <p className="mt-3 text-xl text-cyan-400">{project.subtitle}</p>
-            <p className="mt-6 max-w-3xl text-lg text-zinc-400">{project.description}</p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 border-2 border-[#ff6a1a] bg-[#ff6a1a] px-5 py-2.5 font-mono text-xs font-bold uppercase text-[#16181c] hover:bg-transparent hover:text-[#ff6a1a]"
+            >
+              <Github size={15} /> Inspect Code on GitHub
+            </a>
+          </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {project.metrics.map((m) => (
-                <Card key={m.label} className="text-center">
-                  <p className="text-3xl font-bold text-cyan-400">{m.value}</p>
-                  <p className="mt-1 text-sm text-zinc-500">{m.label}</p>
-                </Card>
-              ))}
-            </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {project.metrics.map((m) => (
+              <div key={m.label} className="border border-white/10 bg-black/40 p-4 text-center">
+                <p className="font-mono text-2xl font-black text-white" style={{ color: project.accent }}>
+                  {m.value}
+                </p>
+                <p className="mt-1 font-mono text-xs text-white/60 uppercase">{m.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
       <div className="mx-auto max-w-5xl px-6 py-16">
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white">Architecture</h2>
-          <Card className="mt-6 font-mono text-sm text-zinc-400">
+        <section className="mb-14">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-[#9dfc3f] mb-4">
+            SYSTEM ARCHITECTURE PIPELINE
+          </h2>
+          <div className="border border-white/10 bg-[#0e1013] p-6 font-mono text-xs text-zinc-300">
             <pre className="overflow-x-auto whitespace-pre">
-{`┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│  Data Layer │ ──► │  ML Pipeline │ ──► │  Insights   │
-│  SQL / ETL  │     │  ${project.technologies[0]?.padEnd(10) ?? "Python    "} │     │  Dashboard  │
-└─────────────┘     └──────────────┘     └─────────────┘
-       │                    │                    │
-       ▼                    ▼                    ▼
-   Raw Sources         Feature Store        Stakeholders`}
+{`┌────────────────┐       ┌─────────────────┐       ┌────────────────┐
+│  Data Layer    │ ───►  │  ML / Analysis  │ ───►  │  Intelligence  │
+│  Dataset / SQL │       │  ${project.technologies[0]?.padEnd(14) ?? "Python        "} │       │  SHAP / Output │
+└────────────────┘       └─────────────────┘       └────────────────┘
+        │                         │                         │
+        ▼                         ▼                         ▼
+  Raw Ingestion            Validation Gate            Auditable Result`}
             </pre>
-          </Card>
+          </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white">Technologies</h2>
-          <div className="mt-4 flex flex-wrap gap-2">
+        <section className="mb-14">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-[#3ad7ff] mb-4">
+            ENGINEERING STACK
+          </h2>
+          <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
-              <Badge key={tech} className="border-cyan-500/20 bg-cyan-500/10 text-cyan-200">
+              <span key={tech} className="border border-white/15 bg-[#1e2026] px-3 py-1 font-mono text-xs text-white">
                 {tech}
-              </Badge>
+              </span>
             ))}
           </div>
         </section>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {[
-            { title: "Challenges", items: project.challenges },
-            { title: "Solutions", items: project.solutions },
-            { title: "Results", items: project.results },
+            { title: "Challenges", items: project.challenges, color: "#ff6a1a" },
+            { title: "Solutions", items: project.solutions, color: "#9dfc3f" },
+            { title: "Results", items: project.results, color: "#3ad7ff" },
           ].map((block) => (
-            <section key={block.title}>
-              <h2 className="text-xl font-bold text-white">{block.title}</h2>
-              <ul className="mt-4 space-y-3">
-                {block.items.map((item) => (
-                  <li key={item} className="flex gap-2 text-sm text-zinc-400">
-                    <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-                    {item}
+            <div key={block.title} className="border border-white/10 bg-[#16181c] p-5">
+              <h3 className="font-mono text-xs uppercase tracking-wider font-bold mb-3" style={{ color: block.color }}>
+                {block.title}
+              </h3>
+              <ul className="space-y-2 text-xs text-[#ece5d5]/80 font-mono">
+                {block.items.map((item, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span style={{ color: block.color }}>▸</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </section>
+            </div>
           ))}
         </div>
       </div>

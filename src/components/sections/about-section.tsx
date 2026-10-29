@@ -100,8 +100,8 @@ export function AboutSection() {
                 }`}
               >
                 <span className="text-sm font-mono text-cyan-400">{item.year}</span>
-                <h3 className="mt-1 text-xl font-semibold text-white">{item.role}</h3>
-                <p className="mt-2 text-zinc-400">{item.description}</p>
+                <h3 className="mt-1 text-xl font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-zinc-400">{item.details}</p>
               </div>
             </div>
           ))}
