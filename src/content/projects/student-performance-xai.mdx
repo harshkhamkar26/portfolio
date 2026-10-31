@@ -1,7 +1,19 @@
-# Student Performance Analysis using Explainable AI
+# SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression
 
-This case study demonstrates end-to-end ML with SHAP interpretability for educational analytics.
+**Conference Paper – Under Review**  
+*Authors: Harsh Khamkar et al.*
 
-## Overview
+---
 
-Built predictive models with full transparency for academic stakeholders using TreeSHAP and interactive dashboards.
+## Executive Abstract
+
+Predicting secondary student academic performance early in the educational lifecycle is crucial for timely instructional intervention. However, many contemporary machine learning implementations suffer from either opaque "black-box" decision models or subtle historical target leakage (such as incorporating downstream intermediate exam marks).
+
+This study formulates a rigorous, zero-leakage explainable machine learning framework evaluated across combined secondary student cohorts in Mathematics and Portuguese language studies.
+
+## Core Methodologies
+
+- **Multi-Model Benchmark**: Evaluated Random Forest, Support Vector Machines (SVM), and Logistic Regression under stratified cross-validation.
+- **Explainability**: Integrated TreeSHAP and KernelSHAP to produce global feature importance hierarchies and local waterfall attribution plots.
+- **Leakage Prevention**: Strictly filtered downstream test marks to isolate actionable socio-academic, behavioral, and demographic features (e.g., dedicated study time, parental education level, school absences).
+- **Educational Guidance**: Provided interpretable decision thresholds tailored for academic advisors to design targeted intervention plans before final evaluations.

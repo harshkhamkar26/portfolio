@@ -1,0 +1,19 @@
+# Explainable Hyperparameter Optimization for Imbalanced Tabular Classification
+
+**Journal Paper – Under Review**  
+*Authors: Harsh Khamkar et al.*
+
+---
+
+## Executive Abstract
+
+High class imbalance in tabular datasets poses severe challenges in credit scoring, fraud detection, and customer retention. Standard classification metrics like accuracy deceive practitioners, while Bayesian hyperparameter optimization often causes unpredictable drifts in model feature attribution across iterations.
+
+This paper proposes an explainable hyperparameter optimization methodology benchmarked on the UCI Bank Marketing dataset, unifying Optuna Bayesian search, SMOTE-NC oversampling, and TreeSHAP attribution stability auditing.
+
+## Core Contributions
+
+1. **Multi-Objective Bayesian Search**: Guided Optuna trials by balancing F1-macro and Precision-Recall AUC (PR-AUC) rather than naive accuracy.
+2. **SMOTE-NC Hybrid Resampling**: Preserved continuous relationships while appropriately handling categorical attributes without synthetic distortion.
+3. **Attribution Stability Auditing**: Leveraged TreeSHAP across top hyperparameter configurations to guarantee that optimal configurations retain consistent, interpretable feature attributions.
+4. **Cost-Sensitive Decision Boundaries**: Adjusted post-hoc probability thresholds to minimize false negative penalties in high-stakes tabular decisioning.

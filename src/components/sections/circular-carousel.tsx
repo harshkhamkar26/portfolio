@@ -169,11 +169,11 @@ export function CircularCarousel() {
                       {/* Main Card Content */}
                       <div className="mt-4 flex flex-col justify-between h-[280px]">
                         <div>
-                          <h3 className="font-display text-xl font-black uppercase leading-tight text-white group-hover:text-[#ece5d5]">
+                          <h3 className="font-display text-base sm:text-xl font-black uppercase leading-tight text-white group-hover:text-[#ece5d5] line-clamp-2">
                             {proj.title}
                           </h3>
                           <p
-                            className="mt-1 font-mono text-xs"
+                            className="mt-1 font-mono text-[10px] sm:text-xs truncate"
                             style={{ color: proj.accent }}
                           >
                             {proj.subtitle}

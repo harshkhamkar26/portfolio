@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Harsh Khamkar",
-  title: "Data Science Engineer · Data Analyst Intern",
-  tagline: "Building high-performance data science pipelines, explainable machine learning models, and executive analytics dashboards.",
+  title: "Data Science Engineer · Machine Learning Researcher · Data Analyst Intern",
+  tagline: "Building high-performance data science pipelines, explainable machine learning models, peer-reviewed research frameworks, and executive analytics dashboards.",
   location: "Mumbai, Maharashtra, India",
   coords: "18.98° N, 72.82° E",
   email: "harshkhamkar26@gmail.com",
@@ -19,6 +19,12 @@ export const siteConfig = {
     "Machine Learning",
     "Explainable AI",
     "SHAP",
+    "Explainable Hyperparameter Optimization for Imbalanced Tabular Classification",
+    "SHAP-Based Explainable Student Performance Prediction Using Random Forest SVM and Logistic Regression",
+    "Journal Paper Under Review",
+    "Conference Paper Under Review",
+    "Optuna Bayesian Optimization",
+    "Random Forest SVM Logistic Regression",
     "Power BI",
     "Zoho Analytics",
     "Choice India",
@@ -33,7 +39,7 @@ export const stationStops = [
   { id: "hero", no: "01", name: "ORIGIN", label: "Hero Terminal" },
   { id: "tracks", no: "02", name: "TRACKS", label: "Core Domains" },
   { id: "showcase", no: "03", name: "3D WHEEL", label: "Flagship 3D" },
-  { id: "depot", no: "04", name: "DEPOT", label: "Project Fleet" },
+  { id: "depot", no: "04", name: "DEPOT", label: "Project Fleet & Papers" },
   { id: "about", no: "05", name: "PROFILE", label: "Harsh Khamkar" },
   { id: "expedition", no: "06", name: "JOURNEY", label: "Experience Log" },
   { id: "matrix", no: "07", name: "MATRIX", label: "Certs & Athletics" },
@@ -48,8 +54,8 @@ export const tracks = [
     long: "Machine Learning & Explainable AI",
     accent: "#9dfc3f",
     ink: "#0f1a07",
-    line: "Models that reason, predict, and explain. Moving past opaque black-boxes with SHAP and rigorous validation.",
-    keywords: ["Explainable AI", "SHAP", "Optuna", "Scikit-Learn", "PyTorch", "Model Auditing"],
+    line: "Models that reason, predict, and explain. Moving past opaque black-boxes with SHAP, Optuna Bayesian tuning, and peer-reviewed research rigor.",
+    keywords: ["Explainable AI", "SHAP", "Optuna", "Scikit-Learn", "PyTorch", "Model Auditing", "Papers Under Review"],
     icon: "brain",
   },
   {
@@ -98,11 +104,87 @@ export const tracks = [
   },
 ];
 
+export type Publication = {
+  id: string;
+  title: string;
+  type: "Journal Paper" | "Conference Paper";
+  status: "Under Review";
+  venue: string;
+  badge: string;
+  accent: string;
+  accentRgb: string;
+  domain: string;
+  authors: string;
+  description: string;
+  methodology: string[];
+  tags: string[];
+  github: string;
+  slug: string;
+  metrics: { label: string; value: string }[];
+};
+
+export const publications: Publication[] = [
+  {
+    id: "journal-tabular-hpo",
+    title: "Explainable Hyperparameter Optimization for Imbalanced Tabular Classification",
+    type: "Journal Paper",
+    status: "Under Review",
+    venue: "Peer-Reviewed Scientific Journal (Under Review)",
+    badge: "Journal Paper – Under Review",
+    accent: "#9dfc3f",
+    accentRgb: "157, 252, 63",
+    domain: "Machine Learning & Explainable AI",
+    authors: "Harsh Khamkar et al.",
+    description: "A machine learning research investigation formulating an end-to-end framework addressing severe tabular class imbalance. Integrates Bayesian optimization with Optuna, SMOTE-NC resampling, cost-sensitive threshold adjustments, and TreeSHAP explainability to audit feature importance stability across the hyperparameter space.",
+    methodology: [
+      "Optuna Bayesian hyperparameter search balancing F1-macro and Precision-Recall AUC",
+      "SMOTE-NC synthetic minority oversampling for mixed numerical and categorical attributes",
+      "TreeSHAP trial-by-trial global and local feature importance attribution auditing"
+    ],
+    tags: ["Journal Paper", "Under Review", "Explainable AI", "Optuna", "TreeSHAP", "SMOTE-NC", "Tabular Data"],
+    github: "https://github.com/harshkhamkar26/Hyperparameter-Optimization-XAI",
+    slug: "hyperparameter-optimization-xai",
+    metrics: [
+      { label: "Category", value: "Journal Paper" },
+      { label: "Status", value: "Under Review" },
+      { label: "Search Engine", value: "Optuna Bayesian" },
+      { label: "Explainability", value: "TreeSHAP" }
+    ]
+  },
+  {
+    id: "conf-student-perf",
+    title: "SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression",
+    type: "Conference Paper",
+    status: "Under Review",
+    venue: "International Academic Conference (Under Review)",
+    badge: "Conference Paper – Under Review",
+    accent: "#3ad7ff",
+    accentRgb: "58, 215, 255",
+    domain: "Educational Data Mining & XAI",
+    authors: "Harsh Khamkar et al.",
+    description: "A comprehensive comparative study predicting secondary academic outcomes on combined Mathematics and Portuguese cohorts. Evaluates Random Forest, Support Vector Machines (SVM), and Logistic Regression with TreeSHAP and KernelSHAP to isolate high-impact behavioral predictors without intermediate exam leakage.",
+    methodology: [
+      "Multi-model benchmark: Random Forest, Support Vector Machines (SVM), and Logistic Regression",
+      "Strict zero-leakage pipeline filtering downstream test marks to isolate true behavioral predictors",
+      "SHAP waterfall and summary interpretations delivering actionable academic intervention guidance"
+    ],
+    tags: ["Conference Paper", "Under Review", "Random Forest", "SVM", "Logistic Regression", "SHAP", "XAI"],
+    github: "https://github.com/harshkhamkar26/Student_Performance_XAI",
+    slug: "student-performance-xai",
+    metrics: [
+      { label: "Category", value: "Conference Paper" },
+      { label: "Status", value: "Under Review" },
+      { label: "Models", value: "RF, SVM, LogReg" },
+      { label: "Explainability", value: "Tree & Kernel SHAP" }
+    ]
+  }
+];
+
 export const metrics = [
+  { label: "Papers Under Review", value: "2", suffix: " Peer-Reviewed" },
   { label: "Industry Internships", value: "2", suffix: " Active" },
   { label: "Data Records Handled", value: "128K+", suffix: "" },
   { label: "Power BI Dashboards", value: "11+", suffix: " Built" },
-  { label: "GitHub Repositories", value: "14+", suffix: " Public" },
 ];
 
 export const experiences = [
@@ -150,6 +232,12 @@ export const experiences = [
 ];
 
 export const journeyTimeline = [
+  {
+    year: "2025–2026",
+    title: "Academic Research & Publications (Under Review)",
+    institution: "Peer-Reviewed Scientific Venues",
+    details: "Authored 1 Journal Paper ('Explainable Hyperparameter Optimization for Imbalanced Tabular Classification') and 1 Conference Paper ('SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression')."
+  },
   {
     year: "2024–2028",
     title: "B.Tech in Artificial Intelligence, Machine Learning & Data Science",
@@ -255,19 +343,19 @@ export const leadership = [
 ];
 
 export const atsKeywords = [
-  { keyword: "Python (NumPy, Pandas, Scikit-learn)", coverage: 98 },
-  { keyword: "Explainable AI (SHAP / Feature Attribution)", coverage: 95 },
+  { keyword: "Explainable AI (TreeSHAP / Model Attribution)", coverage: 99 },
+  { keyword: "Bayesian Optimization (Optuna / SMOTE-NC)", coverage: 96 },
+  { keyword: "Python (NumPy, Pandas, Scikit-learn, PyTorch)", coverage: 98 },
   { keyword: "Power BI & Zoho Analytics Dashboarding", coverage: 96 },
   { keyword: "SQL & Relational Database Optimization", coverage: 92 },
   { keyword: "React.js, Next.js & Modern TypeScript", coverage: 90 },
   { keyword: "Data Engineering (Kafka, Hadoop, ETL)", coverage: 85 },
-  { keyword: "Statistical Modeling & Hyperparameter Tuning", coverage: 92 },
-  { keyword: "Multimodal Deepfake Detection & PyTorch", coverage: 88 },
+  { keyword: "Academic Research & Peer-Reviewed Writing", coverage: 95 },
 ];
 
 export const labItems = [
-  { label: "Public repositories", value: 14, icon: "database" },
-  { label: "Research & ML projects", value: 4, icon: "brain" },
+  { label: "Papers Under Review", value: 2, icon: "brain" },
+  { label: "Public Repositories", value: 14, icon: "database" },
   { label: "Analytics & BI", value: 2, icon: "chart" },
-  { label: "Software projects", value: 4, icon: "code" },
+  { label: "Software Projects", value: 4, icon: "code" },
 ];

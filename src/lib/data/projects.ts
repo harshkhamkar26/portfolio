@@ -16,39 +16,40 @@ export type Project = {
   gradient?: string;
   github: string;
   demoUrl?: string;
-  status: "Implemented" | "Research in progress" | "Production Architecture";
+  status: "Implemented" | "Research in progress" | "Production Architecture" | "Journal Paper – Under Review" | "Conference Paper – Under Review";
 };
 
 export const projects: Project[] = [
   {
     slug: "hyperparameter-optimization-xai",
-    title: "Explainable Hyperparameter Optimization (XAI)",
-    subtitle: "Optuna · SHAP · Class Imbalance · Robustness Analysis",
-    domain: "Machine Learning & XAI",
-    description: "A machine learning research framework addressing high class imbalance using the UCI Bank Marketing dataset. Integrates Bayesian hyperparameter optimization via Optuna, cost-sensitive thresholds, and SHAP to ensure transparency and stability in predictive risk modeling.",
-    tags: ["Machine Learning", "Explainable AI", "Optuna", "SHAP"],
+    title: "Explainable Hyperparameter Optimization for Imbalanced Tabular Classification",
+    subtitle: "Journal Paper – Under Review · Optuna Bayesian · TreeSHAP · Class Imbalance",
+    domain: "Machine Learning & XAI · Journal Submission",
+    description: "A peer-reviewed machine learning journal paper (under review) addressing severe tabular class imbalance using the UCI Bank Marketing benchmark. Formulates an end-to-end framework integrating Bayesian hyperparameter optimization via Optuna, cost-sensitive threshold adjustments, SMOTE-NC resampling, and TreeSHAP explainability to guarantee transparency, stability, and auditability in predictive risk models.",
+    tags: ["Journal Paper", "Under Review", "Explainable AI", "Optuna", "TreeSHAP", "Class Imbalance", "SMOTE-NC"],
     metrics: [
+      { label: "Publication Venue", value: "Journal Paper (Under Review)" },
       { label: "Optimization Framework", value: "Optuna Bayesian" },
       { label: "Explainability Method", value: "TreeSHAP" },
       { label: "Resampling Technique", value: "SMOTE-NC" },
     ],
-    technologies: ["Python", "Scikit-Learn", "Optuna", "SHAP", "Pandas", "SMOTE-NC"],
+    technologies: ["Python", "Scikit-Learn", "Optuna", "TreeSHAP", "SMOTE-NC", "Pandas", "Bayesian Optimization"],
     challenges: [
-      "Severe class imbalance where standard accuracy misleadingly scores high while failing on the positive minority class.",
-      "Black-box optimization often alters feature importance in unpredictable ways across iterations."
+      "Severe class imbalance where standard classification metrics deceptively score high while failing entirely on minority risk classes.",
+      "Black-box Bayesian search unpredictably alters feature attribution and decision boundaries across trials without explainability guarantees."
     ],
     solutions: [
-      "Implemented multi-objective evaluation balancing F1-score, Precision-Recall AUC, and ROC-AUC.",
-      "Computed global and local SHAP summary plots to rigorously audit feature attribution consistency across trials."
+      "Implemented a multi-metric objective function optimizing F1-macro, Precision-Recall AUC (PR-AUC), and cost-sensitive classification thresholds.",
+      "Generated trial-by-trial TreeSHAP global summary and local attribution waterfall plots to audit feature importance stability across the hyperparameter space."
     ],
     results: [
-      "Quantified feature contribution hierarchy and produced stable, auditable risk scoring models."
+      "Authored complete journal manuscript submitted and under peer review, establishing verifiable feature attribution stability under severe class imbalance."
     ],
     featured: true,
     accent: "#9dfc3f",
     accentRgb: "157, 252, 63",
     github: "https://github.com/harshkhamkar26/Hyperparameter-Optimization-XAI",
-    status: "Implemented",
+    status: "Journal Paper – Under Review",
   },
   {
     slug: "multimodal-deepfake-detection",
@@ -142,33 +143,34 @@ export const projects: Project[] = [
   },
   {
     slug: "student-performance-xai",
-    title: "Student Performance Prediction & Explainability",
-    subtitle: "Random Forest · SHAP Interpretability · Feature Importance",
-    domain: "Machine Learning & XAI",
-    description: "Machine learning analytical pipeline predicting secondary academic outcomes on combined Mathematics and Portuguese cohorts. Uses SHAP to dissect non-linear socio-academic variables driving performance.",
-    tags: ["Machine Learning", "Explainable AI", "Data Analysis"],
+    title: "SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression",
+    subtitle: "Conference Paper – Under Review · Random Forest · SVM · Logistic Regression · SHAP Interpretability",
+    domain: "Machine Learning & XAI · Conference Paper",
+    description: "A peer-reviewed academic conference paper (under review) formulating an explainable predictive framework for secondary academic achievement across mathematics and language cohorts. Conducts a rigorous comparative benchmark across Random Forest, Support Vector Machines (SVM), and Logistic Regression, applying TreeSHAP and KernelSHAP to isolate high-impact behavioral predictors with strict zero-leakage boundaries.",
+    tags: ["Conference Paper", "Under Review", "Random Forest", "SVM", "Logistic Regression", "SHAP", "Explainable AI"],
     metrics: [
-      { label: "Model Family", value: "Random Forest Regressor" },
-      { label: "Attribution", value: "SHAP Additive Values" },
+      { label: "Publication Venue", value: "Conference Paper (Under Review)" },
+      { label: "Benchmarked Models", value: "RF, SVM, Logistic Regression" },
+      { label: "Explainability", value: "TreeSHAP & KernelSHAP" },
       { label: "Target Leakage", value: "Zero (Strict Feature Gate)" },
     ],
-    technologies: ["Python", "Scikit-Learn", "SHAP", "Pandas", "Matplotlib", "Seaborn"],
+    technologies: ["Python", "Scikit-Learn", "Random Forest", "SVM", "Logistic Regression", "SHAP", "Pandas", "Matplotlib", "Seaborn"],
     challenges: [
-      "Preventing historical test grade leakage while modeling underlying behavioral and socio-economic variables.",
-      "Providing understandable, non-technical explanations for academic advisors."
+      "Preventing historical intermediate test grade leakage while isolating genuine behavioral and socio-economic variables driving student success.",
+      "Bridging statistical predictive accuracy with clear, interpretable explanations for non-technical academic counselors."
     ],
     solutions: [
-      "Filtered out downstream intermediate exam marks to isolate behavioral predictors (study time, parental education, absences).",
-      "Constructed waterfall and summary plots highlighting intervention leverage points."
+      "Filtered out downstream intermediate exam marks to isolate clean behavioral predictors (study time, parental education, absences).",
+      "Benchmarked Random Forest, SVM, and Logistic Regression, constructing SHAP waterfall and summary plots highlighting high-impact leverage points."
     ],
     results: [
-      "Identified primary academic friction points and created interpretable student support dashboards."
+      "Authored conference paper currently under peer review; provided actionable early intervention blueprints for educators."
     ],
     featured: true,
     accent: "#3ad7ff",
     accentRgb: "58, 215, 255",
     github: "https://github.com/harshkhamkar26/Student_Performance_XAI",
-    status: "Implemented",
+    status: "Conference Paper – Under Review",
   },
   {
     slug: "data-analytics-projects",

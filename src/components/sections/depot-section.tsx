@@ -2,9 +2,9 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Github, ExternalLink, X } from "lucide-react";
+import { Search, Github, ExternalLink, X, BookOpen, Sparkles, CheckCircle2 } from "lucide-react";
 import { projects, Project } from "@/lib/data/projects";
-import { siteConfig } from "@/lib/data/site";
+import { siteConfig, publications } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
 
 type GitHubRepo = {
@@ -21,7 +21,14 @@ type GitHubRepo = {
   updatedAt: string;
 };
 
-const domains = ["All", "Machine Learning & XAI", "Data Analytics & BI", "Full-Stack Systems", "Cybersecurity & Deepfake"];
+const domains = [
+  "All",
+  "Papers Under Review",
+  "Machine Learning & XAI",
+  "Data Analytics & BI",
+  "Full-Stack Systems",
+  "Cybersecurity & Deepfake",
+];
 
 export function DepotSection() {
   const [activeDomain, setActiveDomain] = useState("All");
@@ -33,15 +40,43 @@ export function DepotSection() {
     fetch("/api/github/repos")
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data: { repositories?: GitHubRepo[] }) => {
-        setRepos(data.repositories || []);
+        if (data.repositories && data.repositories.length > 0) {
+          setRepos(data.repositories);
+        } else {
+          throw new Error("Empty repos");
+        }
       })
-      .catch(() => {});
+      .catch(() => {
+        // Direct public client-side fallback from GitHub API
+        fetch("https://api.github.com/users/harshkhamkar26/repos?sort=updated&per_page=12")
+          .then((res) => (res.ok ? res.json() : Promise.reject()))
+          .then((data: Array<{ id: number; name: string; full_name: string; description: string | null; html_url: string; homepage: string | null; language: string | null; topics?: string[]; stargazers_count: number; forks_count: number; updated_at: string }>) => {
+            setRepos(
+              data.map((r) => ({
+                id: r.id,
+                name: r.name,
+                fullName: r.full_name,
+                description: r.description ?? "Repository documentation and source code.",
+                url: r.html_url,
+                demoUrl: r.homepage,
+                language: r.language,
+                topics: r.topics ?? [],
+                stars: r.stargazers_count,
+                forks: r.forks_count,
+                updatedAt: r.updated_at,
+              }))
+            );
+          })
+          .catch(() => {});
+      });
   }, []);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((p) => {
+      const isPaper = p.status.includes("Under Review") || p.tags.includes("Under Review");
       const matchesDomain =
         activeDomain === "All" ||
+        (activeDomain === "Papers Under Review" && isPaper) ||
         (activeDomain === "Machine Learning & XAI" && (p.domain.includes("Machine Learning") || p.domain.includes("XAI"))) ||
         (activeDomain === "Data Analytics & BI" && (p.domain.includes("Analytics") || p.domain.includes("BI"))) ||
         (activeDomain === "Full-Stack Systems" && (p.domain.includes("Full-Stack") || p.domain.includes("Software"))) ||
@@ -62,22 +97,22 @@ export function DepotSection() {
   return (
     <section
       id="depot"
-      className="relative py-24 sm:py-32 bg-[#16181c] border-b border-[#ece5d5]/10"
+      className="relative py-20 sm:py-32 bg-[#16181c] border-b border-[#ece5d5]/10"
       aria-labelledby="depot-heading"
     >
-      <div className="mx-auto max-w-[1600px] px-5 sm:px-10 lg:px-14">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-10 lg:px-14">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
             <div className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#ff6a1a]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#ff6a1a]" />
-              STATION 04 // PROJECT DEPOT &amp; FLEET
+              STATION 04 // PROJECT DEPOT &amp; RESEARCH FLEET
             </div>
             <h2
               id="depot-heading"
-              className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"
+              className="mt-2 text-2xl sm:text-5xl font-black uppercase tracking-tight text-[#ece5d5] font-display"
             >
-              COMPLETE CODE FLEET &amp; RESEARCH
+              RESEARCH PAPERS &amp; CODE FLEET
             </h2>
           </div>
 
@@ -87,16 +122,140 @@ export function DepotSection() {
             rel="noopener noreferrer"
             onClick={() => sounds.playClick()}
             onMouseEnter={() => sounds.playHover()}
-            className="flex items-center gap-2 border border-[#ece5d5]/25 bg-[#1e2026] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider text-[#ece5d5] transition hover:border-[#ff6a1a] hover:text-[#ff6a1a]"
+            className="flex items-center justify-center gap-2 border border-[#ece5d5]/25 bg-[#1e2026] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider text-[#ece5d5] transition hover:border-[#ff6a1a] hover:text-[#ff6a1a]"
           >
             <Github size={15} />
-            <span>OPEN GITHUB PROFILE [harshkhamkar26]</span>
+            <span>GITHUB [@harshkhamkar26]</span>
           </a>
         </div>
 
+        {/* High-Impact Research Papers Under Review Spotlight Banner */}
+        <div className="mt-10 border-2 border-[#ffd23a]/40 bg-gradient-to-br from-[#1b1c22] via-[#16181c] to-[#121316] p-5 sm:p-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 h-40 w-40 bg-[#ffd23a]/5 blur-3xl pointer-events-none" />
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-7 w-7 items-center justify-center rounded-sm bg-[#ffd23a]/20 text-[#ffd23a] border border-[#ffd23a]/40">
+                <BookOpen size={16} />
+              </span>
+              <div>
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffd23a]">
+                  ACADEMIC RESEARCH · PEER-REVIEWED SUBMISSIONS
+                </span>
+                <h3 className="font-display text-lg sm:text-2xl font-black uppercase text-white">
+                  Papers Under Review
+                </h3>
+              </div>
+            </div>
+
+            <div className="inline-flex items-center gap-2 border border-[#9dfc3f]/50 bg-[#9dfc3f]/10 px-3 py-1 font-mono text-[11px] font-bold uppercase text-[#9dfc3f]">
+              <Sparkles size={13} />
+              <span>2 ACTIVE PEER-REVIEWS</span>
+            </div>
+          </div>
+
+          {/* 2 Papers Grid */}
+          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {publications.map((paper) => {
+              const matchedProject = projects.find((p) => p.slug === paper.slug);
+              return (
+                <div
+                  key={paper.id}
+                  className="group relative flex flex-col justify-between border border-[#ece5d5]/20 bg-[#191b21] p-5 sm:p-6 transition-all hover:border-white/40"
+                  style={{
+                    borderLeftColor: paper.accent,
+                    borderLeftWidth: "4px",
+                  }}
+                >
+                  <div>
+                    {/* Header tag */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+                      <span
+                        className="font-mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 border"
+                        style={{
+                          borderColor: `${paper.accent}50`,
+                          color: paper.accent,
+                          backgroundColor: `${paper.accent}15`,
+                        }}
+                      >
+                        {paper.badge}
+                      </span>
+                      <span className="font-mono text-[11px] text-white/50">
+                        {paper.authors}
+                      </span>
+                    </div>
+
+                    {/* Paper Title */}
+                    <h4 className="mt-3 font-display text-lg sm:text-xl font-black uppercase text-white group-hover:text-[#ece5d5] leading-snug">
+                      &ldquo;{paper.title}&rdquo;
+                    </h4>
+
+                    <p className="mt-2 text-xs font-mono text-[#ece5d5]/65">
+                      {paper.venue}
+                    </p>
+
+                    <p className="mt-3 text-xs leading-relaxed text-[#ece5d5]/80">
+                      {paper.description}
+                    </p>
+
+                    {/* Methodology bullets */}
+                    <div className="mt-4 space-y-1.5 border-t border-white/10 pt-3">
+                      {paper.methodology.map((m, i) => (
+                        <div key={i} className="flex items-start gap-2 text-[11px] text-[#ece5d5]/75 font-mono">
+                          <CheckCircle2 size={13} className="shrink-0 mt-0.5" style={{ color: paper.accent }} />
+                          <span>{m}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Tags */}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {paper.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="border border-white/10 bg-black/40 px-2 py-0.5 font-mono text-[10px] text-white/70"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                    {matchedProject && (
+                      <button
+                        onClick={() => {
+                          sounds.playClick();
+                          setSelectedProject(matchedProject);
+                        }}
+                        className="font-mono text-xs font-bold text-white/90 hover:text-white underline decoration-dotted underline-offset-4"
+                      >
+                        [INSPECT METHODOLOGY &amp; BLUEPRINT]
+                      </button>
+                    )}
+
+                    <a
+                      href={paper.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => sounds.playClick()}
+                      className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase transition hover:underline"
+                      style={{ color: paper.accent }}
+                    >
+                      <Github size={14} />
+                      <span>CODE REPOSITORY ↗</span>
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Filter Controls & Search */}
-        <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-2">
+        <div className="mt-12 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {domains.map((dom) => {
               const active = activeDomain === dom;
               return (
@@ -107,7 +266,7 @@ export function DepotSection() {
                     setActiveDomain(dom);
                   }}
                   onMouseEnter={() => sounds.playHover()}
-                  className={`border px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`border px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all ${
                     active
                       ? "border-[#ff6a1a] bg-[#ff6a1a] text-[#16181c]"
                       : "border-white/10 bg-[#1e2026]/70 text-white/70 hover:border-white/30 hover:text-white"
@@ -132,7 +291,7 @@ export function DepotSection() {
         </div>
 
         {/* Project Fleet Cards Grid */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((proj, idx) => (
             <motion.article
               key={proj.slug}
@@ -142,7 +301,7 @@ export function DepotSection() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
               onMouseEnter={() => sounds.playHover()}
-              className="group flex flex-col justify-between border border-[#ece5d5]/15 bg-[#1a1c22] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/40"
+              className="group flex flex-col justify-between border border-[#ece5d5]/15 bg-[#1a1c22] p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/40"
               style={{
                 borderTopColor: proj.accent,
                 borderTopWidth: "3px",
@@ -167,7 +326,7 @@ export function DepotSection() {
                 </div>
 
                 {/* Title & subtitle */}
-                <h3 className="mt-4 font-display text-xl font-black uppercase text-white group-hover:text-[#ece5d5] leading-snug">
+                <h3 className="mt-4 font-display text-lg sm:text-xl font-black uppercase text-white group-hover:text-[#ece5d5] leading-snug">
                   {proj.title}
                 </h3>
                 <p
@@ -224,7 +383,7 @@ export function DepotSection() {
         </div>
 
         {/* Live Public GitHub Repositories Banner */}
-        <div className="mt-16 border border-[#ece5d5]/15 bg-[#121316] p-6 sm:p-8">
+        <div className="mt-16 border border-[#ece5d5]/15 bg-[#121316] p-5 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
             <div>
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#9dfc3f]">
@@ -280,7 +439,7 @@ export function DepotSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-2xl border border-[#ece5d5]/25 bg-[#16181c] p-6 sm:p-8 max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-2xl border border-[#ece5d5]/25 bg-[#16181c] p-5 sm:p-8 max-h-[90vh] overflow-y-auto"
             >
               <button
                 onClick={() => setSelectedProject(null)}
@@ -306,7 +465,7 @@ export function DepotSection() {
                 </span>
               </div>
 
-              <h3 className="mt-3 font-display text-2xl sm:text-3xl font-black uppercase text-white">
+              <h3 className="mt-3 font-display text-xl sm:text-3xl font-black uppercase text-white">
                 {selectedProject.title}
               </h3>
               <p className="font-mono text-xs mt-1" style={{ color: selectedProject.accent }}>

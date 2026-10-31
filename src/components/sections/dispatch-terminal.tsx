@@ -49,6 +49,7 @@ export function DispatchTerminal() {
         output = (
           <div className="space-y-0.5 text-xs font-mono text-[#ece5d5]/80">
             <p className="text-[#9dfc3f] font-bold">AVAILABLE COMMANDS:</p>
+            <p>▸ <strong className="text-white">papers</strong> — View peer-reviewed research papers under review</p>
             <p>▸ <strong className="text-white">bio</strong> — Display Harsh&apos;s education &amp; summary</p>
             <p>▸ <strong className="text-white">projects</strong> — List flagship machine learning &amp; data projects</p>
             <p>▸ <strong className="text-white">internships</strong> — View active &amp; completed work experience</p>
@@ -56,6 +57,26 @@ export function DispatchTerminal() {
             <p>▸ <strong className="text-white">resume</strong> — Download verified ATS resume PDF</p>
             <p>▸ <strong className="text-white">contact</strong> — Output contact details</p>
             <p>▸ <strong className="text-white">clear</strong> — Clear terminal screen</p>
+          </div>
+        );
+        break;
+
+      case "papers":
+      case "publications":
+      case "research":
+        output = (
+          <div className="space-y-1.5 text-xs font-mono">
+            <p className="text-[#ffd23a] font-bold">PEER-REVIEWED RESEARCH PAPERS (UNDER REVIEW):</p>
+            <div className="pl-3 border-l border-[#9dfc3f]">
+              <p className="text-[#9dfc3f] font-bold">1. [Journal Paper – Under Review]</p>
+              <p className="text-white">&ldquo;Explainable Hyperparameter Optimization for Imbalanced Tabular Classification&rdquo;</p>
+              <p className="text-white/60">Venue: Peer-Reviewed Scientific Journal · Authors: Harsh Khamkar et al.</p>
+            </div>
+            <div className="pl-3 border-l border-[#3ad7ff]">
+              <p className="text-[#3ad7ff] font-bold">2. [Conference Paper – Under Review]</p>
+              <p className="text-white">&ldquo;SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression&rdquo;</p>
+              <p className="text-white/60">Venue: International Academic Conference · Authors: Harsh Khamkar et al.</p>
+            </div>
           </div>
         );
         break;
