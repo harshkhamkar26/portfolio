@@ -196,13 +196,24 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Marquee Caution Warning Ribbon at bottom of Hero */}
+      {/* Marquee Caution Warning Ribbon at bottom of Hero (Seamless Gapless Loop) */}
       <div className="mt-10 w-full overflow-hidden border-y border-[#ff6a1a]/40 bg-[#101114] py-2.5">
-        <div className="animate-ticker">
+        <div className="animate-ticker flex">
           <div className="flex shrink-0 items-center gap-6 pr-6">
-            {marqueeItems.concat(marqueeItems).map((text, i) => (
+            {marqueeItems.map((text, i) => (
               <span
-                key={i}
+                key={`primary-${i}`}
+                className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.25em] text-[#ece5d5]/90 whitespace-nowrap"
+              >
+                <span className="text-[#ff6a1a] font-bold">✦</span>
+                <span className={i % 2 === 0 ? "text-[#9dfc3f]" : "text-[#ece5d5]"}>{text}</span>
+              </span>
+            ))}
+          </div>
+          <div className="flex shrink-0 items-center gap-6 pr-6" aria-hidden="true">
+            {marqueeItems.map((text, i) => (
+              <span
+                key={`secondary-${i}`}
                 className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.25em] text-[#ece5d5]/90 whitespace-nowrap"
               >
                 <span className="text-[#ff6a1a] font-bold">✦</span>

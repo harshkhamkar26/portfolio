@@ -20,7 +20,7 @@ export function CircularCarousel() {
   const rotateTo = useCallback((newIndex: number) => {
     sounds.playSwitch();
     // Normalize index within 0..total-1
-    const normalized = (newIndex % total + total) % total;
+    const normalized = ((newIndex % total) + total) % total;
     setActiveIndex(normalized);
   }, [total]);
 
@@ -42,7 +42,7 @@ export function CircularCarousel() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [handleNext, handlePrev]);
 
-  // Pointer drag handling
+  // Pointer & Touch drag handling
   const handlePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
     startXRef.current = e.clientX;
@@ -57,9 +57,9 @@ export function CircularCarousel() {
   const handlePointerUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    if (currentDragDelta.current < -45) {
+    if (currentDragDelta.current < -35) {
       handleNext();
-    } else if (currentDragDelta.current > 45) {
+    } else if (currentDragDelta.current > 35) {
       handlePrev();
     }
   };
@@ -69,10 +69,10 @@ export function CircularCarousel() {
   return (
     <section
       id="showcase"
-      className="relative py-24 sm:py-32 overflow-hidden bg-[#131418] border-b border-[#ece5d5]/10"
+      className="relative py-20 sm:py-32 overflow-hidden bg-[#131418] border-b border-[#ece5d5]/10"
       aria-labelledby="showcase-heading"
     >
-      <div className="mx-auto max-w-[1600px] px-5 sm:px-10 lg:px-14">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-10 lg:px-14">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
@@ -81,15 +81,15 @@ export function CircularCarousel() {
             </div>
             <h2
               id="showcase-heading"
-              className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"
+              className="mt-2 text-2xl sm:text-5xl font-black uppercase tracking-tight text-[#ece5d5] font-display"
             >
               FLAGSHIP WORK IN ORBIT
             </h2>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="font-mono text-xs tracking-widest text-[#ece5d5]/60">
-              DRAG TO ROTATE WHEEL · KEYBOARD [← / →]
+            <span className="hidden sm:inline-block font-mono text-xs tracking-widest text-[#ece5d5]/60">
+              SWIPE / DRAG · KEYBOARD [← / →]
             </span>
             <div className="flex items-center gap-2">
               <button
@@ -119,7 +119,17 @@ export function CircularCarousel() {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
-          className="circular-carousel mt-10"
+          onTouchStart={(e) => {
+            setIsDragging(true);
+            startXRef.current = e.touches[0].clientX;
+            currentDragDelta.current = 0;
+          }}
+          onTouchMove={(e) => {
+            if (!isDragging) return;
+            currentDragDelta.current = e.touches[0].clientX - startXRef.current;
+          }}
+          onTouchEnd={handlePointerUp}
+          className="circular-carousel mt-10 cursor-grab active:cursor-grabbing"
           data-shape="wheel"
         >
           <div className="circular-carousel__stage">
@@ -138,7 +148,7 @@ export function CircularCarousel() {
                     <div
                       key={proj.slug}
                       onClick={() => rotateTo(idx)}
-                      className="circular-carousel__card group border border-[#ece5d5]/20 bg-[#191b21] p-6 shadow-2xl transition-all"
+                      className="circular-carousel__card group border border-[#ece5d5]/20 bg-[#191b21] p-5 sm:p-6 shadow-2xl transition-all"
                       style={{
                         transform: `rotateY(${cardAngle}deg) translateZ(var(--cc-radius))`,
                         borderColor: isCurrent ? proj.accent : "rgba(236,229,213,0.14)",
@@ -152,7 +162,7 @@ export function CircularCarousel() {
                       {/* Top Header of Card */}
                       <div className="flex items-center justify-between border-b border-white/10 pb-3">
                         <span
-                          className="font-mono text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border"
+                          className="font-mono text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border truncate max-w-[170px]"
                           style={{
                             borderColor: `${proj.accent}55`,
                             color: proj.accent,
@@ -161,13 +171,13 @@ export function CircularCarousel() {
                         >
                           {`0${idx + 1} // ${proj.domain}`}
                         </span>
-                        <span className="font-mono text-[10px] text-white/50">
-                          {proj.status}
+                        <span className="font-mono text-[10px] text-white/50 shrink-0">
+                          {proj.status.includes("Under Review") ? "Under Review" : proj.status}
                         </span>
                       </div>
 
                       {/* Main Card Content */}
-                      <div className="mt-4 flex flex-col justify-between h-[280px]">
+                      <div className="mt-3 sm:mt-4 flex flex-col justify-between h-[270px] sm:h-[280px]">
                         <div>
                           <h3 className="font-display text-base sm:text-xl font-black uppercase leading-tight text-white group-hover:text-[#ece5d5] line-clamp-2">
                             {proj.title}
@@ -178,14 +188,14 @@ export function CircularCarousel() {
                           >
                             {proj.subtitle}
                           </p>
-                          <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-[#ece5d5]/75">
+                          <p className="mt-2.5 sm:mt-3 line-clamp-2 sm:line-clamp-3 text-xs leading-relaxed text-[#ece5d5]/75">
                             {proj.description}
                           </p>
                         </div>
 
                         {/* Tech pills */}
                         <div>
-                          <div className="flex flex-wrap gap-1.5 mb-4">
+                          <div className="flex flex-wrap gap-1.5 mb-3 sm:mb-4">
                             {proj.technologies.slice(0, 4).map((tech) => (
                               <span
                                 key={tech}
@@ -222,16 +232,33 @@ export function CircularCarousel() {
           </div>
         </div>
 
+        {/* 5 Orbit Station Indicators */}
+        <div className="mt-6 flex items-center justify-center gap-2">
+          {featured.map((proj, idx) => {
+            const isCurrent = idx === activeIndex;
+            return (
+              <button
+                key={proj.slug}
+                onClick={() => rotateTo(idx)}
+                className={`h-1.5 transition-all rounded-full ${
+                  isCurrent ? "w-8 bg-[#ff6a1a]" : "w-2.5 bg-white/20 hover:bg-white/50"
+                }`}
+                aria-label={`Go to orbit station ${idx + 1}`}
+              />
+            );
+          })}
+        </div>
+
         {/* Selected Project Full Specification Telemetry */}
         {activeProject && (
-          <div className="mt-8 border border-[#ece5d5]/20 bg-[#16181c] p-6 sm:p-8">
+          <div className="mt-8 border border-[#ece5d5]/20 bg-[#16181c] p-5 sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#ece5d5]/15 pb-4">
               <div className="flex items-center gap-3">
                 <span
                   className="h-3 w-3 rounded-full"
                   style={{ backgroundColor: activeProject.accent }}
                 />
-                <h4 className="font-display text-2xl font-black uppercase text-white">
+                <h4 className="font-display text-lg sm:text-2xl font-black uppercase text-white">
                   {activeProject.title}
                 </h4>
               </div>
@@ -250,7 +277,7 @@ export function CircularCarousel() {
               </div>
             </div>
 
-            <div className="mt-6 grid gap-6 md:grid-cols-3">
+            <div className="mt-6 grid gap-4 sm:gap-6 md:grid-cols-3">
               <div className="border border-white/10 bg-black/20 p-4">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-[#ff6a1a]">
                   [KEY CHALLENGE]

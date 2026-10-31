@@ -111,7 +111,7 @@ export function DispatchTerminal() {
         break;
 
       case "contact":
-        output = `Email: harshkhamkar26@gmail.com | LinkedIn: https://linkedin.com/in/harshkhamkar | GitHub: https://github.com/harshkhamkar26`;
+        output = `Email: ${siteConfig.email} | LinkedIn: ${siteConfig.linkedin} | GitHub: ${siteConfig.github}`;
         break;
 
       case "clear":

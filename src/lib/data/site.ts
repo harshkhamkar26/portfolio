@@ -6,7 +6,7 @@ export const siteConfig = {
   coords: "18.98° N, 72.82° E",
   email: "harshkhamkar26@gmail.com",
   phone: "+91 9326508918",
-  linkedin: "https://www.linkedin.com/in/harshkhamkar",
+  linkedin: "https://www.linkedin.com/in/harsh-khamkar-b4a54a32a/",
   github: "https://github.com/harshkhamkar26",
   resumeUrl: "/resume.pdf",
   photoUrl: "/images/harsh-khamkar.jpg",
