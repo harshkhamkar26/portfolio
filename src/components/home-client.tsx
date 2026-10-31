@@ -16,6 +16,7 @@ import { ExpeditionSection } from "@/components/sections/expedition-section";
 import { MatrixSection } from "@/components/sections/matrix-section";
 import { DispatchTerminal } from "@/components/sections/dispatch-terminal";
 import { SmoothScrollProvider } from "@/components/effects/smooth-scroll";
+import { TrainJourney } from "@/components/train/TrainJourney";
 
 const AIAssistant = dynamic(
   () => import("@/components/sections/ai-assistant").then((m) => m.AIAssistant),
@@ -27,6 +28,12 @@ export function HomeClient() {
 
   return (
     <SmoothScrollProvider>
+      {/* ─────────────────────────────────────────────────────────────
+          THE PORTFOLIO EXPRESS: Fixed Animated Cyber-Train Background Layer
+          Fixed viewport, zero click-blocking (pointer-events: none)
+          ───────────────────────────────────────────────────────────── */}
+      <TrainJourney />
+
       {/* Film grain overlay */}
       <div className="grain" aria-hidden="true" />
 

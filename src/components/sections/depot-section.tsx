@@ -6,6 +6,7 @@ import { Search, Github, ExternalLink, X, BookOpen, Sparkles, CheckCircle2 } fro
 import { projects, Project } from "@/lib/data/projects";
 import { siteConfig, publications } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
+import { CoachFrame } from "@/components/train/CoachFrame";
 
 type GitHubRepo = {
   id: number;
@@ -293,20 +294,18 @@ export function DepotSection() {
         {/* Project Fleet Cards Grid */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((proj, idx) => (
-            <motion.article
+            <CoachFrame
               key={proj.slug}
-              layout
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
-              onMouseEnter={() => sounds.playHover()}
-              className="group flex flex-col justify-between border border-[#ece5d5]/15 bg-[#1a1c22] p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/40"
-              style={{
-                borderTopColor: proj.accent,
-                borderTopWidth: "3px",
-              }}
+              coachNumber={idx + 1}
+              coachTitle={proj.title}
+              domain={proj.domain}
+              accentColor={proj.accent}
+              className="h-full"
             >
+              <div
+                onMouseEnter={() => sounds.playHover()}
+                className="group flex h-full flex-col justify-between p-5 sm:p-6 transition-all duration-300"
+              >
               <div>
                 {/* Header info */}
                 <div className="flex items-center justify-between pb-3 border-b border-white/10">
@@ -378,7 +377,8 @@ export function DepotSection() {
                   <span>GITHUB ↗</span>
                 </a>
               </div>
-            </motion.article>
+            </div>
+            </CoachFrame>
           ))}
         </div>
 
