@@ -9,9 +9,9 @@ import { StationToast } from "./StationToast";
 import { stationStops } from "@/lib/data/site";
 
 /**
- * The Portfolio Express - Master Train Journey Orchestrator
- * Full-screen fixed layer (pointer-events: none) providing the cinematic
- * railway scroll experience without altering any existing section layouts.
+ * The Portfolio Express - Master Train Journey Orchestrator (Classic Steam Railway)
+ * Full-screen fixed layer (pointer-events: none) providing the nostalgic
+ * Orient Express steam railway scroll experience without altering any existing section layouts.
  */
 export function TrainJourney() {
   const {
@@ -55,7 +55,7 @@ export function TrainJourney() {
       />
 
       {/* ─────────────────────────────────────────────────────────────
-          4. THE CYBER BULLET LOCOMOTIVE
+          4. THE CLASSIC STEAM LOCOMOTIVE & TENDER
           ───────────────────────────────────────────────────────────── */}
       <Locomotive
         smoothProgress={smoothProgress}
@@ -74,7 +74,7 @@ export function TrainJourney() {
       <div className="hidden lg:flex fixed left-5 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
         {/* Rail Vertical Guide */}
         <div className="relative flex flex-col items-center py-2">
-          <div className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#ff6a1a] via-[#3ad7ff] to-[#9dfc3f] opacity-30" />
+          <div className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#ffd23a] via-[#d4af37] to-[#9dfc3f] opacity-40" />
 
           {/* 8 Station Waypoint Indicators */}
           <div className="relative z-10 flex flex-col items-center gap-5">
@@ -90,18 +90,18 @@ export function TrainJourney() {
                 >
                   {/* Waypoint Dot */}
                   <div
-                    className={`h-2 w-2 rounded-full border transition-all duration-300 ${
+                    className={`h-2.5 w-2.5 rounded-full border transition-all duration-300 ${
                       isActive
-                        ? "border-[#ff6a1a] bg-[#ff6a1a] shadow-[0_0_10px_#ff6a1a] scale-125"
+                        ? "border-[#d4af37] bg-[#ffd23a] shadow-[0_0_12px_#ffd23a] scale-125"
                         : isPassed
-                        ? "border-[#9dfc3f] bg-[#9dfc3f]/40"
+                        ? "border-[#d4af37]/70 bg-[#d4af37]/50"
                         : "border-white/20 bg-[#16181c]"
                     }`}
                   />
 
                   {/* Waypoint Station Label on Hover */}
-                  <span className="pointer-events-none absolute left-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100 font-mono text-[9px] uppercase tracking-widest text-white whitespace-nowrap bg-black/80 px-2 py-0.5 border border-white/10">
-                    {st.no} · {st.name}
+                  <span className="pointer-events-none absolute left-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100 font-serif text-[9px] uppercase tracking-widest text-[#ece5d5] whitespace-nowrap bg-black/90 px-2.5 py-1 border border-[#d4af37]/60 shadow-lg">
+                    NO. {st.no} · {st.name}
                   </span>
                 </div>
               );
@@ -109,9 +109,9 @@ export function TrainJourney() {
           </div>
         </div>
 
-        {/* Miniature Train Icon Indicator */}
-        <div className="border border-white/15 bg-black/80 px-1.5 py-0.5 font-mono text-[8px] text-[#3ad7ff] tracking-widest shadow-md">
-          {scrollPercent}% EXP
+        {/* Miniature Vintage Milestone Indicator */}
+        <div className="border border-[#d4af37]/60 bg-black/90 px-2 py-0.5 font-serif text-[8px] text-[#ffd23a] tracking-widest shadow-md uppercase">
+          {scrollPercent}% STEAM
         </div>
       </div>
     </div>

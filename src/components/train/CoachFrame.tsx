@@ -1,148 +1,152 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
-export interface CoachFrameProps {
-  children: React.ReactNode;
+interface CoachFrameProps {
   coachNumber: number;
   coachTitle: string;
   domain?: string;
   accentColor?: string;
+  children: React.ReactNode;
   className?: string;
 }
 
 /**
- * Reusable Train Carriage Wrapper Component
- * Transforms any project card into an authentic cyber train compartment
- * without modifying its inner content, layout, buttons, or typography.
+ * Reusable Classic Train Carriage Wrapper Component
+ * Encases any existing project card without modifying its layout or interactive buttons.
+ * Adds authentic Orient Express / Pullman carriage styling: brass filigree corner brackets,
+ * gold leaf pinstripes, embossed coach plates, and safety chain couplings.
  */
 export function CoachFrame({
-  children,
   coachNumber,
   coachTitle,
   domain,
-  accentColor = "#ff6a1a",
+  accentColor = "#d4af37",
+  children,
   className = "",
 }: CoachFrameProps) {
-  const shouldReduceMotion = useReducedMotion();
   const formattedNo = coachNumber.toString().padStart(2, "0");
 
   return (
     <motion.div
-      whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.25 } }}
-      className={`group relative flex flex-col ${className}`}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`group relative flex flex-col transition-transform duration-300 hover:-translate-y-1 ${className}`}
     >
       {/* ─────────────────────────────────────────────────────────────
-          1. INTER-CARRIAGE COUPLINGS (Left & Right Mechanical Joints)
+          1. INTER-CARRIAGE COUPLING & SAFETY CHAINS
           ───────────────────────────────────────────────────────────── */}
-      {/* Left Coupler Knuckle */}
       <div
         aria-hidden="true"
-        className="hidden md:flex absolute -left-3.5 top-1/2 -translate-y-1/2 z-20 flex-col items-center pointer-events-none"
+        className="pointer-events-none flex items-center justify-between px-4 pb-1 opacity-75"
       >
-        <div className="h-6 w-3.5 rounded-l-xs border border-white/20 bg-gradient-to-r from-[#101114] to-[#252832] shadow-md flex items-center justify-center">
-          <div className="h-2 w-1 bg-[#ff6a1a] rounded-xs" />
+        {/* Left Screw-Link Hook & Chains */}
+        <div className="flex items-center gap-1.5">
+          <div className="h-2.5 w-3 rounded-xs border border-[#d4af37]/60 bg-[#252830]" />
+          <div className="h-1 w-5 rounded-full border-t border-b border-[#d4af37]/50" />
         </div>
-        {/* Flexible pneumatic jumper hoses */}
-        <div className="h-3 w-1.5 bg-[#3a3d47] border-l border-white/20 -mt-0.5" />
-      </div>
 
-      {/* Right Coupler Knuckle */}
-      <div
-        aria-hidden="true"
-        className="hidden md:flex absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 flex-col items-center pointer-events-none"
-      >
-        <div className="h-6 w-3.5 rounded-r-xs border border-white/20 bg-gradient-to-l from-[#101114] to-[#252832] shadow-md flex items-center justify-center">
-          <div className="h-2 w-1 bg-[#3ad7ff] rounded-xs" />
+        {/* Vintage Vacuum Brake Hoses & Steam Heating Pipe */}
+        <div className="flex items-center gap-2">
+          <div className="h-2 w-1 rounded-full bg-[#8c2a2a]" title="Vacuum Brake Pipe" />
+          <div className="h-2 w-1 rounded-full bg-[#d4af37]" title="Steam Heating" />
+          <span className="font-serif text-[8px] tracking-wider text-[#d4af37]/80 uppercase">
+            PULLMAN INTER-CONNECT
+          </span>
+          <div className="h-2 w-1 rounded-full bg-[#d4af37]" title="Steam Heating" />
+          <div className="h-2 w-1 rounded-full bg-[#8c2a2a]" title="Vacuum Brake Pipe" />
         </div>
-        {/* Flexible pneumatic jumper hoses */}
-        <div className="h-3 w-1.5 bg-[#3a3d47] border-r border-white/20 -mt-0.5" />
+
+        {/* Right Screw-Link Hook */}
+        <div className="flex items-center gap-1.5">
+          <div className="h-1 w-5 rounded-full border-t border-b border-[#d4af37]/50" />
+          <div className="h-2.5 w-3 rounded-xs border border-[#d4af37]/60 bg-[#252830]" />
+        </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. CARRIAGE ROOF STRUCTURE & IDENTIFICATION PLATE
+          2. CARRIAGE ROOF COWLING & EMBOSSED GILDED NAMEPLATE
           ───────────────────────────────────────────────────────────── */}
       <div
-        aria-hidden="true"
-        className="relative z-10 flex items-center justify-between border-t-2 border-x border-b border-white/15 bg-gradient-to-r from-[#1a1c22] via-[#22242c] to-[#1a1c22] px-3.5 py-2 shadow-inner"
+        className="relative flex items-center justify-between border-t-2 border-x border-b border-[#d4af37]/40 bg-gradient-to-r from-[#171920] via-[#222530] to-[#171920] px-4 py-2 shadow-md"
         style={{ borderTopColor: accentColor }}
       >
-        {/* Coach Designation Plate */}
-        <div className="flex items-center gap-2">
+        {/* Ornate Brass Coach Number Badge */}
+        <div className="flex items-center gap-2.5">
           <span
-            className="flex items-center justify-center border px-1.5 py-0.5 font-mono text-[9px] font-black uppercase tracking-widest"
-            style={{
-              borderColor: `${accentColor}60`,
-              color: accentColor,
-              backgroundColor: `${accentColor}12`,
-            }}
+            className="font-serif text-[10px] font-bold px-2 py-0.5 bg-black/80 border border-[#d4af37]/60 rounded-xs shadow-inner"
+            style={{ color: accentColor }}
           >
-            COACH {formattedNo}
+            CAR NO. {formattedNo}
           </span>
-          <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-white truncate max-w-[210px] sm:max-w-none">
+          <span className="font-serif text-[11px] font-bold tracking-wider text-[#ece5d5] truncate max-w-[210px] sm:max-w-none">
             {coachTitle}
           </span>
         </div>
 
-        {/* Running Gear Telemetry Badge */}
-        <div className="hidden sm:flex items-center gap-2 font-mono text-[9px] text-[#ece5d5]/55">
+        {/* Carriage Class & Domain Telemetry */}
+        <div className="hidden sm:flex items-center gap-2 font-serif text-[9px] text-[#d4af37]/80">
           {domain && (
-            <span className="text-[#9dfc3f] border border-[#9dfc3f]/30 px-1 py-0.2 bg-[#9dfc3f]/5">
+            <span className="text-[#e5c07b] border border-[#d4af37]/40 px-1.5 py-0.2 bg-[#d4af37]/10 uppercase tracking-widest">
               {domain}
             </span>
           )}
-          <span>{`CAR #${formattedNo} // LOCKED`}</span>
+          <span>{`SALOON // CAR NO. ${formattedNo}`}</span>
         </div>
 
-        {/* Flush Rivets Along Roof Cowling */}
-        <div className="flex gap-1 opacity-40">
-          <div className="h-1 w-1 rounded-full bg-white" />
-          <div className="h-1 w-1 rounded-full bg-white" />
-          <div className="h-1 w-1 rounded-full bg-white" />
+        {/* Polished Brass Corner Rivets */}
+        <div className="flex gap-1.5 opacity-60">
+          <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37] shadow-[0_0_2px_#d4af37]" />
+          <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37] shadow-[0_0_2px_#d4af37]" />
+          <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37] shadow-[0_0_2px_#d4af37]" />
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
           3. COMPARTMENT CABIN (Window Frame Housing Original Card)
           ───────────────────────────────────────────────────────────── */}
-      <div className="relative flex-1 border-x border-b border-white/15 bg-[#14151a] shadow-xl">
-        {/* Subtle Observation Window Tint Reflection (Non-blocking) */}
+      <div className="relative flex-1 border-x border-b border-[#d4af37]/30 bg-[#131418] shadow-2xl">
+        {/* Subtle Warm Amber Interior Lamp Light Sheen (Non-blocking) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.015] to-[#3ad7ff]/[0.025] z-1"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.015] to-[#ffd23a]/[0.035] z-1"
         />
 
-        {/* Corner Reinforcement Brackets */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-0 h-2.5 w-2.5 border-t border-l border-white/30 z-2"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 right-0 h-2.5 w-2.5 border-t border-r border-white/30 z-2"
-        />
-
-        {/* Render child content completely intact */}
-        <div className="relative z-0 h-full">
+        {/* Preserved Original Project Card Content */}
+        <div className="relative z-2 h-full">
           {children}
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          4. CARRIAGE UNDERBODY SKIRT & BOGIE SUSPENSION SILL
+          4. UNDERBODY RUNNING GEAR & CAST IRON TRUCK SILL
           ───────────────────────────────────────────────────────────── */}
       <div
         aria-hidden="true"
-        className="relative z-10 flex items-center justify-between border-x border-b border-white/10 bg-[#0e0f13] px-3 py-1 font-mono text-[8px] text-white/40 pointer-events-none"
+        className="pointer-events-none flex items-center justify-between border-x border-b border-[#d4af37]/30 bg-[#0e0f13] px-5 py-1.5 opacity-85"
       >
-        <div className="flex items-center gap-1.5">
-          <span className="h-1 w-1 rounded-full bg-[#9dfc3f]" />
-          <span>BOGIE AIR-SPRING: OK</span>
+        {/* Front Bogie Axle Box & Equalizer Beam */}
+        <div className="flex items-center gap-2">
+          <div className="h-2.5 w-2.5 rounded-full border border-[#d4af37]/50 bg-[#282a34]" />
+          <div className="h-1 w-7 bg-[#d4af37]/30" />
+          <div className="h-2.5 w-2.5 rounded-full border border-[#d4af37]/50 bg-[#282a34]" />
         </div>
-        <div className="flex gap-3">
-          <span>AXLE 1: 0 RPM</span>
-          <span>AXLE 2: 0 RPM</span>
+
+        {/* Underfloor Cast Iron Battery / Dynamo Box */}
+        <div className="h-2.5 w-20 rounded-xs border border-[#d4af37]/30 bg-[#16181c] flex items-center justify-center">
+          <span className="font-serif text-[7px] text-[#d4af37]/70 tracking-widest uppercase">
+            STONE DYNAMO
+          </span>
+        </div>
+
+        {/* Rear Bogie Axle Box */}
+        <div className="flex items-center gap-2">
+          <div className="h-2.5 w-2.5 rounded-full border border-[#d4af37]/50 bg-[#282a34]" />
+          <div className="h-1 w-7 bg-[#d4af37]/30" />
+          <div className="h-2.5 w-2.5 rounded-full border border-[#d4af37]/50 bg-[#282a34]" />
         </div>
       </div>
     </motion.div>

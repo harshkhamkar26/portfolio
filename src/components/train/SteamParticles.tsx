@@ -8,21 +8,21 @@ interface SteamParticlesProps {
   scrollPercent: number;
 }
 
-// Pre-calculated deterministic trajectories for brake spark particles (pure rendering)
-const FRONT_SPARKS = [
-  { x: -32, y: -18, delay: 0.05, repeatDelay: 0.1 },
-  { x: -48, y: -26, delay: 0.13, repeatDelay: 0.08 },
-  { x: -25, y: -12, delay: 0.21, repeatDelay: 0.14 },
-  { x: -42, y: -22, delay: 0.29, repeatDelay: 0.06 },
-  { x: -55, y: -15, delay: 0.37, repeatDelay: 0.12 },
+// Pre-calculated deterministic trajectories for vintage brake sparks (pure rendering)
+const FRONT_BRAKE_SPARKS = [
+  { x: -28, y: -16, delay: 0.04, repeatDelay: 0.1 },
+  { x: -44, y: -24, delay: 0.12, repeatDelay: 0.08 },
+  { x: -22, y: -10, delay: 0.19, repeatDelay: 0.15 },
+  { x: -38, y: -20, delay: 0.27, repeatDelay: 0.07 },
+  { x: -50, y: -14, delay: 0.35, repeatDelay: 0.11 },
 ];
 
-const REAR_SPARKS = [
-  { x: -28, y: -14, delay: 0.04, repeatDelay: 0.09 },
-  { x: -40, y: -20, delay: 0.11, repeatDelay: 0.13 },
-  { x: -22, y: -9, delay: 0.18, repeatDelay: 0.07 },
-  { x: -36, y: -18, delay: 0.25, repeatDelay: 0.11 },
-  { x: -46, y: -12, delay: 0.32, repeatDelay: 0.08 },
+const REAR_BRAKE_SPARKS = [
+  { x: -24, y: -12, delay: 0.05, repeatDelay: 0.09 },
+  { x: -36, y: -18, delay: 0.11, repeatDelay: 0.13 },
+  { x: -20, y: -8, delay: 0.17, repeatDelay: 0.07 },
+  { x: -32, y: -16, delay: 0.24, repeatDelay: 0.12 },
+  { x: -42, y: -10, delay: 0.31, repeatDelay: 0.08 },
 ];
 
 export function SteamParticles({
@@ -36,12 +36,12 @@ export function SteamParticles({
   const trainX = useTransform(
     smoothProgress,
     [0, 0.14, 0.86, 1],
-    ["2vw", "18vw", "22vw", "34vw"]
+    ["1vw", "16vw", "20vw", "32vw"]
   );
 
-  // Steam puff opacity and horizontal drift stretch react to scroll speed
-  const steamOpacity = useTransform(speedFactor, [0, 0.2, 1], [0.25, 0.45, 0.85]);
-  const steamDriftX = useTransform(speedFactor, [0, 1], ["-10px", "-90px"]);
+  // Steam puff density, expansion, and horizontal drift react to speed
+  const steamOpacity = useTransform(speedFactor, [0, 0.2, 1], [0.35, 0.65, 0.95]);
+  const steamDriftX = useTransform(speedFactor, [0, 1], ["-15px", "-120px"]);
 
   // Terminus brake event (active when scrollPercent >= 96%)
   const isBrakingTerminus = scrollPercent >= 96;
@@ -57,49 +57,68 @@ export function SteamParticles({
       aria-hidden="true"
     >
       {/* ─────────────────────────────────────────────────────────────
-          1. AMBIENT LOCOMOTIVE ROOF EXHAUST (Cruising Steam Vents)
+          1. BILLOWING SMOKESTACK STEAM PLUMES (From Tall Vintage Chimney)
+          Positioned right at the smokestack (top-right of locomotive)
           ───────────────────────────────────────────────────────────── */}
-      <div className="relative left-14 sm:left-24 bottom-6 sm:bottom-10">
-        {[0, 1, 2, 3, 4].map((i) => (
+      <div className="relative left-60 sm:left-76 bottom-14 sm:bottom-18">
+        {[0, 1, 2, 3, 4, 5].map((i) => (
           <motion.div
-            key={`steam-${i}`}
+            key={`steam-plume-${i}`}
             style={{
               opacity: steamOpacity,
               x: steamDriftX,
-              width: `${24 + i * 8}px`,
-              height: `${24 + i * 8}px`,
+              width: `${26 + i * 10}px`,
+              height: `${26 + i * 10}px`,
             }}
             animate={{
-              y: [-10, -55 - i * 15],
-              x: [0, -35 - i * 22],
-              scale: [0.6, 1.8 + i * 0.4],
-              opacity: [0.7, 0],
+              y: [-6, -65 - i * 18],
+              x: [0, -45 - i * 28],
+              scale: [0.65, 2.2 + i * 0.45],
+              opacity: [0.85, 0],
             }}
             transition={{
-              duration: 1.8 + i * 0.25,
+              duration: 2.1 + i * 0.25,
               repeat: Infinity,
               ease: "easeOut",
-              delay: i * 0.35,
+              delay: i * 0.32,
             }}
-            className="absolute rounded-full bg-gradient-to-tr from-[#ece5d5]/30 via-[#3ad7ff]/15 to-transparent blur-md"
+            className="absolute rounded-full bg-gradient-to-tr from-[#fbf8f1]/50 via-[#e2ded6]/35 to-transparent blur-md"
           />
         ))}
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. FINAL TERMINUS BRAKE SPARKS & PNEUMATIC BURST (100% Scroll)
+          2. UNDERBODY FIREBOX COAL EMBERS (Flickering under cab)
+          ───────────────────────────────────────────────────────────── */}
+      <div className="absolute left-28 sm:left-34 bottom-[-4px]">
+        <motion.div
+          animate={{
+            opacity: [0.5, 0.9, 0.6, 1, 0.5],
+            scale: [0.95, 1.05, 0.98, 1.08, 0.95],
+          }}
+          transition={{
+            duration: 1.6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="h-3 w-12 rounded-full bg-[#ff7a00] blur-sm shadow-[0_0_14px_#ff3d00]"
+        />
+      </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          3. TERMINUS STEAM BRAKE RELEASE & WHEEL SPARKS (At Station 08)
           ───────────────────────────────────────────────────────────── */}
       {isBrakingTerminus && (
         <>
-          {/* Wheel Brake Spark Jets jumping from steel wheels to rail */}
-          <div className="absolute left-10 sm:left-20 bottom-[-10px] flex gap-20">
+          {/* Wheel Brake Spark Jets jumping from cast iron brake shoes */}
+          <div className="absolute left-32 sm:left-42 bottom-[-8px] flex gap-16">
             {/* Front Bogey Sparks */}
             <div className="relative">
-              {FRONT_SPARKS.map((spark, s) => (
+              {FRONT_BRAKE_SPARKS.map((spark, s) => (
                 <motion.div
                   key={`spark-f-${s}`}
                   animate={{
-                    x: [-5, spark.x],
+                    x: [-4, spark.x],
                     y: [0, spark.y],
                     opacity: [1, 0],
                     scale: [1, 0.2],
@@ -116,13 +135,13 @@ export function SteamParticles({
               ))}
             </div>
 
-            {/* Rear Bogey Sparks */}
+            {/* Rear Driving Wheel Sparks */}
             <div className="relative">
-              {REAR_SPARKS.map((spark, s) => (
+              {REAR_BRAKE_SPARKS.map((spark, s) => (
                 <motion.div
                   key={`spark-r-${s}`}
                   animate={{
-                    x: [-5, spark.x],
+                    x: [-4, spark.x],
                     y: [0, spark.y],
                     opacity: [1, 0],
                     scale: [1, 0.2],
@@ -140,12 +159,12 @@ export function SteamParticles({
             </div>
           </div>
 
-          {/* High-Pressure Pneumatic Air-Brake Cloud Burst */}
+          {/* Steam Pressure Cylinder Release Cloud (Pneumatic Hiss) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.4 }}
-            animate={{ opacity: [0, 0.85, 0], scale: [0.6, 2.2, 3] }}
-            transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 1.2, ease: "easeOut" }}
-            className="absolute left-6 bottom-[-4px] h-14 w-28 rounded-full bg-[#ece5d5]/40 blur-lg"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: [0, 0.9, 0], scale: [0.6, 2.5, 3.2] }}
+            transition={{ duration: 1.6, repeat: Infinity, repeatDelay: 1.0, ease: "easeOut" }}
+            className="absolute left-20 bottom-[-4px] h-16 w-36 rounded-full bg-[#fbf8f1]/55 blur-lg"
           />
         </>
       )}

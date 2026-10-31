@@ -11,11 +11,16 @@ interface CoachProps {
   className?: string;
 }
 
+/**
+ * Classic Pullman / Orient Express Luxury Passenger Coach
+ * Featuring a classic clerestory monitor roof, arched mahogany-trimmed windows,
+ * gold leaf filigree, brass coach designation plate, and spoked iron bogies.
+ */
 export function Coach({
   coachNumber,
   title,
-  tagline = "PRESSURIZED · HIGH SPEED TRANSIT",
-  accentColor = "#3ad7ff",
+  tagline = "FIRST CLASS · CONTINENTAL EXPRESS",
+  accentColor = "#d4af37",
   smoothProgress,
   className = "",
 }: CoachProps) {
@@ -34,7 +39,7 @@ export function Coach({
       className={`relative select-none ${className}`}
     >
       {/* ─────────────────────────────────────────────────────────────
-          CYBER CARRIAGE COMPARTMENT CHASSIS
+          VINTAGE PULLMAN PASSENGER CARRIAGE CHASSIS
           ───────────────────────────────────────────────────────────── */}
       <div className="relative h-20 w-72 sm:h-24 sm:w-84">
         <svg
@@ -43,96 +48,116 @@ export function Coach({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Main Coach Body Box */}
+          {/* Main Wooden/Iron Coach Body Box */}
           <path
-            d="M12 75 L328 75 L328 18 C328 18 310 14 280 14 L60 14 C30 14 12 18 12 18 Z"
-            fill="url(#coachBodyGrad)"
-            stroke="rgba(236,229,213,0.2)"
+            d="M12 75 L328 75 L328 20 C328 20 310 16 280 16 L60 16 C30 16 12 20 12 20 Z"
+            fill="url(#classicCoachGrad)"
+            stroke="#453d32"
             strokeWidth="1.2"
           />
 
-          {/* Roof Cowling & Flutes */}
-          <rect x="30" y="10" width="280" height="4" rx="2" fill="#121316" stroke="rgba(255,255,255,0.1)" />
-          <line x1="50" y1="12" x2="290" y2="12" stroke={accentColor} strokeWidth="1" opacity="0.6" />
+          {/* Clerestory Monitor Roof (Raised Center Tier with Vents) */}
+          <rect x="55" y="10" width="230" height="7" rx="2" fill="#121317" stroke="#d4af37" strokeWidth="0.8" />
+          {/* Clerestory Small Glass Ventilators */}
+          {[65, 85, 105, 125, 145, 165, 185, 205, 225, 245, 265].map((vx) => (
+            <rect key={vx} x={vx} y="12" width="12" height="3" rx="0.5" fill="#ffd23a" opacity="0.6" />
+          ))}
 
-          {/* Coach Accent Livery Band */}
-          <rect x="12" y="56" width="316" height="5" fill={accentColor} opacity="0.9" />
-          <rect x="12" y="62" width="316" height="2" fill="#ff6a1a" opacity="0.8" />
+          {/* Roof Edge Gilded Molding */}
+          <line x1="20" y1="18" x2="320" y2="18" stroke="#d4af37" strokeWidth="1.2" />
 
-          {/* Panoramic Tinted Observation Windows (3 Compartment Bays) */}
-          <g fill="#00e5ff" opacity="0.18">
-            <rect x="35" y="24" width="70" height="24" rx="3" stroke="rgba(255,255,255,0.3)" />
-            <rect x="135" y="24" width="70" height="24" rx="3" stroke="rgba(255,255,255,0.3)" />
-            <rect x="235" y="24" width="70" height="24" rx="3" stroke="rgba(255,255,255,0.3)" />
-          </g>
+          {/* Arched Vintage Compartment Windows (Warm Amber Oil Lamp Glow) */}
+          {[36, 92, 148, 204, 260].map((wx, idx) => (
+            <g key={idx}>
+              {/* Arched Window Opening */}
+              <path
+                d={`M${wx} 46 L${wx} 28 C${wx} 22, ${wx + 34} 22, ${wx + 34} 28 L${wx + 34} 46 Z`}
+                fill="url(#coachWindowGlow)"
+                stroke="#d4af37"
+                strokeWidth="1"
+              />
+              {/* Window Velvet Curtain Drapes / Pelmet */}
+              <path
+                d={`M${wx} 28 Q ${wx + 17} 32, ${wx + 34} 28`}
+                stroke="#681b1b"
+                strokeWidth="2.5"
+                fill="none"
+              />
+              {/* Center Mullion Division */}
+              <line x1={wx + 17} y1="24" x2={wx + 17} y2="46" stroke="#453d32" strokeWidth="0.8" />
+            </g>
+          ))}
 
-          {/* Window Reflection Sheen */}
-          <g stroke="rgba(255,255,255,0.35)" strokeWidth="0.8">
-            <line x1="45" y1="26" x2="65" y2="46" />
-            <line x1="145" y1="26" x2="165" y2="46" />
-            <line x1="245" y1="26" x2="265" y2="46" />
-          </g>
+          {/* Gold Filigree & Coach Belt Rail */}
+          <line x1="12" y1="52" x2="328" y2="52" stroke="#d4af37" strokeWidth="1.4" />
+          <line x1="12" y1="56" x2="328" y2="56" stroke="#d4af37" strokeWidth="0.8" opacity="0.7" />
 
-          {/* Coach Designation Plate */}
+          {/* Gilded Cast Brass Carriage Nameplate (Center) */}
           <g>
-            <rect x="110" y="48" width="120" height="15" rx="1" fill="#0d0e12" stroke="#ece5d5" strokeWidth="0.6" />
+            <rect x="100" y="58" width="140" height="13" rx="1.5" fill="#121316" stroke={accentColor} strokeWidth="1" />
             <text
               x="170"
-              y="56"
-              fill="#ece5d5"
-              fontSize="6"
-              fontFamily="monospace"
+              y="65"
+              fill={accentColor}
+              fontSize="5.5"
+              fontFamily="serif"
               fontWeight="bold"
               textAnchor="middle"
-              letterSpacing="0.1em"
+              letterSpacing="0.12em"
             >
-              COACH {coachNumber.toString().padStart(2, "0")} · {title.slice(0, 16).toUpperCase()}
+              CARRIAGE NO. {coachNumber.toString().padStart(2, "0")} · {title.slice(0, 16).toUpperCase()}
             </text>
             <text
               x="170"
-              y="61"
-              fill={accentColor}
-              fontSize="3.8"
-              fontFamily="monospace"
+              y="69.5"
+              fill="#ece5d5"
+              fontSize="3.5"
+              fontFamily="serif"
               textAnchor="middle"
-              letterSpacing="0.08em"
-              opacity="0.85"
+              letterSpacing="0.1em"
+              opacity="0.8"
             >
-              {tagline.slice(0, 30).toUpperCase()}
+              {tagline.slice(0, 32).toUpperCase()}
             </text>
           </g>
 
-          {/* Inter-Carriage Coupler Knuckles at Both Ends */}
-          <rect x="2" y="68" width="10" height="6" fill="#3a3d47" stroke="#16181c" />
-          <rect x="328" y="68" width="10" height="6" fill="#3a3d47" stroke="#16181c" />
+          {/* Coach Underbody Wooden Siding & Truss Rods */}
+          <line x1="12" y1="74" x2="328" y2="74" stroke="#d4af37" strokeWidth="1" />
+          <path d="M45 75 L170 82 L295 75" stroke="#453d32" strokeWidth="1.2" fill="none" />
+          <line x1="170" y1="75" x2="170" y2="82" stroke="#d4af37" strokeWidth="1" />
 
-          {/* Bogie Underframe Skirts */}
-          <rect x="28" y="75" width="284" height="10" fill="#0d0e12" stroke="#252830" strokeWidth="1" />
+          {/* Accordion Gangway End Bellows */}
+          <rect x="4" y="24" width="8" height="48" rx="1" fill="#1b1c22" stroke="#3c3e47" />
+          <line x1="8" y1="24" x2="8" y2="72" stroke="#121316" strokeWidth="1.5" />
+          <rect x="328" y="24" width="8" height="48" rx="1" fill="#1b1c22" stroke="#3c3e47" />
+          <line x1="332" y1="24" x2="332" y2="72" stroke="#121316" strokeWidth="1.5" />
 
           {/* Gradients */}
           <defs>
-            <linearGradient id="coachBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1e2026" />
-              <stop offset="50%" stopColor="#242630" />
-              <stop offset="100%" stopColor="#181a20" />
+            <linearGradient id="classicCoachGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#252932" />
+              <stop offset="35%" stopColor="#1e2129" />
+              <stop offset="75%" stopColor="#171920" />
+              <stop offset="100%" stopColor="#0f1014" />
+            </linearGradient>
+            <linearGradient id="coachWindowGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#fff2a8" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="#ffb020" stopOpacity="0.6" />
             </linearGradient>
           </defs>
         </svg>
 
         {/* ─────────────────────────────────────────────────────────────
-            REVOLVING WHEELSETS BENEATH CARRIAGE
+            WHEELSETS UNDER COACH COMPARTMENT
             ───────────────────────────────────────────────────────────── */}
-        <div className="absolute -bottom-2 inset-x-8 flex justify-between px-2">
-          {/* Left Bogie */}
+        <div className="absolute -bottom-2 inset-x-8 flex justify-between px-3">
           <div className="flex gap-4">
-            <CoachWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
-            <CoachWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
+            <CoachVintageWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
+            <CoachVintageWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
           </div>
-
-          {/* Right Bogie */}
           <div className="flex gap-4">
-            <CoachWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
-            <CoachWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
+            <CoachVintageWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
+            <CoachVintageWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
           </div>
         </div>
       </div>
@@ -140,7 +165,7 @@ export function Coach({
   );
 }
 
-function CoachWheel({
+function CoachVintageWheel({
   rotateValue,
   shouldReduceMotion,
 }: {
@@ -148,19 +173,13 @@ function CoachWheel({
   shouldReduceMotion: boolean;
 }) {
   return (
-    <div className="relative h-6 w-6 sm:h-7 sm:w-7">
-      <div className="absolute inset-0 rounded-full border-2 border-[#545763] bg-[#121316]" />
-      <motion.div
-        style={{ rotate: shouldReduceMotion ? 0 : rotateValue }}
-        className="absolute inset-0 flex items-center justify-center will-change-transform"
-      >
-        <svg className="h-full w-full" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="13" stroke="#3a3d47" strokeWidth="2" />
-          <line x1="16" y1="3" x2="16" y2="29" stroke="#8c919e" strokeWidth="1.5" />
-          <line x1="3" y1="16" x2="29" y2="16" stroke="#8c919e" strokeWidth="1.5" />
-          <circle cx="16" cy="16" r="3.5" fill="#252830" stroke="#ffd23a" strokeWidth="1" />
-        </svg>
-      </motion.div>
-    </div>
+    <motion.div
+      style={{ rotate: shouldReduceMotion ? 0 : rotateValue }}
+      className="relative h-6 w-6 rounded-full border-2 border-[#d4af37]/70 bg-[#16181c] shadow-md will-change-transform"
+    >
+      <div className="absolute inset-x-0 top-1/2 h-[1px] -translate-y-1/2 bg-[#ece5d5]/50" />
+      <div className="absolute inset-y-0 left-1/2 w-[1px] -translate-x-1/2 bg-[#ece5d5]/50" />
+      <div className="absolute inset-0 m-auto h-2 w-2 rounded-full border border-white/40 bg-[#d4af37]" />
+    </motion.div>
   );
 }

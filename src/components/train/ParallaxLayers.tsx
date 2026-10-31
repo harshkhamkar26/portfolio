@@ -10,14 +10,36 @@ interface ParallaxLayersProps {
 export function ParallaxLayers({ smoothProgress, speedFactor }: ParallaxLayersProps) {
   const shouldReduceMotion = useReducedMotion();
 
-  // Parallax displacement ranges (opposite to train travel: scrolling forward translates scenery backward/leftward)
-  const skyX = useTransform(smoothProgress, [0, 1], ["0%", "-15%"]);
-  const skylineX = useTransform(smoothProgress, [0, 1], ["0%", "-38%"]);
-  const terrainX = useTransform(smoothProgress, [0, 1], ["0%", "-75%"]);
-  const catenaryX = useTransform(smoothProgress, [0, 1], ["0%", "-145%"]);
+  // Layer 1: Moon & Night Sky Stars (Slowest drift: -5vw)
+  const starsX = useTransform(smoothProgress, [0, 1], ["0vw", "-5vw"]);
 
-  // Dynamic speed streak opacity coupled directly to scroll velocity
-  const streakOpacity = useTransform(speedFactor, [0.05, 0.4, 1], [0, 0.28, 0.65]);
+  // Layer 2: Distant Mountain Ridges & Pine Tree Silhouette Peaks (-16vw)
+  const mountainsX = useTransform(smoothProgress, [0, 1], ["0vw", "-16vw"]);
+
+  // Layer 3: Victorian Stone Viaduct Bridge Arches & Water Towers (-32vw)
+  const viaductX = useTransform(smoothProgress, [0, 1], ["0vw", "-32vw"]);
+
+  // Layer 4: Foreground Wooden Telegraph Poles with Crossarms & Sagging Wires (-68vw)
+  const telegraphPolesX = useTransform(smoothProgress, [0, 1], ["0vw", "-68vw"]);
+
+  // Motion streak opacity tied to scroll speed
+  const speedStreakOpacity = useTransform(speedFactor, [0, 0.2, 0.9], [0, 0.2, 0.65]);
+
+  if (shouldReduceMotion) {
+    return (
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-30 select-none"
+      >
+        <svg className="absolute bottom-20 h-44 w-full" preserveAspectRatio="none">
+          <path
+            d="M0 120 L120 70 L240 110 L360 65 L480 95 L600 60 L720 100 L840 70 L960 110 L1080 60 L1200 95 L1320 70 L1440 120 L1440 180 L0 180 Z"
+            fill="#121316"
+          />
+        </svg>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -25,272 +47,184 @@ export function ParallaxLayers({ smoothProgress, speedFactor }: ParallaxLayersPr
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
     >
       {/* ─────────────────────────────────────────────────────────────
-          LAYER 1: DEEP COSMIC SKY & CYBER CONSTELLATION GRID (-15%)
+          LAYER 1: Silver Night Moon, Clouds & Star Field
           ───────────────────────────────────────────────────────────── */}
       <motion.div
-        style={{ x: shouldReduceMotion ? "0%" : skyX }}
-        className="absolute inset-0 h-full w-[130%] opacity-40 will-change-transform"
+        style={{ x: starsX }}
+        className="absolute inset-0 h-full w-[120vw] will-change-transform opacity-45"
       >
-        <svg
-          className="h-full w-full object-cover"
-          viewBox="0 0 1920 1080"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-        >
-          {/* Subtle cyber coordinate grid */}
+        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#0d0f12" stopOpacity="0.8" />
-              <stop offset="70%" stopColor="#16181c" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#16181c" stopOpacity="0" />
-            </linearGradient>
-            <radialGradient id="nebulaGlow" cx="60%" cy="30%" r="50%">
-              <stop offset="0%" stopColor="#3ad7ff" stopOpacity="0.12" />
-              <stop offset="50%" stopColor="#ff6a1a" stopOpacity="0.04" />
-              <stop offset="100%" stopColor="#16181c" stopOpacity="0" />
+            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#fff9e6" stopOpacity="0.9" />
+              <stop offset="40%" stopColor="#ffd875" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="transparent" stopOpacity="0" />
             </radialGradient>
           </defs>
 
-          <rect width="1920" height="1080" fill="url(#skyGrad)" />
-          <rect width="1920" height="1080" fill="url(#nebulaGlow)" />
+          {/* Glowing Full Silver Moon (Upper Left-Center Sky) */}
+          <circle cx="22%" cy="16%" r="28" fill="url(#moonGlow)" />
+          <circle cx="22%" cy="16%" r="14" fill="#fffaea" />
+          <circle cx="20%" cy="14%" r="3" fill="#e8dfc8" opacity="0.4" />
+          <circle cx="24%" cy="18%" r="4" fill="#e8dfc8" opacity="0.3" />
 
-          {/* Twinkling cyber navigational stars */}
-          <g fill="#ece5d5" opacity="0.45">
-            <circle cx="120" cy="80" r="1.5" />
-            <circle cx="280" cy="140" r="1.2" />
-            <circle cx="450" cy="95" r="2" />
-            <circle cx="620" cy="180" r="1" />
-            <circle cx="810" cy="70" r="2.2" />
-            <circle cx="990" cy="130" r="1.5" />
-            <circle cx="1180" cy="90" r="1.8" />
-            <circle cx="1360" cy="160" r="1.2" />
-            <circle cx="1540" cy="75" r="2" />
-            <circle cx="1720" cy="115" r="1.4" />
-            <circle cx="1880" cy="190" r="1.6" />
-
-            <circle cx="210" cy="220" r="1" />
-            <circle cx="530" cy="260" r="1.6" />
-            <circle cx="890" cy="210" r="1.2" />
-            <circle cx="1250" cy="240" r="1.4" />
-            <circle cx="1620" cy="230" r="1.1" />
-          </g>
-
-          {/* Cyan waypoint satellite beacons */}
-          <circle cx="450" cy="95" r="3.5" fill="#3ad7ff" opacity="0.3" />
-          <circle cx="810" cy="70" r="4.5" fill="#ffd23a" opacity="0.25" />
-          <circle cx="1540" cy="75" r="4" fill="#3ad7ff" opacity="0.3" />
-
-          {/* Constellation vector vectors */}
-          <path
-            d="M120 80 L280 140 L450 95 L620 180 M990 130 L1180 90 L1360 160 L1540 75"
-            stroke="#3ad7ff"
-            strokeWidth="0.5"
-            strokeDasharray="4 6"
-            opacity="0.2"
-          />
+          {/* Twinkling Night Sky Stars */}
+          {[
+            { cx: "8%", cy: "12%", r: 1.1 },
+            { cx: "14%", cy: "24%", r: 1.4 },
+            { cx: "32%", cy: "10%", r: 0.9 },
+            { cx: "42%", cy: "22%", r: 1.6 },
+            { cx: "56%", cy: "12%", r: 1.2 },
+            { cx: "68%", cy: "28%", r: 1.5 },
+            { cx: "78%", cy: "14%", r: 1.8 },
+            { cx: "88%", cy: "22%", r: 1.1 },
+            { cx: "98%", cy: "10%", r: 1.3 },
+            { cx: "108%", cy: "26%", r: 1.4 },
+          ].map((pt, i) => (
+            <circle
+              key={i}
+              cx={pt.cx}
+              cy={pt.cy}
+              r={pt.r}
+              fill="#ece5d5"
+              opacity={0.45 + (i % 3) * 0.2}
+            />
+          ))}
         </svg>
       </motion.div>
 
       {/* ─────────────────────────────────────────────────────────────
-          LAYER 2: FAR FUTURISTIC MEGA-CITY SILHOUETTE (-38%)
+          LAYER 2: Misty Rolling Mountain Ridges & Pine Forests
           ───────────────────────────────────────────────────────────── */}
       <motion.div
-        style={{ x: shouldReduceMotion ? "0%" : skylineX }}
-        className="absolute bottom-20 left-0 h-[42vh] w-[150%] opacity-25 will-change-transform"
+        style={{ x: mountainsX }}
+        className="absolute bottom-20 sm:bottom-24 h-56 sm:h-72 w-[140vw] will-change-transform opacity-35"
       >
         <svg
-          className="h-full w-full object-fill"
-          viewBox="0 0 2400 600"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          className="h-full w-full"
           preserveAspectRatio="none"
+          viewBox="0 0 1600 240"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Cyber Megacity Silhouettes */}
+          {/* Distant Mountain Peaks & Pine Forest Silhouette */}
           <path
-            d="
-              M0 600 L0 380 L40 380 L40 420 L70 420 L70 340 L100 340 L100 300 L115 220 L130 300 L160 300 L160 410 
-              L220 410 L220 280 L260 280 L260 210 L275 160 L290 210 L330 210 L330 430 L380 430 L380 360 L420 360 
-              L450 310 L480 360 L510 360 L510 440 L580 440 L580 260 L620 260 L620 180 L635 120 L650 180 L700 180 
-              L700 420 L750 420 L750 370 L800 370 L800 450 L880 450 L880 330 L930 330 L930 290 L960 290 L960 460 
-              L1040 460 L1040 240 L1070 240 L1070 190 L1085 140 L1100 190 L1140 190 L1140 430 L1200 430 L1200 350 
-              L1250 350 L1250 440 L1320 440 L1320 270 L1370 270 L1370 200 L1410 200 L1410 420 L1470 420 L1470 330 
-              L1530 330 L1530 450 L1600 450 L1600 290 L1650 290 L1650 220 L1665 170 L1680 220 L1720 220 L1720 440 
-              L1800 440 L1800 360 L1850 360 L1850 430 L1940 430 L1940 250 L1980 250 L1980 190 L2020 190 L2020 450 
-              L2120 450 L2120 340 L2170 340 L2170 430 L2260 430 L2260 300 L2310 300 L2310 420 L2400 420 L2400 600 Z
-            "
-            fill="#121317"
-            stroke="rgba(236,229,213,0.06)"
-            strokeWidth="1"
+            d="M0 240 L0 160 L60 130 L110 145 L180 110 L250 150 L320 120 L380 135 L440 95 L510 140 L580 115 L660 150 L730 100 L810 140 L890 120 L960 90 L1040 130 L1120 105 L1190 140 L1260 115 L1340 145 L1420 100 L1500 135 L1600 110 L1600 240 Z"
+            fill="#13151a"
           />
-
-          {/* Rooftop communication beacon LEDs */}
-          <g>
-            <circle cx="275" cy="160" r="3" fill="#ff2e97" />
-            <circle cx="635" cy="120" r="3" fill="#3ad7ff" />
-            <circle cx="1085" cy="140" r="3" fill="#ffd23a" />
-            <circle cx="1665" cy="170" r="3" fill="#ff2e97" />
-            <circle cx="1980" cy="190" r="3" fill="#3ad7ff" />
-          </g>
-
-          {/* Monolith window matrix bands */}
-          <g fill="#ece5d5" opacity="0.12">
-            <rect x="235" y="300" width="12" height="60" />
-            <rect x="600" y="280" width="15" height="90" />
-            <rect x="1055" y="260" width="14" height="110" />
-            <rect x="1335" y="290" width="20" height="70" />
-            <rect x="1620" y="310" width="18" height="80" />
-          </g>
+          {/* Pine Tree Peaks Spanning the Ridge */}
+          {[90, 210, 340, 480, 620, 760, 920, 1070, 1220, 1370, 1520].map((tx, idx) => (
+            <polygon
+              key={idx}
+              points={`${tx},130 ${tx + 8},110 ${tx + 16},130`}
+              fill="#181a20"
+            />
+          ))}
         </svg>
       </motion.div>
 
       {/* ─────────────────────────────────────────────────────────────
-          LAYER 3: MID MOUNTAINS, TUNNEL ARCHES & MAGLEV PYLONS (-75%)
+          LAYER 3: Victorian Stone Viaduct Bridge Arches & Water Tower
           ───────────────────────────────────────────────────────────── */}
       <motion.div
-        style={{ x: shouldReduceMotion ? "0%" : terrainX }}
-        className="hidden sm:block absolute bottom-14 left-0 h-[30vh] w-[190%] opacity-35 will-change-transform"
+        style={{ x: viaductX }}
+        className="absolute bottom-16 sm:bottom-20 h-40 sm:h-52 w-[180vw] will-change-transform opacity-45"
       >
         <svg
-          className="h-full w-full object-fill"
-          viewBox="0 0 3000 450"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          className="h-full w-full"
           preserveAspectRatio="none"
+          viewBox="0 0 2000 180"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Rugged polygon ridges and tunnel portals */}
-          <path
-            d="
-              M0 450 L0 320 L180 240 L340 310 L520 190 L710 290 L880 220 L1060 300 
-              L1240 180 L1420 280 L1580 210 L1760 300 L1940 190 L2120 290 L2300 230 
-              L2480 310 L2660 200 L2840 280 L3000 240 L3000 450 Z
-            "
-            fill="#101114"
-            stroke="rgba(58,215,255,0.08)"
-            strokeWidth="1.5"
-          />
+          {/* Solid Masonry Viaduct Deck */}
+          <rect x="0" y="80" width="2000" height="12" fill="#181a20" stroke="#453d32" strokeWidth="1" />
 
-          {/* Cyber tunnel rib portal arches (Station transitions) */}
-          <g stroke="#ff6a1a" strokeWidth="1.5" opacity="0.3">
-            <path d="M480 380 L520 190 L560 380" fill="none" />
-            <path d="M500 380 L520 220 L540 380" fill="none" />
-            <path d="M1200 380 L1240 180 L1280 380" fill="none" />
-            <path d="M1900 380 L1940 190 L1980 380" fill="none" />
-          </g>
+          {/* Stone Viaduct Arches Spanning Valley */}
+          {[120, 360, 600, 840, 1080, 1320, 1560, 1800].map((archX, idx) => (
+            <g key={idx}>
+              {/* Massive Stone Pillar Pier */}
+              <rect x={archX} y="92" width="28" height="88" fill="#131418" stroke="#352e25" strokeWidth="1" />
+              {/* Arched Opening Between Pillars */}
+              <path
+                d={`M${archX + 28} 180 L${archX + 28} 115 Q ${archX + 104} 95, ${archX + 180} 115 L${archX + 180} 180 Z`}
+                fill="#0d0e12"
+                stroke="#453d32"
+                strokeWidth="1.2"
+              />
+            </g>
+          ))}
 
-          {/* Neon trackside perimeter guide lights */}
-          <g fill="#9dfc3f" opacity="0.6">
-            <circle cx="200" cy="360" r="2" />
-            <circle cx="520" cy="360" r="2" />
-            <circle cx="840" cy="360" r="2" />
-            <circle cx="1160" cy="360" r="2" />
-            <circle cx="1480" cy="360" r="2" />
-            <circle cx="1800" cy="360" r="2" />
-            <circle cx="2120" cy="360" r="2" />
-            <circle cx="2440" cy="360" r="2" />
-            <circle cx="2760" cy="360" r="2" />
+          {/* Classic Brick Railway Water Tank Tower (Station Refueling Point) */}
+          <g transform="translate(720, 25)">
+            <rect x="0" y="25" width="45" height="30" rx="3" fill="#20222a" stroke="#d4af37" strokeWidth="1" />
+            <rect x="5" y="55" width="35" height="40" fill="#16181d" stroke="#3e3930" strokeWidth="1" />
+            <line x1="42" y1="35" x2="60" y2="48" stroke="#d4af37" strokeWidth="2.5" />
           </g>
         </svg>
       </motion.div>
 
       {/* ─────────────────────────────────────────────────────────────
-          LAYER 4: NEAR HIGH-VOLTAGE CATENARY GANTRIES & WIRES (-145%)
+          LAYER 4: Foreground Wooden Telegraph Poles & Sagging Wires
           ───────────────────────────────────────────────────────────── */}
       <motion.div
-        style={{ x: shouldReduceMotion ? "0%" : catenaryX }}
-        className="hidden md:block absolute bottom-0 left-0 h-[65vh] w-[260%] opacity-20 will-change-transform"
+        style={{ x: telegraphPolesX }}
+        className="absolute bottom-10 h-36 w-[260vw] will-change-transform opacity-35 pointer-events-none"
       >
         <svg
-          className="h-full w-full object-fill"
-          viewBox="0 0 4200 800"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          className="h-full w-full"
           preserveAspectRatio="none"
+          viewBox="0 0 2800 140"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Overhead catenary high-voltage suspension wires */}
+          {/* Copper Telegraph Wires with authentic catenary sag */}
           <path
-            d="
-              M0 160 Q350 200 700 160 Q1050 200 1400 160 Q1750 200 2100 160 
-              Q2450 200 2800 160 Q3150 200 3500 160 Q3850 200 4200 160
-            "
-            stroke="#ece5d5"
-            strokeWidth="1.5"
-            opacity="0.4"
+            d="M0 45 Q 225 60, 450 45 Q 675 60, 900 45 Q 1125 60, 1350 45 Q 1575 60, 1800 45 Q 2025 60, 2250 45 Q 2475 60, 2700 45 L2800 45"
+            stroke="#d4af37"
+            strokeWidth="0.8"
+            opacity="0.6"
+            fill="none"
           />
           <path
-            d="M0 210 L4200 210"
-            stroke="#3ad7ff"
-            strokeWidth="1"
-            opacity="0.5"
+            d="M0 52 Q 225 68, 450 52 Q 675 68, 900 52 Q 1125 68, 1350 52 Q 1575 68, 1800 52 Q 2025 68, 2250 52 Q 2475 68, 2700 52 L2800 52"
+            stroke="#d4af37"
+            strokeWidth="0.6"
+            opacity="0.45"
+            fill="none"
           />
 
-          {/* Dropper suspension links */}
-          <g stroke="rgba(236,229,213,0.3)" strokeWidth="0.8">
-            {Array.from({ length: 42 }).map((_, i) => (
-              <line key={i} x1={i * 100 + 50} y1="180" x2={i * 100 + 50} y2="210" />
-            ))}
-          </g>
+          {/* Wooden Timber Telegraph Poles with Crossarms & Ceramic Insulators */}
+          {[0, 450, 900, 1350, 1800, 2250, 2700].map((poleX, idx) => (
+            <g key={idx}>
+              {/* Main Vertical Wooden Pole */}
+              <line x1={poleX + 50} y1="140" x2={poleX + 50} y2="35" stroke="#382c20" strokeWidth="3" />
+              {/* Horizontal Timber Crossarm */}
+              <line x1={poleX + 28} y1="45" x2={poleX + 72} y2="45" stroke="#544433" strokeWidth="2.5" />
+              {/* Diagonal Crossarm Bracing Struts */}
+              <line x1={poleX + 50} y1="58" x2={poleX + 38} y2="46" stroke="#382c20" strokeWidth="1.2" />
+              <line x1={poleX + 50} y1="58" x2={poleX + 62} y2="46" stroke="#382c20" strokeWidth="1.2" />
 
-          {/* Catenary Mast Pylons standing every 700 units */}
-          {Array.from({ length: 7 }).map((_, i) => {
-            const px = i * 700 + 350;
-            return (
-              <g key={i}>
-                {/* Steel truss mast */}
-                <line x1={px} y1="100" x2={px} y2="800" stroke="#252830" strokeWidth="8" />
-                <line x1={px} y1="100" x2={px} y2="800" stroke="#3ad7ff" strokeWidth="1" opacity="0.4" />
-                {/* Horizontal cantilever arm */}
-                <line x1={px - 80} y1="130" x2={px + 80} y2="130" stroke="#252830" strokeWidth="6" />
-                {/* Ceramic insulator bells */}
-                <circle cx={px} cy="155" r="5" fill="#ffd23a" opacity="0.8" />
-                <circle cx={px} cy="205" r="4" fill="#3ad7ff" opacity="0.9" />
-              </g>
-            );
-          })}
+              {/* Glass / Ceramic Insulators */}
+              <circle cx={poleX + 32} cy="42" r="1.8" fill="#d4af37" />
+              <circle cx={poleX + 44} cy="42" r="1.8" fill="#d4af37" />
+              <circle cx={poleX + 56} cy="42" r="1.8" fill="#d4af37" />
+              <circle cx={poleX + 68} cy="42" r="1.8" fill="#d4af37" />
+            </g>
+          ))}
         </svg>
       </motion.div>
 
       {/* ─────────────────────────────────────────────────────────────
-          LAYER 5: WARP VELOCITY SPEED STREAKS (Coupled to Velocity)
+          LAYER 5: Soft Atmospheric Speed Streaks (During High Throttle)
           ───────────────────────────────────────────────────────────── */}
       <motion.div
-        style={{ opacity: shouldReduceMotion ? 0 : streakOpacity }}
-        className="absolute inset-0 pointer-events-none will-change-opacity"
+        style={{ opacity: speedStreakOpacity }}
+        className="absolute inset-0 pointer-events-none overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#3ad7ff]/[0.025] to-transparent" />
-        <svg
-          className="h-full w-full object-cover"
-          viewBox="0 0 1920 1080"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* High-speed motion blur horizontal laser streaks */}
-          <g stroke="url(#streakGradCyan)" strokeWidth="1.5">
-            <line x1="0" y1="220" x2="1920" y2="220" strokeDasharray="300 200" />
-            <line x1="0" y1="410" x2="1920" y2="410" strokeDasharray="450 150" />
-            <line x1="0" y1="580" x2="1920" y2="580" strokeDasharray="600 250" />
-            <line x1="0" y1="740" x2="1920" y2="740" strokeDasharray="380 180" />
-            <line x1="0" y1="890" x2="1920" y2="890" strokeDasharray="520 120" />
-          </g>
-          <g stroke="url(#streakGradOrange)" strokeWidth="1">
-            <line x1="0" y1="310" x2="1920" y2="310" strokeDasharray="400 300" />
-            <line x1="0" y1="670" x2="1920" y2="670" strokeDasharray="500 250" />
-            <line x1="0" y1="820" x2="1920" y2="820" strokeDasharray="350 200" />
-          </g>
-
-          <defs>
-            <linearGradient id="streakGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3ad7ff" stopOpacity="0" />
-              <stop offset="50%" stopColor="#3ad7ff" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#3ad7ff" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient id="streakGradOrange" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ff6a1a" stopOpacity="0" />
-              <stop offset="50%" stopColor="#ff6a1a" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#ff6a1a" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
+        <div className="absolute top-[32%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#ffd23a]/30 to-transparent blur-[0.6px]" />
+        <div className="absolute top-[48%] left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/30 to-transparent blur-[0.8px]" />
+        <div className="absolute top-[64%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#e5c07b]/25 to-transparent blur-[0.6px]" />
       </motion.div>
     </div>
   );
