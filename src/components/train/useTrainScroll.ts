@@ -63,20 +63,23 @@ export function useTrainScroll(): TrainScrollState {
       const progress = totalHeight > 0 ? Math.min(Math.max(scrollY / totalHeight, 0), 1) : 0;
       setScrollPercent(Math.round(progress * 100));
 
-      // Check section element positions for pinpoint accuracy
-      const probeY = scrollY + window.innerHeight * 0.38;
+      // Check section element positions using getBoundingClientRect for pinpoint synchronization
+      const probeY = window.innerHeight * 0.35;
       let matchedIndex = 0;
 
       for (let i = stationStops.length - 1; i >= 0; i--) {
         const el = document.getElementById(stationStops[i].id);
-        if (el && probeY >= el.offsetTop) {
-          matchedIndex = i;
-          break;
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= probeY) {
+            matchedIndex = i;
+            break;
+          }
         }
       }
 
       // Edge case: if reached the bottom of page, force Station 08 (Terminus)
-      if (progress >= 0.96) {
+      if (window.innerHeight + scrollY >= document.documentElement.scrollHeight - 60) {
         matchedIndex = stationStops.length - 1;
       }
 

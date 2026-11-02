@@ -4,8 +4,6 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { LineProgress } from "@/components/layout/line-progress";
-import { HudDisplay } from "@/components/layout/hud-display";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { HeroSection } from "@/components/sections/hero-section";
 import { TracksSection } from "@/components/sections/tracks-section";
@@ -29,19 +27,13 @@ export function HomeClient() {
   return (
     <SmoothScrollProvider>
       {/* ─────────────────────────────────────────────────────────────
-          THE PORTFOLIO EXPRESS: Fixed Animated Cyber-Train Background Layer
+          THE PORTFOLIO EXPRESS: Fixed Animated Steam Railway Background Layer
           Fixed viewport, zero click-blocking (pointer-events: none)
           ───────────────────────────────────────────────────────────── */}
       <TrainJourney />
 
       {/* Film grain overlay */}
       <div className="grain" aria-hidden="true" />
-
-      {/* Right-side vertical railway station progress tracker */}
-      <LineProgress />
-
-      {/* Bottom-left telemetry HUD */}
-      <HudDisplay />
 
       {/* Main navigation */}
       <Navbar onCommandOpen={() => setCommandOpen(true)} />
@@ -59,26 +51,27 @@ export function HomeClient() {
         {/* Station 04: Project Depot Fleet & GitHub API Sync */}
         <DepotSection />
 
-        {/* Station 05: Profile & Tactical Photo HUD */}
+        {/* Station 05: Data Science Engineer Profile & Arsenal */}
         <ProfileSection />
 
-        {/* Station 06: Expedition Journey Timeline */}
+        {/* Station 06: Career Expedition & Research Milestones */}
         <ExpeditionSection />
 
-        {/* Station 07: Certifications & Athletic Matrix */}
+        {/* Station 07: Competency Matrix & Athletic Accolades */}
         <MatrixSection />
 
-        {/* Station 08: Comms Dispatch & CLI Terminal */}
+        {/* Station 08: Dispatch Terminal & Secure Transmission */}
         <DispatchTerminal />
       </main>
 
+      {/* Terminal Footer */}
       <Footer />
 
-      {/* Command Palette */}
-      <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} />
-
-      {/* Optional AI Assistant Drawer */}
+      {/* Interactive AI Locomotive Engineer Assistant */}
       <AIAssistant />
+
+      {/* Keyboard Command Palette (Ctrl+K) */}
+      <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} />
     </SmoothScrollProvider>
   );
 }

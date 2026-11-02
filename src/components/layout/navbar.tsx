@@ -34,7 +34,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
         }
       }
 
-      // If at bottom of page, force last station
+      // If at bottom of page, force last station (08 COMMS)
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
         currentId = stationStops[stationStops.length - 1].id;
       }
@@ -52,7 +52,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
   const handleAnchor = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     sounds.playClick();
-    setActiveStation(id); // Immediate visual response on tab click
+    setActiveStation(id); // Immediate visual feedback on tab click
 
     const target = document.getElementById(id);
     if (target) {
@@ -75,25 +75,25 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/10 bg-[#16181c]/95 py-2.5 backdrop-blur-xl shadow-2xl"
-          : "bg-transparent py-4"
+          ? "border-b border-white/10 bg-[#12141a]/95 py-2.5 backdrop-blur-xl shadow-2xl"
+          : "bg-transparent py-3 sm:py-4"
       }`}
     >
       <nav
-        className="mx-auto flex max-w-[1600px] items-center justify-between px-4 sm:px-8"
+        className="mx-auto flex max-w-[1680px] items-center justify-between px-3 sm:px-6 lg:px-8"
         aria-label="Main navigation"
       >
-        {/* Brand / Logo */}
+        {/* Brand / Locomotive Operator Identity */}
         <Link
           href="/"
-          className="group flex items-center gap-3 shrink-0"
+          className="group flex items-center gap-2.5 sm:gap-3 shrink-0"
           onClick={() => {
             sounds.playClick();
             closeMenu();
           }}
           onMouseEnter={() => sounds.playHover()}
         >
-          <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 overflow-hidden border-2 border-[#ff6a1a] bg-[#16181c] shadow-[0_0_12px_rgba(255,106,26,0.25)] transition-all group-hover:border-[#9dfc3f]">
+          <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 overflow-hidden border-2 border-[#ff6a1a] bg-[#16181c] shadow-[0_0_12px_rgba(255,106,26,0.3)] transition-all group-hover:border-[#9dfc3f] group-hover:shadow-[0_0_16px_rgba(157,252,63,0.4)]">
             <Image
               src="/images/harsh-khamkar.jpg"
               alt="Harsh Khamkar"
@@ -106,7 +106,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
             <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[#9dfc3f]" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display text-xs sm:text-sm font-black uppercase tracking-tight text-[#ece5d5]">
+            <span className="font-display text-xs sm:text-sm font-black uppercase tracking-tight text-[#ece5d5] group-hover:text-white transition-colors">
               HARSH KHAMKAR
             </span>
             <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-[#ff6a1a]">
@@ -116,49 +116,64 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
         </Link>
 
         {/* ─────────────────────────────────────────────────────────────
-            SLEEK DESKTOP STATION TABS (All 8 Stations · Back to Normal Sizing)
-            Live active tab updates with clean accent underline & audio
+            INTERACTIVE CYBER-RAILWAY WAYPOINT NAVIGATOR (All 8 Stations)
+            Features live sliding active capsule, glowing track line & audio
             ───────────────────────────────────────────────────────────── */}
-        <div className="hidden items-center gap-1 xl:gap-2 lg:flex">
-          {stationStops.map((st) => {
-            const isCurrent = activeStation === st.id;
+        <div className="hidden lg:flex items-center">
+          <div className="relative flex items-center rounded-full border border-white/15 bg-[#161820]/90 p-1 shadow-[0_4px_24px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+            {/* Background Micro-Track Rail Line */}
+            <div className="pointer-events-none absolute inset-x-4 top-1/2 -translate-y-1/2 h-[1px] bg-white/10 -z-10" />
 
-            return (
-              <a
-                key={st.id}
-                href={`#${st.id}`}
-                onClick={(e) => handleAnchor(e, st.id)}
-                onMouseEnter={() => sounds.playHover()}
-                className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider transition-colors duration-150 ${
-                  isCurrent
-                    ? "text-white font-bold"
-                    : "text-[#ece5d5]/60 hover:text-white"
-                }`}
-              >
-                <span
-                  className={`transition-colors ${
+            {stationStops.map((st) => {
+              const isCurrent = activeStation === st.id;
+
+              return (
+                <a
+                  key={st.id}
+                  href={`#${st.id}`}
+                  onClick={(e) => handleAnchor(e, st.id)}
+                  onMouseEnter={() => sounds.playHover()}
+                  className={`relative flex items-center gap-1.5 rounded-full px-2 xl:px-3 py-1 font-mono text-[10px] xl:text-[11px] uppercase tracking-wider transition-colors duration-200 select-none whitespace-nowrap shrink-0 ${
                     isCurrent
-                      ? "text-[#ff6a1a] font-bold"
-                      : "text-[#ff6a1a]/70 group-hover:text-[#ff6a1a]"
+                      ? "text-white font-bold"
+                      : "text-[#ece5d5]/65 hover:text-white"
                   }`}
+                  title={`Station ${st.no}: ${st.name} (${st.label})`}
                 >
-                  {st.no}
-                </span>
-
-                <span className="relative pb-0.5">
-                  {st.name}
-                  {/* Clean, subtle active tab underline */}
+                  {/* Sliding Active Waypoint Capsule */}
                   {isCurrent && (
-                    <motion.span
-                      layoutId="activeStationTabUnderline"
-                      className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-[#ff6a1a]"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    <motion.div
+                      layoutId="activeStationNavPill"
+                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                      className="absolute inset-0 rounded-full border border-[#ff6a1a] bg-gradient-to-r from-[#ff6a1a]/25 via-[#ffd23a]/20 to-[#ff6a1a]/25 shadow-[0_0_18px_rgba(255,106,26,0.35)] -z-10"
                     />
                   )}
-                </span>
-              </a>
-            );
-          })}
+
+                  {/* Pulsing Beacon Dot on Active Station */}
+                  {isCurrent && (
+                    <span className="relative flex h-1.5 w-1.5 items-center justify-center">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ffd23a] opacity-80" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#ffd23a]" />
+                    </span>
+                  )}
+
+                  {/* Station Number Badge */}
+                  <span
+                    className={`transition-colors ${
+                      isCurrent
+                        ? "text-[#ffd23a] font-black"
+                        : "text-[#ff6a1a]/70 group-hover:text-[#ff6a1a]"
+                    }`}
+                  >
+                    {st.no}
+                  </span>
+
+                  {/* Station Name */}
+                  <span>{st.name}</span>
+                </a>
+              );
+            })}
+          </div>
         </div>
 
         {/* Action Controls */}
@@ -196,7 +211,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
             rel="noopener noreferrer"
             onClick={() => sounds.playClick()}
             onMouseEnter={() => sounds.playHover()}
-            className="flex items-center gap-1.5 border-2 border-[#ff6a1a] bg-[#ff6a1a] px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#16181c] transition-all hover:bg-transparent hover:text-[#ff6a1a] cursor-pointer"
+            className="flex items-center gap-1.5 border-2 border-[#ff6a1a] bg-[#ff6a1a] px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#16181c] transition-all hover:bg-transparent hover:text-[#ff6a1a] cursor-pointer shadow-[0_0_12px_rgba(255,106,26,0.25)]"
           >
             <Download size={13} />
             <span>RESUME</span>
@@ -223,7 +238,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-[#ece5d5]/15 bg-[#16181c] px-6 py-4 lg:hidden shadow-2xl"
+            className="overflow-hidden border-b border-[#ece5d5]/15 bg-[#12141a]/98 px-6 py-4 lg:hidden shadow-2xl backdrop-blur-2xl"
           >
             <div className="flex flex-col divide-y divide-white/5">
               {stationStops.map((st) => {
@@ -241,7 +256,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
                     }`}
                   >
                     <span className="flex items-center gap-2">
-                      <span className={isCurrent ? "text-[#ff6a1a]" : "text-white/40"}>
+                      <span className={isCurrent ? "text-[#ffd23a] font-bold" : "text-white/40"}>
                         {st.no}
                       </span>
                       <span>{st.name}</span>

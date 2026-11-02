@@ -5,13 +5,12 @@ import { ParallaxLayers } from "./ParallaxLayers";
 import { Track } from "./Track";
 import { Locomotive } from "./Locomotive";
 import { StationToast } from "./StationToast";
-import { stationStops } from "@/lib/data/site";
-import { sounds } from "@/components/layout/sound-manager";
 
 /**
  * The Portfolio Express - Master Train Journey Orchestrator (Classic Steam Railway)
  * Full-screen fixed layer providing the nostalgic Orient Express steam railway
  * interactive scroll experience with responsive movements, audio cues, and waypoints.
+ * Pointer-events none to guarantee zero interference with page controls.
  */
 export function TrainJourney() {
   const {
@@ -20,7 +19,6 @@ export function TrainJourney() {
     speedFactor,
     scrollPercent,
     currentStation,
-    activeStationIndex,
     isTerminus,
   } = useTrainScroll();
 
@@ -61,61 +59,6 @@ export function TrainJourney() {
           4. STATION WAYPOINT TOAST NOTIFICATION
           ───────────────────────────────────────────────────────────── */}
       <StationToast currentStation={currentStation} />
-
-      {/* ─────────────────────────────────────────────────────────────
-          5. INTERACTIVE HUD RAIL WAYPOINT TRACKER (Left Edge)
-          ───────────────────────────────────────────────────────────── */}
-      <div className="hidden lg:flex fixed left-5 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
-        {/* Rail Vertical Guide */}
-        <div className="relative flex flex-col items-center py-2">
-          <div className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#ffd23a] via-[#d4af37] to-[#9dfc3f] opacity-40" />
-
-          {/* 8 Clickable Station Waypoint Indicators */}
-          <div className="relative z-10 flex flex-col items-center gap-5">
-            {stationStops.map((st, i) => {
-              const isActive = i === activeStationIndex;
-              const isPassed = i < activeStationIndex;
-
-              return (
-                <button
-                  key={st.id}
-                  onClick={() => {
-                    sounds.playClick();
-                    const el = document.getElementById(st.id);
-                    if (el) {
-                      el.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                  className="pointer-events-auto group relative flex items-center cursor-pointer transition-transform hover:scale-125 focus:outline-none"
-                  title={`Station ${st.no}: ${st.name} · Click to cruise here`}
-                  aria-label={`Jump to Station ${st.no}: ${st.name}`}
-                >
-                  {/* Waypoint Dot */}
-                  <div
-                    className={`h-2.5 w-2.5 rounded-full border transition-all duration-300 ${
-                      isActive
-                        ? "border-[#d4af37] bg-[#ffd23a] shadow-[0_0_12px_#ffd23a] scale-125"
-                        : isPassed
-                        ? "border-[#d4af37]/70 bg-[#d4af37]/50"
-                        : "border-white/20 bg-[#16181c] group-hover:border-[#d4af37]"
-                    }`}
-                  />
-
-                  {/* Waypoint Station Label on Hover */}
-                  <span className="pointer-events-none absolute left-6 opacity-0 transition-opacity duration-200 group-hover:opacity-100 font-serif text-[9px] uppercase tracking-widest text-[#ece5d5] whitespace-nowrap bg-black/90 px-2.5 py-1 border border-[#d4af37]/60 shadow-lg">
-                    NO. {st.no} · {st.name} ➔
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Miniature Vintage Milestone Indicator */}
-        <div className="border border-[#d4af37]/60 bg-black/90 px-2 py-0.5 font-serif text-[8px] text-[#ffd23a] tracking-widest shadow-md uppercase">
-          {scrollPercent}% EXP
-        </div>
-      </div>
     </div>
   );
 }
