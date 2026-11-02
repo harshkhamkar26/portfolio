@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { experiences, journeyTimeline } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
+import { StationBadge } from "@/components/ui/station-badge";
 
 export function ExpeditionSection() {
   return (
@@ -15,10 +16,7 @@ export function ExpeditionSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffd23a]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#ffd23a]" />
-              STATION 06 // EXPEDITION TIMELINE
-            </div>
+<StationBadge stationNo="06" title="EXPEDITION TIMELINE" nextStationId="matrix" nextStationName="MATRIX" accentColor="#ff6a1a" />
             <h2
               id="expedition-heading"
               className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"

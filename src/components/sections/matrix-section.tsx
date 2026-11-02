@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Award, Trophy } from "lucide-react";
 import { certifications, leadership } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
+import { StationBadge } from "@/components/ui/station-badge";
 
 export function MatrixSection() {
   return (
@@ -16,10 +17,7 @@ export function MatrixSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#ff2e97]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#ff2e97]" />
-              STATION 07 // CREDENTIALS &amp; ATHLETIC HONORS
-            </div>
+<StationBadge stationNo="07" title="CREDENTIALS & ATHLETIC MATRIX" nextStationId="terminal" nextStationName="COMMS" accentColor="#ffd23a" />
             <h2
               id="matrix-heading"
               className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"

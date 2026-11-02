@@ -6,6 +6,7 @@ import { Linkedin, Github, Download, ArrowUpRight, Check, Copy } from "lucide-re
 import { siteConfig } from "@/lib/data/site";
 import { projects } from "@/lib/data/projects";
 import { sounds } from "@/components/layout/sound-manager";
+import { StationBadge } from "@/components/ui/station-badge";
 
 type TerminalHistory = {
   command: string;
@@ -138,10 +139,7 @@ export function DispatchTerminal() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#9dfc3f]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#9dfc3f]" />
-              STATION 08 // COMMS DISPATCH &amp; CLI
-            </div>
+<StationBadge stationNo="08" title="COMMS DISPATCH & CLI TERMINAL" accentColor="#9dfc3f" />
             <h2
               id="terminal-heading"
               className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"

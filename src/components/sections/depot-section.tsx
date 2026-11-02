@@ -6,6 +6,7 @@ import { Search, Github, ExternalLink, X, BookOpen, Sparkles, CheckCircle2 } fro
 import { projects, Project } from "@/lib/data/projects";
 import { siteConfig, publications } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
+import { StationBadge } from "@/components/ui/station-badge";
 import { CoachFrame } from "@/components/train/CoachFrame";
 
 type GitHubRepo = {
@@ -105,10 +106,7 @@ export function DepotSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#ff6a1a]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#ff6a1a]" />
-              STATION 04 // PROJECT DEPOT &amp; RESEARCH FLEET
-            </div>
+<StationBadge stationNo="04" title="PROJECT DEPOT & RESEARCH FLEET" nextStationId="about" nextStationName="PROFILE" accentColor="#3ad7ff" />
             <h2
               id="depot-heading"
               className="mt-2 text-2xl sm:text-5xl font-black uppercase tracking-tight text-[#ece5d5] font-display"

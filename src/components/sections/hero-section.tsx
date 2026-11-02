@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Download, Github, Sparkles } from "lucide-react";
 import { siteConfig } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
+import { StationBadge } from "@/components/ui/station-badge";
 
 export function HeroSection() {
   const marqueeItems = [
@@ -67,11 +68,7 @@ export function HeroSection() {
             <span className="font-bold tracking-wider">HARSH KHAMKAR</span>
           </div>
 
-          <div className="inline-flex items-center gap-2 border border-[#9dfc3f]/50 bg-[#9dfc3f]/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#9dfc3f]">
-            <span className="h-2 w-2 rounded-full bg-[#9dfc3f] animate-ping opacity-80" />
-            <span className="h-2 w-2 rounded-full bg-[#9dfc3f] -ml-4" />
-            STATION 01 // ONLINE
-          </div>
+<StationBadge stationNo="01" title="ONLINE · ORIGIN" nextStationId="tracks" nextStationName="TRACKS" accentColor="#9dfc3f" />
 
           <div className="inline-flex items-center gap-1.5 border border-[#ffd23a]/50 bg-[#ffd23a]/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#ffd23a]">
             <Sparkles size={12} />

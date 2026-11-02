@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { ArrowLeft, ArrowRight, Github } from "lucide-react";
 import { projects } from "@/lib/data/projects";
 import { sounds } from "@/components/layout/sound-manager";
+import { StationBadge } from "@/components/ui/station-badge";
 
 export function CircularCarousel() {
   const featured = projects.filter((p) => p.featured).slice(0, 5);
@@ -76,9 +77,7 @@ export function CircularCarousel() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#ff6a1a]">
-              <span>STATION 03 // 3D CYLINDER SHOWCASE</span>
-            </div>
+<StationBadge stationNo="03" title="3D CYLINDER SHOWCASE" nextStationId="depot" nextStationName="DEPOT" accentColor="#ffd23a" />
             <h2
               id="showcase-heading"
               className="mt-2 text-2xl sm:text-5xl font-black uppercase tracking-tight text-[#ece5d5] font-display"
