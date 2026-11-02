@@ -11,7 +11,7 @@ export const siteConfig = {
   resumeUrl: "/resume.pdf",
   photoUrl: "/images/harsh-khamkar.jpg",
   institution: "Universal AI University, Mumbai",
-  degree: "B.Tech in Artificial Intelligence, Machine Learning & Data Science (2024–2028)",
+  degree: "B.Tech in Artificial Intelligence, Machine Learning & Data Science (Universal AI University · Expected 2028 · CGPA: 8.17)",
   keywords: [
     "Harsh Khamkar",
     "Data Scientist",
@@ -191,29 +191,28 @@ export const experiences = [
   {
     company: "Choice India (The Joy of Earning)",
     role: "Data Analyst & Business Analyst Intern",
-    period: "May 2026 – Present",
+    period: "18 May 2026 – 18 July 2026",
     location: "Mumbai, India",
-    badge: "Active Role",
+    badge: "Completed",
     color: "#ff6a1a",
     highlights: [
-      "Analyzed and preprocessed financial and travel-sector enterprise datasets comprising over 128,000 verified records.",
-      "Engineered 11+ automated Power BI dashboards and Zoho Analytics reports for cross-departmental executive visibility.",
-      "Optimized SQL query routines and data cleansing pipelines, reducing manual reporting overhead by 40%.",
-      "Assisted in deploying AiSensy-based WhatsApp messaging automation pipelines across B2B, B2C, and B2G workflows."
+      "Analyze business and financial datasets across client accounts (GIC, GFC and MakeMyTrip) using SQL and Zoho Analytics, delivering approximately 3 reports per week.",
+      "Design and maintain 11 interactive Power BI dashboards and automated reports to monitor business KPIs.",
+      "Support AI-powered WhatsApp automation using AiSensy across B2B, B2C and B2G business workflows.",
+      "Clean and process a 3-month MakeMyTrip dataset containing approximately 128,000 records to improve data quality for downstream analysis."
     ]
   },
   {
     company: "One Globe Build Con LLP",
     role: "Technology & Innovation Intern",
-    period: "April 2025 – July 2025",
+    period: "Apr 2025 – Jul 2025",
     location: "Nagpur, India",
     badge: "Completed",
     color: "#9dfc3f",
     highlights: [
-      "Engineered responsive, modular frontend interfaces utilizing React.js, modern JavaScript (ES6+), and CSS architecture.",
-      "Implemented supervised machine learning workflows using Python and Scikit-learn for exploratory data analysis and model optimization.",
-      "Constructed visual telemetry dashboards with Pandas, Matplotlib, and Excel for field operations monitoring.",
-      "Collaborated in agile cross-functional sprints delivering production features on accelerated timelines."
+      "Built responsive frontend interfaces using HTML, CSS, JavaScript and React.js.",
+      "Contributed to machine learning workflows involving data preprocessing, model evaluation and optimization using Python and Scikit-learn.",
+      "Created analytical dashboards and visualizations using Pandas, Matplotlib, Excel and Power BI."
     ]
   },
   {

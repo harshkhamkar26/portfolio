@@ -45,7 +45,7 @@ export default function ResumePage() {
                   Data Science Engineer · ML Researcher · Data Analyst
                 </p>
                 <p className="mt-0.5 font-mono text-[11px] text-[#ece5d5]/60">
-                  B.Tech in Artificial Intelligence &amp; Data Science · Universal AI University (2024–2028)
+                  B.Tech in Artificial Intelligence &amp; Data Science · Universal AI University (Expected 2028 · CGPA: 8.17)
                 </p>
               </div>
             </div>
