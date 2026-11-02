@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Linkedin, Github, Download, ArrowUpRight, Check, Copy } from "lucide-react";
+import { Linkedin, Github, Download, ArrowUpRight, Check, Copy, Terminal as TerminalIcon, ChevronDown } from "lucide-react";
 import { siteConfig } from "@/lib/data/site";
 import { projects } from "@/lib/data/projects";
 import { sounds } from "@/components/layout/sound-manager";
@@ -13,22 +13,51 @@ type TerminalHistory = {
   output: string | React.ReactNode;
 };
 
+const QUICK_COMMANDS = [
+  "help",
+  "papers",
+  "projects",
+  "internships",
+  "skills",
+  "resume",
+  "bio",
+  "contact",
+  "clear",
+];
+
 export function DispatchTerminal() {
   const [copied, setCopied] = useState(false);
   const [terminalInput, setTerminalInput] = useState("");
+  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalContainerRef = useRef<HTMLDivElement>(null);
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
+
   const [history, setHistory] = useState<TerminalHistory[]>([
     {
       command: "sysinfo",
       output: (
         <div className="space-y-1 text-xs font-mono text-[#ece5d5]/80">
-          <p className="text-[#9dfc3f]">OPERATING SYSTEM: HK-AI-CORE v2026.1</p>
+          <p className="text-[#9dfc3f] font-bold">OPERATING SYSTEM: HK-AI-CORE v2026.1</p>
           <p>ENGINEER: Harsh Khamkar (Universal AI University, Mumbai)</p>
           <p>ROLE: Data Science Engineer · Data Analyst Intern @ Choice India</p>
-          <p className="text-[#ffd23a]">Type <span className="underline font-bold">help</span> to list available subroutines.</p>
+          <p className="text-[#ffd23a]">
+            Type <span className="underline font-bold">help</span> or click the quick command chips below.
+          </p>
         </div>
       ),
     },
   ]);
+
+  // Auto-scroll to bottom whenever history changes
+  useEffect(() => {
+    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [history]);
+
+  const handleScroll = () => {
+    if (!terminalContainerRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = terminalContainerRef.current;
+    setIsScrolledUp(scrollHeight - scrollTop - clientHeight > 60);
+  };
 
   const handleCopyEmail = () => {
     sounds.playClick();
@@ -37,10 +66,9 @@ export function DispatchTerminal() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleCommandSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const executeCommand = (rawCmd: string) => {
     sounds.playClick();
-    const cmd = terminalInput.trim().toLowerCase();
+    const cmd = rawCmd.trim().toLowerCase();
     if (!cmd) return;
 
     let output: string | React.ReactNode = "";
@@ -48,15 +76,15 @@ export function DispatchTerminal() {
     switch (cmd) {
       case "help":
         output = (
-          <div className="space-y-0.5 text-xs font-mono text-[#ece5d5]/80">
+          <div className="space-y-1 text-xs font-mono text-[#ece5d5]/85">
             <p className="text-[#9dfc3f] font-bold">AVAILABLE COMMANDS:</p>
-            <p>▸ <strong className="text-white">papers</strong> — View peer-reviewed research papers under review</p>
-            <p>▸ <strong className="text-white">bio</strong> — Display Harsh&apos;s education &amp; summary</p>
+            <p>▸ <strong className="text-white">papers</strong> — View 2 peer-reviewed research papers under review</p>
             <p>▸ <strong className="text-white">projects</strong> — List flagship machine learning &amp; data projects</p>
-            <p>▸ <strong className="text-white">internships</strong> — View active &amp; completed work experience</p>
-            <p>▸ <strong className="text-white">skills</strong> — Enumerate technical stack and tools</p>
-            <p>▸ <strong className="text-white">resume</strong> — Download verified ATS resume PDF</p>
-            <p>▸ <strong className="text-white">contact</strong> — Output contact details</p>
+            <p>▸ <strong className="text-white">internships</strong> — Choice India (128K+ records) &amp; One Globe Build Con</p>
+            <p>▸ <strong className="text-white">skills</strong> — Technical stack (Python, SQL, SHAP, Power BI)</p>
+            <p>▸ <strong className="text-white">bio</strong> — Education, CGPA 8.17 &amp; athletic leadership</p>
+            <p>▸ <strong className="text-white">resume</strong> — Download verified ATS 1-page resume PDF</p>
+            <p>▸ <strong className="text-white">contact</strong> — Direct email, LinkedIn &amp; phone coordinates</p>
             <p>▸ <strong className="text-white">clear</strong> — Clear terminal screen</p>
           </div>
         );
@@ -66,53 +94,89 @@ export function DispatchTerminal() {
       case "publications":
       case "research":
         output = (
-          <div className="space-y-1.5 text-xs font-mono">
+          <div className="space-y-2 text-xs font-mono">
             <p className="text-[#ffd23a] font-bold">PEER-REVIEWED RESEARCH PAPERS (UNDER REVIEW):</p>
-            <div className="pl-3 border-l border-[#9dfc3f]">
+            <div className="pl-3 border-l-2 border-[#9dfc3f] space-y-0.5">
               <p className="text-[#9dfc3f] font-bold">1. [Journal Paper – Under Review]</p>
               <p className="text-white">&ldquo;Explainable Hyperparameter Optimization for Imbalanced Tabular Classification&rdquo;</p>
               <p className="text-white/60">Venue: Peer-Reviewed Scientific Journal · Authors: Harsh Khamkar et al.</p>
+              <p className="text-[#9dfc3f]/80 text-[11px]">Features: Optuna Bayesian Search, SMOTE-NC, TreeSHAP Attribution Stability</p>
             </div>
-            <div className="pl-3 border-l border-[#3ad7ff]">
+            <div className="pl-3 border-l-2 border-[#3ad7ff] space-y-0.5">
               <p className="text-[#3ad7ff] font-bold">2. [Conference Paper – Under Review]</p>
               <p className="text-white">&ldquo;SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression&rdquo;</p>
               <p className="text-white/60">Venue: International Academic Conference · Authors: Harsh Khamkar et al.</p>
+              <p className="text-[#3ad7ff]/80 text-[11px]">Features: Zero-leakage behavioral isolation, TreeSHAP &amp; KernelSHAP counseling blueprints</p>
             </div>
           </div>
         );
         break;
 
       case "bio":
-        output = `Harsh Khamkar · B.Tech in AI/ML & Data Science at Universal AI University, Mumbai (2024–2028). Specialized in explainable AI (SHAP), 128k+ record enterprise analytics, and sports analytics. President of UAI Sports Club & National Basketball Player.`;
+        output = `Harsh Khamkar · B.Tech in AI/ML & Data Science at Universal AI University, Mumbai (Expected 2028 · CGPA: 8.17). Specialized in explainable AI (SHAP), 128K+ record enterprise analytics, and predictive data pipelines. President of UAI Sports Club & National Basketball Player.`;
         break;
 
       case "projects":
         output = (
-          <ul className="space-y-1 text-xs font-mono">
+          <div className="space-y-1.5 text-xs font-mono">
+            <p className="text-[#ffd23a] font-bold">FLAGSHIP DATA SCIENCE &amp; ML REPOSITORIES:</p>
             {projects.slice(0, 5).map((p) => (
-              <li key={p.slug} className="text-[#ece5d5]/90">
-                <span className="text-[#ff6a1a] font-bold">[{p.domain}]</span> {p.title} → {p.github}
-              </li>
+              <div key={p.slug} className="text-[#ece5d5]/90 pl-2 border-l border-white/20">
+                <span className="text-[#ff6a1a] font-bold">[{p.domain}]</span>{" "}
+                <span className="text-white font-semibold">{p.title}</span>
+                <p className="text-white/50 text-[11px] truncate">{p.description}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         );
         break;
 
       case "internships":
-        output = `1. Choice India (May 2026–Present): Data Analyst & Business Analyst Intern · 128K+ records & 11 dashboards. \n2. One Globe Build Con (Apr–Jul 2025): Tech & Innovation Division · React frontend & Scikit-learn pipelines.`;
+        output = (
+          <div className="space-y-1.5 text-xs font-mono">
+            <p className="text-[#ffd23a] font-bold">PROFESSIONAL WORK EXPERIENCE:</p>
+            <div className="pl-2 border-l border-[#ff6a1a]">
+              <p className="text-white font-bold">1. Choice India (The Joy of Earning) — Data &amp; Business Analyst Intern</p>
+              <p className="text-white/70">May 2026 – Present · Mumbai, India</p>
+              <p className="text-[#ece5d5]/80">Preprocessed 128,000+ financial records, engineered 11+ Power BI dashboards &amp; Zoho Analytics reports, reduced reporting overhead by 40%.</p>
+            </div>
+            <div className="pl-2 border-l border-white/30">
+              <p className="text-white font-bold">2. One Globe Build Con LLP — Tech &amp; Innovation Intern</p>
+              <p className="text-white/70">Apr 2025 – Jul 2025 · Mumbai, India</p>
+              <p className="text-[#ece5d5]/80">Modular React frontends, Scikit-learn supervised learning workflows &amp; Pandas analytics.</p>
+            </div>
+          </div>
+        );
         break;
 
       case "skills":
-        output = `Languages: Python, SQL, C++, TypeScript, HTML/CSS, Java\nML/AI: SHAP, Optuna, Scikit-learn, PyTorch, Deepfake Detection\nBI & Analytics: Power BI (11+ Dashboards), Zoho Analytics, Pandas, Excel VBA\nData Eng: Apache Kafka, Hadoop, REST APIs\nWeb: Next.js 16, React 19, Tailwind CSS`;
+        output = (
+          <div className="space-y-1 text-xs font-mono">
+            <p className="text-[#9dfc3f] font-bold">TECHNICAL SKILL ARSENAL:</p>
+            <p><strong className="text-white">Languages:</strong> Python, SQL, C++, TypeScript, HTML/CSS, Java</p>
+            <p><strong className="text-white">ML &amp; XAI:</strong> SHAP (Tree/Kernel), Optuna Bayesian Optimization, Scikit-learn, PyTorch, SMOTE-NC</p>
+            <p><strong className="text-white">Analytics &amp; BI:</strong> Power BI (11+ Dashboards, Star Schema, DAX), Zoho Analytics, Pandas, Excel VBA</p>
+            <p><strong className="text-white">Data Engineering:</strong> Apache Kafka, Hadoop, REST APIs, Star Schema ETL</p>
+            <p><strong className="text-white">Full-Stack:</strong> Next.js 16, React 19, Tailwind CSS v4, Three.js / WebGL</p>
+          </div>
+        );
         break;
 
       case "resume":
         window.open("/resume.pdf", "_blank");
-        output = "Triggering download for Harsh_Khamkar_Resume.pdf...";
+        output = "Opening and downloading verified 1-page ATS Resume (PDF)...";
         break;
 
       case "contact":
-        output = `Email: ${siteConfig.email} | LinkedIn: ${siteConfig.linkedin} | GitHub: ${siteConfig.github}`;
+        output = (
+          <div className="space-y-1 text-xs font-mono">
+            <p><strong className="text-[#ffd23a]">Email:</strong> {siteConfig.email}</p>
+            <p><strong className="text-[#ffd23a]">LinkedIn:</strong> {siteConfig.linkedin}</p>
+            <p><strong className="text-[#ffd23a]">GitHub:</strong> {siteConfig.github}</p>
+            <p><strong className="text-[#ffd23a]">Phone:</strong> {siteConfig.phone}</p>
+            <p><strong className="text-[#ffd23a]">Location:</strong> Mumbai, Maharashtra, India</p>
+          </div>
+        );
         break;
 
       case "clear":
@@ -121,12 +185,17 @@ export function DispatchTerminal() {
         return;
 
       default:
-        output = `Command not recognized: '${cmd}'. Type 'help' for available commands.`;
+        output = `Command not recognized: '${cmd}'. Type 'help' or click the quick command chips above.`;
         break;
     }
 
-    setHistory((prev) => [...prev, { command: terminalInput, output }]);
+    setHistory((prev) => [...prev, { command: rawCmd, output }]);
     setTerminalInput("");
+  };
+
+  const handleCommandSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    executeCommand(terminalInput);
   };
 
   return (
@@ -139,7 +208,7 @@ export function DispatchTerminal() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-<StationBadge stationNo="08" title="COMMS DISPATCH & CLI TERMINAL" accentColor="#9dfc3f" />
+            <StationBadge stationNo="08" title="COMMS DISPATCH & CLI TERMINAL" accentColor="#9dfc3f" />
             <h2
               id="terminal-heading"
               className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"
@@ -199,7 +268,7 @@ export function DispatchTerminal() {
                   </a>
                   <button
                     onClick={handleCopyEmail}
-                    className="flex h-8 w-8 items-center justify-center border border-white/20 bg-white/5 text-white/80 hover:text-white"
+                    className="flex h-8 w-8 items-center justify-center border border-white/20 bg-white/5 text-white/80 hover:text-white cursor-pointer transition"
                     title="Copy Email"
                   >
                     {copied ? <Check size={14} className="text-[#9dfc3f]" /> : <Copy size={14} />}
@@ -214,7 +283,7 @@ export function DispatchTerminal() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onMouseEnter={() => sounds.playHover()}
-                  className="flex items-center justify-between border border-white/10 bg-[#1e2026] p-3 text-xs font-mono text-white hover:border-[#3ad7ff] hover:text-[#3ad7ff]"
+                  className="flex items-center justify-between border border-white/10 bg-[#1e2026] p-3 text-xs font-mono text-white hover:border-[#3ad7ff] hover:text-[#3ad7ff] transition"
                 >
                   <span className="flex items-center gap-2">
                     <Linkedin size={15} /> LinkedIn
@@ -227,7 +296,7 @@ export function DispatchTerminal() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onMouseEnter={() => sounds.playHover()}
-                  className="flex items-center justify-between border border-white/10 bg-[#1e2026] p-3 text-xs font-mono text-white hover:border-[#9dfc3f] hover:text-[#9dfc3f]"
+                  className="flex items-center justify-between border border-white/10 bg-[#1e2026] p-3 text-xs font-mono text-white hover:border-[#9dfc3f] hover:text-[#9dfc3f] transition"
                 >
                   <span className="flex items-center gap-2">
                     <Github size={15} /> GitHub
@@ -243,7 +312,7 @@ export function DispatchTerminal() {
                   download="Harsh_Khamkar_Resume.pdf"
                   onClick={() => sounds.playClick()}
                   onMouseEnter={() => sounds.playHover()}
-                  className="w-full flex items-center justify-center gap-2 border-2 border-[#ff6a1a] bg-[#ff6a1a] py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#16181c] transition-all hover:bg-transparent hover:text-[#ff6a1a]"
+                  className="w-full flex items-center justify-center gap-2 border-2 border-[#ff6a1a] bg-[#ff6a1a] py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#16181c] transition-all hover:bg-transparent hover:text-[#ff6a1a] cursor-pointer shadow-[0_0_12px_rgba(255,106,26,0.3)]"
                 >
                   <Download size={15} />
                   <span>DOWNLOAD COMPLETE ATS RESUME (PDF)</span>
@@ -253,27 +322,57 @@ export function DispatchTerminal() {
           </div>
 
           {/* Interactive CLI Command Terminal (7 Cols) */}
-          <div className="lg:col-span-7 border border-[#ece5d5]/20 bg-[#0e1013] shadow-2xl">
+          <div className="lg:col-span-7 border border-[#ece5d5]/25 bg-[#0e1013] shadow-2xl relative">
             {/* Terminal Top Window Bar */}
             <div className="flex items-center justify-between border-b border-white/10 bg-[#16181c] px-4 py-2.5 font-mono text-xs text-white/70">
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
                 <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
                 <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-                <span className="ml-2 text-[11px] text-white/50">hk-terminal · bash · 80x24</span>
+                <span className="ml-2 text-[11px] text-white/60 flex items-center gap-1.5">
+                  <TerminalIcon size={12} className="text-[#ff6a1a]" /> hk-terminal · bash · 80x24
+                </span>
               </div>
-              <span className="font-mono text-[10px] text-[#9dfc3f]">READY</span>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[9px] uppercase px-1.5 py-0.5 rounded-xs border border-[#9dfc3f]/40 bg-[#9dfc3f]/10 text-[#9dfc3f]">
+                  READY
+                </span>
+                <span className="hidden sm:inline font-mono text-[9px] text-white/40">
+                  SCROLL ENABLED
+                </span>
+              </div>
             </div>
 
-            {/* Terminal Body */}
-            <div className="p-5 font-mono text-xs min-h-[360px] max-h-[460px] overflow-y-auto space-y-4">
+            {/* Quick Interactive Command Chips Bar */}
+            <div className="flex items-center gap-1.5 border-b border-white/10 bg-[#121418] px-3 py-1.5 overflow-x-auto custom-scrollbar">
+              <span className="text-[9px] font-mono font-bold uppercase text-[#ff6a1a] shrink-0 tracking-wider">
+                COMMANDS:
+              </span>
+              {QUICK_COMMANDS.map((cmd) => (
+                <button
+                  key={cmd}
+                  type="button"
+                  onClick={() => executeCommand(cmd)}
+                  className="px-2 py-0.5 rounded-xs border border-white/15 bg-black/40 font-mono text-[10px] text-[#ece5d5]/80 hover:border-[#ff6a1a] hover:text-white hover:bg-[#ff6a1a]/15 transition shrink-0 cursor-pointer"
+                >
+                  {cmd}
+                </button>
+              ))}
+            </div>
+
+            {/* Terminal Body with High-Visibility Amber Scrollbar */}
+            <div
+              ref={terminalContainerRef}
+              onScroll={handleScroll}
+              className="p-5 font-mono text-xs min-h-[380px] max-h-[480px] sm:max-h-[520px] overflow-y-auto custom-scrollbar space-y-4 relative"
+            >
               {history.map((item, idx) => (
-                <div key={idx} className="space-y-1">
+                <div key={idx} className="space-y-1.5">
                   <div className="flex items-center gap-2 text-white/50">
-                    <span className="text-[#9dfc3f]">visitor@harsh-sys:~$</span>
+                    <span className="text-[#9dfc3f] font-bold">visitor@harsh-sys:~$</span>
                     <span className="text-white font-bold">{item.command}</span>
                   </div>
-                  <div className="text-[#ece5d5]/85 pl-4 border-l border-white/15">
+                  <div className="text-[#ece5d5]/85 pl-4 border-l-2 border-white/20 py-0.5">
                     {item.output}
                   </div>
                 </div>
@@ -281,19 +380,33 @@ export function DispatchTerminal() {
 
               {/* Input Line */}
               <form onSubmit={handleCommandSubmit} className="flex items-center gap-2 pt-2">
-                <span className="text-[#9dfc3f] shrink-0">visitor@harsh-sys:~$</span>
+                <span className="text-[#9dfc3f] font-bold shrink-0">visitor@harsh-sys:~$</span>
                 <input
                   type="text"
                   value={terminalInput}
                   onChange={(e) => setTerminalInput(e.target.value)}
-                  placeholder="type 'help', 'projects', 'resume'..."
+                  placeholder="type 'help', 'papers', 'projects', 'resume'..."
                   className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder-white/30"
                   autoCapitalize="off"
                   autoComplete="off"
                   spellCheck="false"
                 />
               </form>
+
+              {/* Anchor for auto-scroll */}
+              <div ref={terminalEndRef} />
             </div>
+
+            {/* Floating Jump to Latest Button when Scrolled Up */}
+            {isScrolledUp && (
+              <button
+                onClick={() => terminalEndRef.current?.scrollIntoView({ behavior: "smooth" })}
+                className="absolute bottom-3 right-4 flex items-center gap-1.5 border border-[#ff6a1a] bg-[#16181c]/95 px-2.5 py-1 font-mono text-[10px] text-[#ff6a1a] shadow-xl backdrop-blur-md cursor-pointer hover:bg-[#ff6a1a] hover:text-[#16181c] transition"
+              >
+                <span>JUMP TO LATEST</span>
+                <ChevronDown size={12} />
+              </button>
+            )}
           </div>
         </div>
       </div>

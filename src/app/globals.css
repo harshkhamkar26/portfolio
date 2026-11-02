@@ -64,19 +64,44 @@ body {
   outline-offset: 3px;
 }
 
-/* Custom Scrollbar */
+/* Custom Global Scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #111215;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2e313b;
-  border-radius: 2px;
+  background: #3e424e;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #ff6a1a;
+}
+
+/* High-Visibility Amber Cyber-Rail Scrollbar for Terminal & AI Assistant */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #ff6a1a rgba(14, 16, 20, 0.95);
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(14, 16, 20, 0.95);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #ff6a1a;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 210, 58, 0.35);
+  box-shadow: 0 0 8px rgba(255, 106, 26, 0.6);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ffd23a;
+  box-shadow: 0 0 12px rgba(255, 210, 58, 0.8);
 }
 
 /* Cinematic Terminal Typography & Utilities */
