@@ -1,44 +1,103 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { useTransform, motion, MotionValue, useReducedMotion } from "framer-motion";
+import { sounds } from "@/components/layout/sound-manager";
+import { StationData } from "./useTrainScroll";
+import { Coach } from "./Coach";
 
 interface LocomotiveProps {
   smoothProgress: MotionValue<number>;
   speedFactor: MotionValue<number>;
+  velocity?: MotionValue<number>;
   scrollPercent: number;
+  currentStation?: StationData;
 }
 
 /**
- * Classic Steam Locomotive ("The Iron Horse" / Vintage 4-6-2 Pacific Class)
- * Features cast-iron boiler, brass bands, tall chimney, cowcatcher,
- * glowing firebox, round brass lantern headlight, and reciprocating side driving rods.
+ * Classic Steam Locomotive ("The Harsh Express" / Pacific Class 4-6-2)
+ * Features responsive track movement across all 8 stations, interactive steam whistle,
+ * reciprocating side driving rods, spoked iron wheels, glowing firebox,
+ * parabolic headlight beam, smokestack steam plumes, and luxury Pullman coach coupling.
  */
-export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: LocomotiveProps) {
+export function Locomotive({
+  smoothProgress,
+  speedFactor,
+  velocity,
+  scrollPercent,
+  currentStation,
+}: LocomotiveProps) {
   const shouldReduceMotion = useReducedMotion();
+  const [isWhistling, setIsWhistling] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const whistleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Driving wheels rotate based on overall distance traveled (24 full revolutions)
-  const wheelRotate = useTransform(smoothProgress, [0, 1], [0, 360 * 24]);
+  // Responsive track distance calculation:
+  // Starts at Station 01 Origin Platform (left) and docks at Station 08 Terminus Buffer Stop (right).
+  const [travelDistance, setTravelDistance] = useState({ start: 8, max: 640 });
+
+  useEffect(() => {
+    const updateBounds = () => {
+      if (typeof window === "undefined") return;
+      const vw = window.innerWidth;
+      const isMobile = vw < 640;
+      const isTablet = vw < 1024;
+
+      // Effective scaled train width
+      const trainWidth = isMobile ? 220 : isTablet ? 320 : 420;
+      const bufferOffset = isMobile ? 80 : 140;
+      const startX = isMobile ? 4 : 16;
+      const maxX = Math.max(vw - trainWidth - bufferOffset, 60);
+
+      setTravelDistance({ start: startX, max: maxX });
+    };
+
+    updateBounds();
+    window.addEventListener("resize", updateBounds, { passive: true });
+    return () => window.removeEventListener("resize", updateBounds);
+  }, []);
+
+  // ─────────────────────────────────────────────────────────────
+  // 1. PROPER CONTINUOUS RAIL MOVEMENT ACROSS THE WHOLE JOURNEY
+  // Translates smoothly from Station 01 Origin to Station 08 Terminus
+  // ─────────────────────────────────────────────────────────────
+  const trainX = useTransform(
+    smoothProgress,
+    [0, 1],
+    [travelDistance.start, travelDistance.max]
+  );
+
+  // Driving wheels rotate continuously with distance traveled (36 full revolutions)
+  const wheelRotate = useTransform(smoothProgress, [0, 1], [0, 360 * 36]);
 
   // Reciprocating side driving rod follows circular crank-pin orbit (radius = 6px)
   const rodX = useTransform(wheelRotate, (r) => Math.cos((r * Math.PI) / 180) * 6);
   const rodY = useTransform(wheelRotate, (r) => Math.sin((r * Math.PI) / 180) * 6);
 
-  // Locomotive horizontal positioning across the bottom track:
-  // - 0 to 14%: Standing at Origin Platform 01
-  // - 14 to 86%: High-speed cruising through landscape
-  // - 86 to 100%: Decelerates and halts at Terminus Buffer
-  const trainX = useTransform(
-    smoothProgress,
-    [0, 0.14, 0.86, 1],
-    ["1vw", "16vw", "20vw", "32vw"]
-  );
+  // Gentle rail suspension bounce & track vibration based on speed
+  const vibrationY = useTransform(speedFactor, [0, 1], [0, -2]);
 
-  // Gentle rail suspension bounce & track vibration
-  const vibrationY = useTransform(speedFactor, [0, 1], [0, -1.8]);
+  // Vintage parabolic lantern headlight beam reacts to throttle
+  const lanternBeamOpacity = useTransform(speedFactor, [0, 0.3, 1], [0.45, 0.7, 0.98]);
+  const lanternBeamWidth = useTransform(speedFactor, [0, 1], ["240px", "420px"]);
 
-  // Vintage parabolic lantern headlight beam
-  const lanternBeamOpacity = useTransform(speedFactor, [0, 0.3, 1], [0.4, 0.65, 0.95]);
-  const lanternBeamWidth = useTransform(speedFactor, [0, 1], ["240px", "390px"]);
+  // Billowing steam drift backwards according to speed
+  const steamDriftX = useTransform(speedFactor, [0, 1], ["-12px", "-95px"]);
+  const steamDriftOpacity = useTransform(speedFactor, [0, 0.2, 1], [0.35, 0.65, 0.9]);
+
+  // Interactive Whistle Trigger
+  const handleWhistle = () => {
+    sounds.playWhistle();
+    setIsWhistling(true);
+    if (whistleTimeoutRef.current) {
+      clearTimeout(whistleTimeoutRef.current);
+    }
+    whistleTimeoutRef.current = setTimeout(() => {
+      setIsWhistling(false);
+    }, 950);
+  };
+
+  const isBraking = scrollPercent >= 90;
 
   return (
     <motion.div
@@ -46,12 +105,56 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
         x: shouldReduceMotion ? "16vw" : trainX,
         y: shouldReduceMotion ? 0 : vibrationY,
       }}
-      className="pointer-events-none fixed bottom-5 z-30 select-none will-change-transform"
-      aria-hidden="true"
+      className="pointer-events-auto fixed bottom-3 sm:bottom-5 z-30 select-none will-change-transform origin-bottom-left scale-[0.58] sm:scale-75 md:scale-85 lg:scale-100"
+      aria-label="The Harsh Express Steam Locomotive"
+      onMouseEnter={() => {
+        setIsHovered(true);
+        sounds.playHover();
+      }}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleWhistle}
     >
-      <div className="relative flex items-end">
+      {/* ─────────────────────────────────────────────────────────────
+          INTERACTIVE HUD PLAQUE TOOLTIP (Floats above locomotive on hover)
+          ───────────────────────────────────────────────────────────── */}
+      <div
+        className={`pointer-events-none absolute -top-16 left-12 sm:left-24 z-40 transition-all duration-300 ${
+          isHovered || isWhistling
+            ? "opacity-100 -translate-y-1 scale-100"
+            : "opacity-0 translate-y-2 scale-95"
+        }`}
+      >
+        <div className="flex items-center gap-2.5 rounded-xs border border-[#d4af37] bg-[#12141a]/95 px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.9)] backdrop-blur-md whitespace-nowrap">
+          <span className="h-2 w-2 rounded-full bg-[#d4af37] animate-pulse" />
+          <div className="font-serif text-[10px]">
+            <span className="font-bold text-[#ffd23a]">THE HARSH EXPRESS · NO. 26</span>
+            <span className="mx-1 text-[#d4af37]/40">|</span>
+            <span className="text-[#ece5d5]/85 uppercase tracking-wider">
+              {currentStation ? `STATION ${currentStation.no} · ${currentStation.name}` : "EN ROUTE"}
+            </span>
+          </div>
+          <span className="border border-[#d4af37]/50 bg-[#d4af37]/15 px-1.5 py-0.5 font-mono text-[8px] text-[#ffd23a] uppercase">
+            CLICK TO WHISTLE
+          </span>
+        </div>
+      </div>
+
+      {/* Train Assembly Container */}
+      <div className="relative flex items-end cursor-pointer group">
+        {/* Luxury Pullman Passenger Carriage (Coupled behind on large desktop) */}
+        <div className="hidden xl:flex items-end mr-[-4px]">
+          <Coach
+            coachNumber={1}
+            title="THE HARSH EXPRESS"
+            tagline="DATA SCIENCE &amp; ML RESEARCH"
+            smoothProgress={smoothProgress}
+          />
+          {/* Inter-carriage Screw Link Coupler */}
+          <div className="relative bottom-5 h-2 w-4 bg-[#252830] border-t border-b border-[#d4af37]/60" />
+        </div>
+
         {/* ─────────────────────────────────────────────────────────────
-            CLASSIC STEAM LOCOMOTIVE & COAL TENDER (Inline SVG)
+            CLASSIC STEAM LOCOMOTIVE & COAL TENDER (Vector SVG)
             ───────────────────────────────────────────────────────────── */}
         <div className="relative h-22 w-88 sm:h-26 sm:w-104">
           <svg
@@ -62,7 +165,7 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
           >
             {/* 1. COAL TENDER (Fuel & Water Car directly behind cab) */}
             <g id="coal-tender">
-              {/* Tender Coal Heap (Textured irregular fuel chunks) */}
+              {/* Tender Coal Heap (Irregular fuel chunks) */}
               <path
                 d="M12 48 Q 28 32, 50 30 Q 75 34, 98 48 Z"
                 fill="#121316"
@@ -116,7 +219,7 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
                 strokeWidth="1"
               />
 
-              {/* Arched Driver's Side Window with Warm Golden Firebox Light */}
+              {/* Arched Driver's Side Windows with Warm Golden Firebox Light */}
               <path
                 d="M120 52 L120 40 C120 36, 134 36, 134 40 L134 52 Z"
                 fill="url(#warmGlowGrad)"
@@ -172,7 +275,7 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
                 strokeWidth="1"
               />
 
-              {/* Brass Steam Whistle (Behind Dome) */}
+              {/* Brass Steam Whistle (Behind Dome - x: 184) */}
               <line x1="184" y1="34" x2="184" y2="24" stroke="#d4af37" strokeWidth="2" />
               <rect x="182" y="21" width="4" height="4" rx="1" fill="#d4af37" />
 
@@ -184,7 +287,7 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
                 strokeWidth="1"
               />
 
-              {/* Tall Flanged Vintage Chimney / Smokestack */}
+              {/* Tall Flanged Vintage Chimney / Smokestack (x: 312-328) */}
               <path
                 d="M312 34 L314 14 L308 10 L328 10 L322 14 L324 34 Z"
                 fill="url(#chimneyGrad)"
@@ -256,7 +359,6 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
                 stroke="#544c3d"
                 strokeWidth="1.2"
               />
-              {/* Vertical / Diagonal Wooden/Steel Pilot Slats */}
               <line x1="344" y1="80" x2="344" y2="88" stroke="#d4af37" strokeWidth="1.2" />
               <line x1="352" y1="82" x2="352" y2="88" stroke="#d4af37" strokeWidth="1.2" />
               <line x1="360" y1="83.5" x2="360" y2="88" stroke="#d4af37" strokeWidth="1.2" />
@@ -320,9 +422,88 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
           />
 
           {/* ─────────────────────────────────────────────────────────────
+              SMOKESTACK CONTINUOUS BILLOWING STEAM PLUMES (From Chimney x: 318)
+              ───────────────────────────────────────────────────────────── */}
+          {!shouldReduceMotion && (
+            <div className="absolute left-[75.7%] top-[-8px] pointer-events-none">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <motion.div
+                  key={`loco-steam-${i}`}
+                  style={{
+                    x: steamDriftX,
+                    opacity: steamDriftOpacity,
+                  }}
+                  animate={{
+                    y: [-4, -50 - i * 14],
+                    x: [0, -35 - i * 22],
+                    scale: [0.6, 2.0 + i * 0.4],
+                    opacity: [0.85, 0],
+                  }}
+                  transition={{
+                    duration: 1.8 + i * 0.22,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                    delay: i * 0.28,
+                  }}
+                  className="absolute h-7 w-7 rounded-full bg-gradient-to-tr from-[#fbf8f1]/60 via-[#e2ded6]/35 to-transparent blur-sm"
+                />
+              ))}
+            </div>
+          )}
+
+          {/* ─────────────────────────────────────────────────────────────
+              INTERACTIVE STEAM WHISTLE BLAST JET (Triggered on click/tap!)
+              ───────────────────────────────────────────────────────────── */}
+          {isWhistling && !shouldReduceMotion && (
+            <div className="absolute left-[43.8%] top-[-10px] pointer-events-none z-50">
+              {/* High-pressure sharp vertical steam jet */}
+              <motion.div
+                initial={{ opacity: 0, scaleY: 0.2, y: 0 }}
+                animate={{ opacity: [0.95, 0.8, 0], scaleY: [1, 2.4, 3], y: [0, -45, -75] }}
+                transition={{ duration: 0.85, ease: "easeOut" }}
+                className="w-4 h-12 origin-bottom rounded-full bg-gradient-to-t from-white via-[#f3f0e8]/80 to-transparent blur-[2px]"
+              />
+              {/* Expanding cloud around whistle bell */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.4 }}
+                animate={{ opacity: [0.9, 0.6, 0], scale: [0.6, 1.8, 2.5], y: -20 }}
+                transition={{ duration: 0.85, ease: "easeOut" }}
+                className="absolute -left-3 -top-6 w-10 h-10 rounded-full bg-white/70 blur-md"
+              />
+            </div>
+          )}
+
+          {/* ─────────────────────────────────────────────────────────────
+              BRAKE SPARK PARTICLES (Active during deceleration at Terminus)
+              ───────────────────────────────────────────────────────────── */}
+          {isBraking && !shouldReduceMotion && (
+            <div className="absolute left-36 -bottom-1 pointer-events-none z-40">
+              {[0, 1, 2, 3, 4, 5].map((s) => (
+                <motion.div
+                  key={`spark-${s}`}
+                  animate={{
+                    x: [0, -25 - s * 8],
+                    y: [0, -6 - (s % 3) * 6, 2],
+                    opacity: [1, 0.8, 0],
+                    scale: [1, 0.5],
+                  }}
+                  transition={{
+                    duration: 0.45 + s * 0.08,
+                    repeat: Infinity,
+                    repeatDelay: 0.05,
+                    ease: "easeOut",
+                    delay: s * 0.06,
+                  }}
+                  className="absolute h-1.5 w-1.5 rounded-full bg-[#ffb020] shadow-[0_0_6px_#ff6a1a]"
+                />
+              ))}
+            </div>
+          )}
+
+          {/* ─────────────────────────────────────────────────────────────
               REVOLVING STEEL WHEELSETS (Scroll-driven rotation)
               ───────────────────────────────────────────────────────────── */}
-          {/* A. Tender Wheels (2 Dual-Axle Bogies: x ~ 24, 46, 72, 92) */}
+          {/* A. Tender Wheels (2 Dual-Axle Bogies) */}
           <div className="absolute -bottom-2.5 left-4 flex gap-3.5">
             <ClassicSmallWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
             <ClassicSmallWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
@@ -332,7 +513,7 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
             <ClassicSmallWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
           </div>
 
-          {/* B. Front Pilot Truck (Small Leading Wheel: x ~ 335) */}
+          {/* B. Front Pilot Truck (Small Leading Wheel) */}
           <div className="absolute -bottom-2.5 right-11">
             <ClassicSmallWheel rotateValue={wheelRotate} shouldReduceMotion={!!shouldReduceMotion} />
           </div>
@@ -356,7 +537,6 @@ export function Locomotive({ smoothProgress, speedFactor, scrollPercent }: Locom
           >
             {/* The Horizontal Polished Steel Side Rod */}
             <div className="relative h-2 w-32 rounded-full border border-white/50 bg-gradient-to-r from-[#ece5d5] via-[#8c8e96] to-[#ece5d5] shadow-md flex items-center justify-between px-1">
-              {/* Connecting Pins on the 3 Driving Wheel Hubs */}
               <div className="h-2 w-2 rounded-full border border-black bg-[#d4af37]" />
               <div className="h-2 w-2 rounded-full border border-black bg-[#d4af37]" />
               <div className="h-2 w-2 rounded-full border border-black bg-[#d4af37]" />
@@ -383,12 +563,10 @@ function ClassicSmallWheel({
       style={{ rotate: shouldReduceMotion ? 0 : rotateValue }}
       className="relative h-6 w-6 rounded-full border-2 border-[#d4af37]/70 bg-[#16181c] shadow-[0_2px_4px_rgba(0,0,0,0.9)] will-change-transform"
     >
-      {/* 4 Iron Spokes */}
       <div className="absolute inset-x-0 top-1/2 h-[1px] -translate-y-1/2 bg-[#ece5d5]/50" />
       <div className="absolute inset-y-0 left-1/2 w-[1px] -translate-x-1/2 bg-[#ece5d5]/50" />
       <div className="absolute inset-0 m-auto h-[1px] w-full rotate-45 bg-[#ece5d5]/35" />
       <div className="absolute inset-0 m-auto h-[1px] w-full -rotate-45 bg-[#ece5d5]/35" />
-      {/* Center Brass Hubcap */}
       <div className="absolute inset-0 m-auto h-2 w-2 rounded-full border border-white/40 bg-[#d4af37]" />
     </motion.div>
   );
@@ -409,7 +587,6 @@ function ClassicBigDrivingWheel({
       style={{ rotate: shouldReduceMotion ? 0 : rotateValue }}
       className="relative h-9 w-9 rounded-full border-2 border-[#d4af37] bg-[#121316] shadow-[0_4px_8px_rgba(0,0,0,0.95)] will-change-transform"
     >
-      {/* 8 Steel Radial Spokes */}
       <div className="absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-1/2 bg-[#ece5d5]/60" />
       <div className="absolute inset-y-0 left-1/2 w-[1.5px] -translate-x-1/2 bg-[#ece5d5]/60" />
       <div className="absolute inset-0 m-auto h-[1.5px] w-full rotate-45 bg-[#ece5d5]/45" />
@@ -417,7 +594,7 @@ function ClassicBigDrivingWheel({
       <div className="absolute inset-0 m-auto h-[1.2px] w-full rotate-[22.5deg] bg-[#ece5d5]/30" />
       <div className="absolute inset-0 m-auto h-[1.2px] w-full -rotate-[22.5deg] bg-[#ece5d5]/30" />
 
-      {/* Cast Iron Crescent Counterweight (Balanced opposite the crank pin) */}
+      {/* Cast Iron Crescent Counterweight */}
       <div className="absolute top-0.5 inset-x-1.5 h-3 rounded-t-full bg-[#2a2d36] border-b border-black/40" />
 
       {/* Center Axle Hub with Crank Pin */}

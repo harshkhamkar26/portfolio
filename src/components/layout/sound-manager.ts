@@ -90,6 +90,48 @@ class SoundManager {
       osc.stop(this.ctx.currentTime + 0.08);
     } catch {}
   }
+
+  /**
+   * Classic Multi-Chime Vintage Steam Whistle
+   * Harmonically tuned acoustic chord (620Hz, 780Hz, 930Hz) with steam breath envelope.
+   */
+  public playWhistle() {
+    if (!this.enabled) return;
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+
+      const t = this.ctx.currentTime;
+      const duration = 0.75;
+      const masterGain = this.ctx.createGain();
+      masterGain.gain.setValueAtTime(0.0001, t);
+      masterGain.gain.linearRampToValueAtTime(0.06, t + 0.08);
+      masterGain.gain.setValueAtTime(0.06, t + 0.5);
+      masterGain.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+      masterGain.connect(this.ctx.destination);
+
+      // 3 Acoustic Chime Frequencies
+      const freqs = [620, 780, 930];
+      freqs.forEach((freq, idx) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const chimeGain = this.ctx.createGain();
+
+        osc.type = idx === 0 ? "triangle" : "sine";
+        osc.frequency.setValueAtTime(freq, t);
+        // Subtle steam pitch wobble
+        osc.frequency.linearRampToValueAtTime(freq * 1.015, t + 0.15);
+        osc.frequency.linearRampToValueAtTime(freq, t + duration);
+
+        chimeGain.gain.setValueAtTime(idx === 0 ? 0.7 : 0.45, t);
+        osc.connect(chimeGain);
+        chimeGain.connect(masterGain);
+
+        osc.start(t);
+        osc.stop(t + duration);
+      });
+    } catch {}
+  }
 }
 
 export const sounds = new SoundManager();

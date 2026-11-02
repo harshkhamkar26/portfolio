@@ -79,7 +79,7 @@ body {
   background: #ff6a1a;
 }
 
-/* AI Expo Typography & Utilities */
+/* Cinematic Terminal Typography & Utilities */
 .font-display {
   font-family: var(--font-display);
   font-stretch: 75%;
@@ -144,7 +144,7 @@ body {
   );
 }
 
-/* Bottom Left HUD (From aiexpo.vercel.app) */
+/* Bottom Left Mission Control HUD Telemetry */
 .hud {
   z-index: 80;
   font: 11px/1.4 var(--font-mono);

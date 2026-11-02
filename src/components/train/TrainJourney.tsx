@@ -4,18 +4,19 @@ import { useTrainScroll } from "./useTrainScroll";
 import { ParallaxLayers } from "./ParallaxLayers";
 import { Track } from "./Track";
 import { Locomotive } from "./Locomotive";
-import { SteamParticles } from "./SteamParticles";
 import { StationToast } from "./StationToast";
 import { stationStops } from "@/lib/data/site";
+import { sounds } from "@/components/layout/sound-manager";
 
 /**
  * The Portfolio Express - Master Train Journey Orchestrator (Classic Steam Railway)
- * Full-screen fixed layer (pointer-events: none) providing the nostalgic
- * Orient Express steam railway scroll experience without altering any existing section layouts.
+ * Full-screen fixed layer providing the nostalgic Orient Express steam railway
+ * interactive scroll experience with responsive movements, audio cues, and waypoints.
  */
 export function TrainJourney() {
   const {
     smoothProgress,
+    velocity,
     speedFactor,
     scrollPercent,
     currentStation,
@@ -25,7 +26,7 @@ export function TrainJourney() {
 
   return (
     <div
-      aria-hidden="true"
+      aria-hidden="false"
       className="pointer-events-none fixed inset-0 z-15 overflow-hidden select-none"
     >
       {/* ─────────────────────────────────────────────────────────────
@@ -46,47 +47,48 @@ export function TrainJourney() {
       />
 
       {/* ─────────────────────────────────────────────────────────────
-          3. STEAM & BRAKE SPARK PARTICLE EMITTER
-          ───────────────────────────────────────────────────────────── */}
-      <SteamParticles
-        smoothProgress={smoothProgress}
-        speedFactor={speedFactor}
-        scrollPercent={scrollPercent}
-      />
-
-      {/* ─────────────────────────────────────────────────────────────
-          4. THE CLASSIC STEAM LOCOMOTIVE & TENDER
+          3. THE INTERACTIVE CLASSIC STEAM LOCOMOTIVE & LUXURY COACH
           ───────────────────────────────────────────────────────────── */}
       <Locomotive
         smoothProgress={smoothProgress}
         speedFactor={speedFactor}
+        velocity={velocity}
         scrollPercent={scrollPercent}
+        currentStation={currentStation}
       />
 
       {/* ─────────────────────────────────────────────────────────────
-          5. STATION WAYPOINT TOAST NOTIFICATION
+          4. STATION WAYPOINT TOAST NOTIFICATION
           ───────────────────────────────────────────────────────────── */}
       <StationToast currentStation={currentStation} />
 
       {/* ─────────────────────────────────────────────────────────────
-          6. MINI TRAIN-POSITION HUD RAIL PROGRESS BAR (Left Edge)
+          5. INTERACTIVE HUD RAIL WAYPOINT TRACKER (Left Edge)
           ───────────────────────────────────────────────────────────── */}
       <div className="hidden lg:flex fixed left-5 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
         {/* Rail Vertical Guide */}
         <div className="relative flex flex-col items-center py-2">
           <div className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#ffd23a] via-[#d4af37] to-[#9dfc3f] opacity-40" />
 
-          {/* 8 Station Waypoint Indicators */}
+          {/* 8 Clickable Station Waypoint Indicators */}
           <div className="relative z-10 flex flex-col items-center gap-5">
             {stationStops.map((st, i) => {
               const isActive = i === activeStationIndex;
               const isPassed = i < activeStationIndex;
 
               return (
-                <div
+                <button
                   key={st.id}
-                  className="group relative flex items-center"
-                  title={`Station ${st.no}: ${st.name}`}
+                  onClick={() => {
+                    sounds.playClick();
+                    const el = document.getElementById(st.id);
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="pointer-events-auto group relative flex items-center cursor-pointer transition-transform hover:scale-125 focus:outline-none"
+                  title={`Station ${st.no}: ${st.name} · Click to cruise here`}
+                  aria-label={`Jump to Station ${st.no}: ${st.name}`}
                 >
                   {/* Waypoint Dot */}
                   <div
@@ -95,15 +97,15 @@ export function TrainJourney() {
                         ? "border-[#d4af37] bg-[#ffd23a] shadow-[0_0_12px_#ffd23a] scale-125"
                         : isPassed
                         ? "border-[#d4af37]/70 bg-[#d4af37]/50"
-                        : "border-white/20 bg-[#16181c]"
+                        : "border-white/20 bg-[#16181c] group-hover:border-[#d4af37]"
                     }`}
                   />
 
                   {/* Waypoint Station Label on Hover */}
-                  <span className="pointer-events-none absolute left-5 opacity-0 transition-opacity duration-200 group-hover:opacity-100 font-serif text-[9px] uppercase tracking-widest text-[#ece5d5] whitespace-nowrap bg-black/90 px-2.5 py-1 border border-[#d4af37]/60 shadow-lg">
-                    NO. {st.no} · {st.name}
+                  <span className="pointer-events-none absolute left-6 opacity-0 transition-opacity duration-200 group-hover:opacity-100 font-serif text-[9px] uppercase tracking-widest text-[#ece5d5] whitespace-nowrap bg-black/90 px-2.5 py-1 border border-[#d4af37]/60 shadow-lg">
+                    NO. {st.no} · {st.name} ➔
                   </span>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -111,7 +113,7 @@ export function TrainJourney() {
 
         {/* Miniature Vintage Milestone Indicator */}
         <div className="border border-[#d4af37]/60 bg-black/90 px-2 py-0.5 font-serif text-[8px] text-[#ffd23a] tracking-widest shadow-md uppercase">
-          {scrollPercent}% STEAM
+          {scrollPercent}% EXP
         </div>
       </div>
     </div>

@@ -83,7 +83,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center font-mono text-[11px] text-white/40">
-          <p>© {new Date().getFullYear()} Harsh Khamkar. Replicating the AI Expo / Hack on Track dynamic experience.</p>
+          <p>© {new Date().getFullYear()} Harsh Khamkar. Architected, engineered &amp; driven by relentless creative energy.</p>
           <p className="mt-2 sm:mt-0 text-[#9dfc3f]">COORDS: 18.98° N, 72.82° E · MUMBAI, INDIA</p>
         </div>
       </div>
