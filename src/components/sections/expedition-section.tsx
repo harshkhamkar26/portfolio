@@ -4,8 +4,12 @@ import { motion } from "framer-motion";
 import { experiences, journeyTimeline } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
 import { StationBadge } from "@/components/ui/station-badge";
+import { Briefcase, BookOpen, GraduationCap, ArrowUpRight } from "lucide-react";
 
 export function ExpeditionSection() {
+  const internships = experiences.filter((e) => e.badge === "Industry Internship");
+  const institutional = experiences.filter((e) => e.badge === "Institutional Leadership");
+
   return (
     <section
       id="expedition"
@@ -16,127 +20,153 @@ export function ExpeditionSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-<StationBadge stationNo="06" title="EXPEDITION TIMELINE" nextStationId="matrix" nextStationName="MATRIX" accentColor="#ff6a1a" />
+            <StationBadge stationNo="06" title="EXPERIENCE & TIMELINE" nextStationId="matrix" nextStationName="MATRIX" accentColor="#ff6a1a" />
             <h2
               id="expedition-heading"
               className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"
             >
-              CHRONICLES OF INDUSTRY &amp; CAMPUS
+              INDUSTRY EXPERIENCE &amp; ROADMAP
             </h2>
           </div>
 
           <p className="max-w-md font-mono text-xs leading-relaxed text-[#ece5d5]/70">
-            A milestone-by-milestone traversal of corporate internships, campus leadership, and analytical engineering.
+            Chronological log separating corporate industry internships, academic research milestones, and institutional field operations.
           </p>
         </div>
 
-        {/* Railway Timeline Track */}
-        <div className="relative mt-16">
-          {/* Vertical Glowing Track Line */}
-          <div className="absolute left-4 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#ff6a1a] via-[#9dfc3f] to-[#3ad7ff] md:left-1/2 md:-translate-x-1/2 opacity-60" />
+        {/* ─────────────────────────────────────────────────────────────
+            SUBSECTION 1: INDUSTRY INTERNSHIPS (Choice India & One Globe)
+            ───────────────────────────────────────────────────────────── */}
+        <div className="mt-14">
+          <div className="flex items-center gap-2 mb-8 border-b border-white/10 pb-3">
+            <Briefcase size={16} className="text-[#3ad7ff]" />
+            <h3 className="font-mono text-xs uppercase tracking-widest text-[#3ad7ff] font-bold">
+              INDUSTRY INTERNSHIPS &amp; CORPORATE ANALYTICS
+            </h3>
+          </div>
 
-          <div className="space-y-12">
-            {experiences.map((exp, idx) => {
-              const isEven = idx % 2 === 0;
-              return (
-                <motion.div
-                  key={exp.company}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  onMouseEnter={() => sounds.playHover()}
-                  className={`relative flex flex-col md:flex-row items-center ${
-                    isEven ? "md:flex-row-reverse" : ""
-                  }`}
-                >
-                  {/* Waypoint Dot */}
-                  <div
-                    className="absolute left-4 -translate-x-1/2 flex h-8 w-8 items-center justify-center rounded-full border-2 bg-[#16181c] md:left-1/2 z-10"
-                    style={{ borderColor: exp.color }}
-                  >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {internships.map((exp, idx) => (
+              <motion.div
+                key={exp.company}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                onMouseEnter={() => sounds.playHover()}
+                className="border border-[#ece5d5]/15 bg-[#181a22] p-6 sm:p-8 flex flex-col justify-between shadow-xl"
+                style={{ borderLeft: `4px solid ${exp.color}` }}
+              >
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 mb-4">
                     <span
-                      className="h-2.5 w-2.5 rounded-full"
-                      style={{ backgroundColor: exp.color }}
-                    />
-                  </div>
-
-                  {/* Empty Spacer Half */}
-                  <div className="hidden md:block md:w-1/2" />
-
-                  {/* Card Content Half */}
-                  <div
-                    className={`ml-12 md:ml-0 md:w-1/2 ${
-                      isEven ? "md:pr-12" : "md:pl-12"
-                    } w-full`}
-                  >
-                    <div
-                      className="border border-[#ece5d5]/15 bg-[#1a1c22] p-6 sm:p-8 transition-all hover:border-white/30"
-                      style={{ borderLeftColor: exp.color, borderLeftWidth: "4px" }}
+                      className="font-mono text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border"
+                      style={{
+                        borderColor: `${exp.color}50`,
+                        color: exp.color,
+                        backgroundColor: `${exp.color}15`,
+                      }}
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
-                        <span
-                          className="font-mono text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border"
-                          style={{
-                            borderColor: `${exp.color}50`,
-                            color: exp.color,
-                            backgroundColor: `${exp.color}10`,
-                          }}
-                        >
-                          {exp.badge}
-                        </span>
-                        <span className="font-mono text-xs text-white/50">
-                          {exp.period}
-                        </span>
-                      </div>
-
-                      <h3 className="mt-3 font-display text-xl sm:text-2xl font-black uppercase text-white">
-                        {exp.company}
-                      </h3>
-                      <p
-                        className="font-mono text-xs font-bold mt-0.5"
-                        style={{ color: exp.color }}
-                      >
-                        {exp.role} · {exp.location}
-                      </p>
-
-                      <ul className="mt-4 space-y-2 font-mono text-xs text-[#ece5d5]/80">
-                        {exp.highlights.map((h, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span style={{ color: exp.color }}>▸</span>
-                            <span className="leading-relaxed">{h}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      {exp.badge}
+                    </span>
+                    <span className="font-mono text-xs text-white/50">{exp.period}</span>
                   </div>
-                </motion.div>
-              );
-            })}
+
+                  <h4 className="font-display text-xl sm:text-2xl font-black uppercase text-white">
+                    {exp.company}
+                  </h4>
+                  <p className="font-mono text-xs font-bold mt-1" style={{ color: exp.color }}>
+                    {exp.role} · {exp.location}
+                  </p>
+
+                  <ul className="mt-5 space-y-2.5 font-mono text-xs text-[#ece5d5]/85">
+                    {exp.highlights.map((h, i) => (
+                      <li key={i} className="flex gap-2.5 items-start">
+                        <span style={{ color: exp.color }} className="shrink-0 mt-0.5">▸</span>
+                        <span className="leading-relaxed">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-white/10 font-mono text-[10px] text-white/50 flex justify-between">
+                  <span>VERIFICATION: Direct Internship Certificate &amp; Deliverables</span>
+                  <span className="text-[#9dfc3f]">ACTIVE / COMPLETED</span>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        {/* Academic Journey Roadmap */}
-        <div className="mt-20 border border-[#ece5d5]/15 bg-[#16181c] p-6 sm:p-8">
-          <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest text-[#9dfc3f] mb-4">
-            <span>STATION WAYPOINTS // ACADEMIC ROADMAP</span>
+        {/* ─────────────────────────────────────────────────────────────
+            SUBSECTION 2: INSTITUTIONAL LEADERSHIP & FIELD ENGAGEMENTS
+            ───────────────────────────────────────────────────────────── */}
+        <div className="mt-14 pt-10 border-t border-white/10">
+          <div className="flex items-center gap-2 mb-6">
+            <GraduationCap size={16} className="text-[#9dfc3f]" />
+            <h3 className="font-mono text-xs uppercase tracking-widest text-[#9dfc3f] font-bold">
+              INSTITUTIONAL FIELD OPERATIONS &amp; DEMOGRAPHIC RESEARCH
+            </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {journeyTimeline.map((item, i) => (
-              <div key={i} className="border border-white/10 bg-black/25 p-4">
-                <span className="font-mono text-xs font-black text-[#ff6a1a]">
-                  {item.year}
-                </span>
-                <p className="mt-1 font-display text-sm font-bold text-white">
-                  {item.title}
+          <div className="grid grid-cols-1 gap-6">
+            {institutional.map((exp) => (
+              <div
+                key={exp.company}
+                className="border border-white/15 bg-[#161820] p-6 sm:p-7 shadow-lg"
+                style={{ borderLeft: `4px solid ${exp.color}` }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 mb-3">
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#3ad7ff]">
+                    {exp.badge}
+                  </span>
+                  <span className="font-mono text-xs text-white/50">{exp.period}</span>
+                </div>
+
+                <h4 className="font-display text-xl font-bold uppercase text-white">
+                  {exp.company}
+                </h4>
+                <p className="font-mono text-xs text-[#3ad7ff] mt-0.5">
+                  {exp.role} · {exp.location}
                 </p>
-                <p className="mt-0.5 font-mono text-[11px] text-[#9dfc3f]">
-                  {item.institution}
-                </p>
-                <p className="mt-2 text-xs text-[#ece5d5]/65 leading-relaxed">
-                  {item.details}
-                </p>
+
+                <ul className="mt-4 space-y-2 font-mono text-xs text-[#ece5d5]/80">
+                  {exp.highlights.map((h, i) => (
+                    <li key={i} className="flex gap-2 items-start">
+                      <span className="text-[#3ad7ff]">▸</span>
+                      <span className="leading-relaxed">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────────────────────
+            SUBSECTION 3: ACADEMIC & RESEARCH ROADMAP
+            ───────────────────────────────────────────────────────────── */}
+        <div className="mt-14 border border-[#ece5d5]/15 bg-[#16181c] p-6 sm:p-8">
+          <div className="flex items-center gap-2 border-b border-white/10 pb-3 mb-6">
+            <BookOpen size={16} className="text-[#ffd23a]" />
+            <h3 className="font-mono text-xs uppercase tracking-widest text-[#ffd23a] font-bold">
+              INTEGRATED CAREER &amp; RESEARCH TRAJECTORY
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {journeyTimeline.map((item, idx) => (
+              <div key={idx} className="border border-white/10 bg-black/30 p-4 font-mono text-xs flex flex-col justify-between">
+                <div>
+                  <span className="text-[#3ad7ff] font-bold text-[10px] block mb-1">
+                    {item.year}
+                  </span>
+                  <p className="font-bold text-white text-[12px]">{item.title}</p>
+                  <p className="text-white/50 text-[10px] mt-0.5">{item.institution}</p>
+                  <p className="mt-2.5 text-[11px] text-[#ece5d5]/75 leading-relaxed">
+                    {item.details}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

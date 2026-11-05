@@ -3,6 +3,7 @@ export type Project = {
   title: string;
   subtitle: string;
   domain: string;
+  category: "Financial AI" | "Machine Learning" | "Explainable AI" | "Agentic AI" | "Data Analytics" | "Full-Stack Engineering" | "Research";
   description: string;
   tags: string[];
   metrics: { label: string; value: string }[];
@@ -16,31 +17,69 @@ export type Project = {
   gradient?: string;
   github: string;
   demoUrl?: string;
-  status: "Implemented" | "Research in progress" | "Production Architecture" | "Journal Paper – Under Review" | "Conference Paper – Under Review";
+  status: "Prototype / Technical Assessment" | "Submitted / Under Review" | "Implemented" | "Research in progress" | "Production Architecture";
+  isFinancialAI?: boolean;
 };
 
 export const projects: Project[] = [
   {
+    slug: "ai-portfolio-analytics-agent",
+    title: "AI Portfolio Analytics Agent",
+    subtitle: "NL-to-SQL Engine · Sector Exposure Calculation · Read-Only Guardrails · SQLite Sandbox",
+    domain: "Financial AI & Agentic Systems",
+    category: "Financial AI",
+    isFinancialAI: true,
+    description: "An evidence-grounded financial analytics agent designed for the PL Capital technical assessment. Converts natural-language investor inquiries into validated read-only SQL queries over normalized SQLite portfolio databases, computes real-time sector exposure allocations, and enforces deterministic tool routing with ground-truth verification.",
+    tags: ["Financial AI", "NL-to-SQL", "Agentic Systems", "SQLite", "Gemini API", "Streamlit", "PL Capital"],
+    metrics: [
+      { label: "Target Scope", value: "PL Capital Assessment" },
+      { label: "Execution Sandbox", value: "SQLite (Read-Only)" },
+      { label: "Safety Verification", value: "AST Token Safeguard" },
+      { label: "Evaluation", value: "Ground-Truth Suite" },
+    ],
+    technologies: ["Python", "SQLite", "Gemini API", "Streamlit", "SQLAlchemy", "Pandas", "AST Parser", "Prompt Engineering"],
+    challenges: [
+      "Naive LLM query synthesis risks severe database mutations (e.g. DROP, UPDATE, DELETE) and hallucinated schema relationships.",
+      "Financial queries often require deterministic mathematical aggregations (e.g. precise sector concentration % and weighted cost basis) rather than unstructured prose generation.",
+      "Ambiguous investor intents (e.g., 'show risk' vs 'list holdings') require strict tool-routing boundaries before query execution."
+    ],
+    solutions: [
+      "Engineered a deterministic Intent Router classifying prompts into direct SQL querying, sector concentration calculations, or schema clarifications.",
+      "Implemented an Abstract Syntax Tree (AST) SQL safety validator strictly enforcing SELECT-only statements and blocking multi-statement or DDL/DML tokens.",
+      "Constructed a ground-truth evaluation benchmark verifying syntactic validity, parameter binding, and numerical calculation parity against known portfolio holdings."
+    ],
+    results: [
+      "Successfully built the complete architectural prototype, SQLite relational schema, intent router, and Streamlit dashboard interface ready for PL Capital technical review."
+    ],
+    featured: true,
+    accent: "#3ad7ff",
+    accentRgb: "58, 215, 255",
+    github: "https://github.com/harshkhamkar26/AI-Portfolio-Analytics-Agent",
+    demoUrl: "/#financial-demo",
+    status: "Prototype / Technical Assessment",
+  },
+  {
     slug: "hyperparameter-optimization-xai",
     title: "Explainable Hyperparameter Optimization for Imbalanced Tabular Classification",
     subtitle: "Journal Paper – Under Review · Optuna Bayesian · TreeSHAP · Class Imbalance",
-    domain: "Machine Learning & XAI · Journal Submission",
-    description: "A peer-reviewed machine learning journal paper (under review) addressing severe tabular class imbalance using the UCI Bank Marketing benchmark. Formulates an end-to-end framework integrating Bayesian hyperparameter optimization via Optuna, cost-sensitive threshold adjustments, SMOTE-NC resampling, and TreeSHAP explainability to guarantee transparency, stability, and auditability in predictive risk models.",
+    domain: "Machine Learning & Explainable AI",
+    category: "Explainable AI",
+    description: "A peer-reviewed machine learning journal paper (submitted and under review) addressing severe tabular class imbalance on the UCI Bank Marketing benchmark. Formulates an end-to-end framework integrating Bayesian optimization via Optuna, cost-sensitive threshold adjustments, SMOTE-NC mixed categorical resampling, and TreeSHAP explainability to guarantee feature attribution stability across the hyperparameter search space.",
     tags: ["Journal Paper", "Under Review", "Explainable AI", "Optuna", "TreeSHAP", "Class Imbalance", "SMOTE-NC"],
     metrics: [
-      { label: "Publication Venue", value: "Journal Paper (Under Review)" },
+      { label: "Publication Type", value: "Journal Paper" },
+      { label: "Peer-Review Status", value: "Submitted / Under Review" },
       { label: "Optimization Framework", value: "Optuna Bayesian" },
-      { label: "Explainability Method", value: "TreeSHAP" },
-      { label: "Resampling Technique", value: "SMOTE-NC" },
+      { label: "Explainability Method", value: "TreeSHAP Stability" },
     ],
     technologies: ["Python", "Scikit-Learn", "Optuna", "TreeSHAP", "SMOTE-NC", "Pandas", "Bayesian Optimization"],
     challenges: [
-      "Severe class imbalance where standard classification metrics deceptively score high while failing entirely on minority risk classes.",
-      "Black-box Bayesian search unpredictably alters feature attribution and decision boundaries across trials without explainability guarantees."
+      "Severe tabular class imbalance where default loss functions deceptively score high accuracy while failing entirely on minority financial risk classes.",
+      "Black-box Bayesian search unpredictably distorts underlying feature importance attributions across trials, preventing deployment in auditable financial settings."
     ],
     solutions: [
-      "Implemented a multi-metric objective function optimizing F1-macro, Precision-Recall AUC (PR-AUC), and cost-sensitive classification thresholds.",
-      "Generated trial-by-trial TreeSHAP global summary and local attribution waterfall plots to audit feature importance stability across the hyperparameter space."
+      "Implemented a multi-metric objective function jointly optimizing F1-macro, Precision-Recall AUC (PR-AUC), and cost-sensitive decision thresholds.",
+      "Generated trial-by-trial TreeSHAP global summary and local attribution waterfall plots to mathematically audit and verify feature importance stability."
     ],
     results: [
       "Authored complete journal manuscript submitted and under peer review, establishing verifiable feature attribution stability under severe class imbalance."
@@ -49,24 +88,122 @@ export const projects: Project[] = [
     accent: "#9dfc3f",
     accentRgb: "157, 252, 63",
     github: "https://github.com/harshkhamkar26/Hyperparameter-Optimization-XAI",
-    status: "Journal Paper – Under Review",
+    status: "Submitted / Under Review",
+  },
+  {
+    slug: "data-analytics-projects",
+    title: "Enterprise Data Analytics & BI Operations",
+    subtitle: "Choice India · 128,000+ Records · 11 Power BI Dashboards · Zoho Analytics",
+    domain: "Enterprise Analytics & Business Intelligence",
+    category: "Data Analytics",
+    description: "Enterprise data analytics and business intelligence workflows engineered during the Choice India internship. Focused on processing a 3-month MakeMyTrip dataset of approximately 128,000 records, authoring ~3 executive SQL/Zoho reports weekly, deploying 11 production Power BI dashboards, and supporting AiSensy WhatsApp automation.",
+    tags: ["Data Analytics", "Power BI", "SQL", "Zoho Analytics", "Choice India", "MakeMyTrip", "AiSensy"],
+    metrics: [
+      { label: "Dataset Scale", value: "~128,000 Records" },
+      { label: "Production Dashboards", value: "11 Views Deployed" },
+      { label: "Reporting Cadence", value: "~3 Reports / Week" },
+      { label: "Overhead Slashing", value: "40% Time Reduction" },
+    ],
+    technologies: ["Power BI", "DAX", "SQL", "Zoho Analytics", "Pandas", "AiSensy", "Excel VBA"],
+    challenges: [
+      "Cleansing and integrating disparate CRM, transactional travel records, and partner data streams with inconsistent schemas.",
+      "Delivering near-instant cross-filtering on 100k+ row tables for executive leadership across GIC, GFC, and MakeMyTrip."
+    ],
+    solutions: [
+      "Designed star-schema dimensional data models with optimized DAX measures and indexed SQL relational routines.",
+      "Engineered automated refresh pipelines and integrated AiSensy WhatsApp notification webhooks across client communication workflows."
+    ],
+    results: [
+      "Delivered 11 active production dashboards and reduced manual report compilation overhead by approximately 40%."
+    ],
+    featured: true,
+    accent: "#ff6a1a",
+    accentRgb: "255, 106, 26",
+    github: "https://github.com/harshkhamkar26/-Data-Analytics-Projects",
+    status: "Implemented",
+  },
+  {
+    slug: "student-performance-xai",
+    title: "SHAP-Based Explainable Student Performance Prediction",
+    subtitle: "Conference Paper – Under Review · Random Forest · SVM · Logistic Regression · Zero Leakage",
+    domain: "Educational Data Mining & Explainable AI",
+    category: "Explainable AI",
+    description: "An academic conference paper (submitted and under review) formulating an explainable predictive framework for secondary academic achievement. Conducts a rigorous comparative benchmark across Random Forest, SVM, and Logistic Regression with TreeSHAP and KernelSHAP interpretability, employing strict zero-leakage feature filtration.",
+    tags: ["Conference Paper", "Under Review", "Random Forest", "SVM", "Logistic Regression", "SHAP", "Zero Leakage"],
+    metrics: [
+      { label: "Publication Type", value: "Conference Paper" },
+      { label: "Peer-Review Status", value: "Submitted / Under Review" },
+      { label: "Benchmarked Models", value: "RF, SVM, LogReg" },
+      { label: "Explainability", value: "Tree & Kernel SHAP" },
+    ],
+    technologies: ["Python", "Scikit-Learn", "Random Forest", "Support Vector Machines", "Logistic Regression", "SHAP", "Pandas"],
+    challenges: [
+      "Preventing historical intermediate exam marks (G1/G2) from contaminating features while isolating actionable behavioral and socio-economic variables.",
+      "Delivering statistical predictive accuracy that non-technical counselors can inspect through intuitive graphical explanations."
+    ],
+    solutions: [
+      "Enforced a strict zero-leakage boundary isolating clean behavioral indicators (study time, parental education, absences).",
+      "Benchmarked multiple model paradigms and constructed SHAP waterfall summaries revealing high-leverage intervention targets."
+    ],
+    results: [
+      "Authored conference paper under peer review; provided educators with early-warning intervention blueprints."
+    ],
+    featured: true,
+    accent: "#3ad7ff",
+    accentRgb: "58, 215, 255",
+    github: "https://github.com/harshkhamkar26/Student_Performance_XAI",
+    status: "Submitted / Under Review",
+  },
+  {
+    slug: "sentinel-x",
+    title: "SENTINEL-X — Agentic SOC & Threat Investigation",
+    subtitle: "Autonomous Incident Response · Evidence Correlation · Audit-Log Guardrails",
+    domain: "Agentic AI & Cybersecurity",
+    category: "Agentic AI",
+    description: "An agentic security operations platform concept designed for continuous telemetry ingestion, multi-stage alert correlation, evidence-grounded threat investigation, and human-in-the-loop automated response playbooks.",
+    tags: ["Agentic AI", "Cybersecurity", "SIEM / SOAR", "Threat Intel", "FastAPI"],
+    metrics: [
+      { label: "Architecture", value: "Multi-Agent SOC" },
+      { label: "Investigation Mode", value: "Approval-Gated" },
+      { label: "Verification", value: "Audit-Log Reversible" },
+      { label: "Framework", value: "Python & FastAPI" },
+    ],
+    technologies: ["Python", "FastAPI", "Agentic Systems", "Threat Intel APIs", "Graph Correlation", "Docker"],
+    challenges: [
+      "Severe analyst alert fatigue caused by thousands of un-correlated SIEM notifications daily.",
+      "Unbounded autonomous action risks causing inadvertent network disruption."
+    ],
+    solutions: [
+      "Structured agentic reasoning loops with strict read-only investigation phases.",
+      "Enforced deterministic whitelist policies with cryptographic audit logging before remediation execution."
+    ],
+    results: [
+      "Formulated complete Phase-0 architecture, threat model, UML diagrams, and integration test protocols."
+    ],
+    featured: true,
+    accent: "#ffd23a",
+    accentRgb: "255, 210, 58",
+    github: "https://github.com/harshkhamkar26/SENTINEL-X",
+    status: "Production Architecture",
   },
   {
     slug: "multimodal-deepfake-detection",
     title: "Multimodal Audio-Visual Deepfake Detection",
-    subtitle: "Cross-Manipulation Generalization · Reliability Temporal Fusion",
+    subtitle: "Cross-Manipulation Generalization · Reliability Temporal Attention Fusion",
     domain: "Deep Learning & Vision",
-    description: "Robust deep learning architecture designed to detect state-of-the-art synthetic manipulations across both visual facial artifacts and acoustic voice anomalies, employing reliability-aware cross-attention temporal fusion.",
-    tags: ["Deep Learning", "Computer Vision", "Audio Processing", "PyTorch"],
+    category: "Machine Learning",
+    description: "Deep learning research architecture engineered to detect modern synthetic manipulations across both visual facial artifacts and acoustic voice anomalies, employing reliability-aware cross-attention temporal fusion.",
+    tags: ["Deep Learning", "Computer Vision", "Audio Processing", "PyTorch", "Transformers"],
     metrics: [
       { label: "Modality Stream", value: "Audio + Video" },
       { label: "Fusion Technique", value: "Reliability Attention" },
       { label: "Generalization", value: "Cross-Manipulation" },
+      { label: "Framework", value: "PyTorch & Librosa" },
     ],
     technologies: ["PyTorch", "TorchAudio", "OpenCV", "Temporal CNNs", "Librosa", "Transformers"],
     challenges: [
-      "Deepfakes trained with modern GANs and diffusion models often fool single-modality detectors.",
-      "Temporal desynchronization between speech phonemes and lip visemes."
+      "Deepfakes trained with modern diffusion models easily fool single-modality detectors.",
+      "Temporal desynchronization between speech phonemes and lip visemes under heavy network compression."
     ],
     solutions: [
       "Engineered dual-stream feature extractors for mel-spectrogram harmonics and frame-level spatial cues.",
@@ -82,137 +219,50 @@ export const projects: Project[] = [
     status: "Research in progress",
   },
   {
-    slug: "sentinel-x",
-    title: "SENTINEL-X — Agentic SOC & Threat Investigation",
-    subtitle: "Autonomous Incident Response · Evidence Correlation · SOAR Guardrails",
-    domain: "Agentic AI & Cybersecurity",
-    description: "An agentic security operations platform concept designed for continuous event ingestion, multi-stage alert correlation, evidence-grounded threat investigation, and human-in-the-loop automated response playbooks.",
-    tags: ["Agentic AI", "Cybersecurity", "SIEM / SOAR", "Threat Intel"],
-    metrics: [
-      { label: "Architecture", value: "Multi-Agent SOC" },
-      { label: "Response Model", value: "Approval-Gated" },
-      { label: "Verification", value: "Audit-Log Reversible" },
-    ],
-    technologies: ["Python", "FastAPI", "Agentic Systems", "Threat Intel APIs", "Graph Correlation"],
-    challenges: [
-      "Security alert fatigue resulting from thousands of disparate SIEM warnings daily.",
-      "Unbounded autonomous action risks causing inadvertent network disruption."
-    ],
-    solutions: [
-      "Structured agentic reasoning loops with strict read-only investigation phases.",
-      "Enforced deterministic whitelist policies with cryptographic audit logging before remediation triggers."
-    ],
-    results: [
-      "Formulated complete Phase-0 architecture, threat model, UML diagrams, and integration test protocols."
-    ],
-    featured: true,
-    accent: "#ffd23a",
-    accentRgb: "255, 210, 58",
-    github: "https://github.com/harshkhamkar26/SENTINEL-X",
-    status: "Production Architecture",
-  },
-  {
     slug: "uai-sports-club-platform",
-    title: "UAI Sports Club Management & Tournament Intelligence",
-    subtitle: "Full-Stack Portal · Live Brackets · Real-time Leaderboards",
-    domain: "Full-Stack Systems",
-    description: "Production full-stack web platform built for Universal AI University Sports Club, managing multi-tier athletic leagues, live match scoring, player profiles, tournament brackets, and campus athletic leaderboards.",
-    tags: ["Full-Stack", "Next.js", "TypeScript", "Tailwind CSS"],
+    title: "UAI Sports Club Management Platform",
+    subtitle: "Next.js 16 · Dynamic Brackets · Leaderboards · Real-time Tournament Ops",
+    domain: "Full-Stack Systems & Leadership",
+    category: "Full-Stack Engineering",
+    description: "Production full-stack web platform built for Universal AI University Sports Club, managing multi-tier athletic leagues, live match scoring, player profiles, dynamic tournament brackets, and campus athletic leaderboards for 1,200+ students.",
+    tags: ["Full-Stack", "Next.js", "TypeScript", "Tailwind CSS", "Tournament Engine"],
     metrics: [
-      { label: "Active Users", value: "1,200+ Students" },
-      { label: "Tournament Engine", value: "Live Dynamic Brackets" },
-      { label: "Stack", value: "Next.js & TypeScript" },
+      { label: "Active Student Reach", value: "1,200+ Students" },
+      { label: "Bracket Engine", value: "Live Dynamic Brackets" },
+      { label: "Frontend Stack", value: "Next.js 16 & React 19" },
+      { label: "Styling Engine", value: "Tailwind CSS v4" },
     ],
     technologies: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "REST APIs"],
     challenges: [
       "Handling concurrent score submissions and bracket reorganizations during high-intensity campus tournaments.",
-      "Designing a high-impact mobile-first UI for students and referees on the court."
+      "Designing a high-contrast mobile-first UI for students and referees on the court."
     ],
     solutions: [
-      "Engineered optimistic UI state updates and reactive bracket trees.",
-      "Integrated fast search, player stat cards, and dynamic standings generation."
+      "Engineered optimistic UI state updates and reactive tournament bracket trees.",
+      "Integrated fast player profile search and dynamic standing calculations."
     ],
     results: [
-      "Successfully deployed for university tournaments including Undergrad Premier League and sports festivals."
+      "Successfully deployed for university tournaments including Undergrad Premier League and intercollegiate festivals."
     ],
-    featured: true,
+    featured: false,
     accent: "#ff6a1a",
     accentRgb: "255, 106, 26",
     github: "https://github.com/harshkhamkar26/uai-sports-club-platform",
     status: "Implemented",
   },
   {
-    slug: "student-performance-xai",
-    title: "SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression",
-    subtitle: "Conference Paper – Under Review · Random Forest · SVM · Logistic Regression · SHAP Interpretability",
-    domain: "Machine Learning & XAI · Conference Paper",
-    description: "A peer-reviewed academic conference paper (under review) formulating an explainable predictive framework for secondary academic achievement across mathematics and language cohorts. Conducts a rigorous comparative benchmark across Random Forest, Support Vector Machines (SVM), and Logistic Regression, applying TreeSHAP and KernelSHAP to isolate high-impact behavioral predictors with strict zero-leakage boundaries.",
-    tags: ["Conference Paper", "Under Review", "Random Forest", "SVM", "Logistic Regression", "SHAP", "Explainable AI"],
-    metrics: [
-      { label: "Publication Venue", value: "Conference Paper (Under Review)" },
-      { label: "Benchmarked Models", value: "RF, SVM, Logistic Regression" },
-      { label: "Explainability", value: "TreeSHAP & KernelSHAP" },
-      { label: "Target Leakage", value: "Zero (Strict Feature Gate)" },
-    ],
-    technologies: ["Python", "Scikit-Learn", "Random Forest", "SVM", "Logistic Regression", "SHAP", "Pandas", "Matplotlib", "Seaborn"],
-    challenges: [
-      "Preventing historical intermediate test grade leakage while isolating genuine behavioral and socio-economic variables driving student success.",
-      "Bridging statistical predictive accuracy with clear, interpretable explanations for non-technical academic counselors."
-    ],
-    solutions: [
-      "Filtered out downstream intermediate exam marks to isolate clean behavioral predictors (study time, parental education, absences).",
-      "Benchmarked Random Forest, SVM, and Logistic Regression, constructing SHAP waterfall and summary plots highlighting high-impact leverage points."
-    ],
-    results: [
-      "Authored conference paper currently under peer review; provided actionable early intervention blueprints for educators."
-    ],
-    featured: true,
-    accent: "#3ad7ff",
-    accentRgb: "58, 215, 255",
-    github: "https://github.com/harshkhamkar26/Student_Performance_XAI",
-    status: "Conference Paper – Under Review",
-  },
-  {
-    slug: "data-analytics-projects",
-    title: "Enterprise Data Analytics & BI Operations",
-    subtitle: "128,000+ Records · 11+ Power BI Dashboards · Zoho Analytics",
-    domain: "Enterprise Analytics & BI",
-    description: "Enterprise analytics suite developed during data analyst internships. Focuses on large-scale dataset ingestion, automated financial reporting, KPI scorecards, and customer acquisition pipeline analysis.",
-    tags: ["Data Analytics", "Power BI", "SQL", "Zoho Analytics"],
-    metrics: [
-      { label: "Record Scale", value: "128,000+ Rows" },
-      { label: "Dashboards", value: "11 Production Views" },
-      { label: "Automation Savings", value: "40% Time Reduction" },
-    ],
-    technologies: ["Power BI", "DAX", "Zoho Analytics", "SQL", "Excel VBA", "Pandas"],
-    challenges: [
-      "Integrating disparate CRM, sales, and travel operational data streams containing inconsistent schemas.",
-      "Delivering near-instant cross-filtering on 100k+ record tables for executive leadership."
-    ],
-    solutions: [
-      "Designed star-schema dimensional data models with optimized DAX measures.",
-      "Set up automated refresh routines and WhatsApp notification webhooks via AiSensy."
-    ],
-    results: [
-      "Delivered 11 active dashboards powering weekly executive decision-making."
-    ],
-    featured: false,
-    accent: "#9dfc3f",
-    accentRgb: "157, 252, 63",
-    github: "https://github.com/harshkhamkar26/-Data-Analytics-Projects",
-    status: "Implemented",
-  },
-  {
     slug: "bistro-cafe-management-system",
-    title: "Bistro Cafe Management & Campus POS",
+    title: "Bistro Cafe Management & POS System",
     subtitle: "Java & Python · Relational Database Engine · POS Workflows",
     domain: "Software Systems",
+    category: "Full-Stack Engineering",
     description: "Full-stack cafe management system engineered for the campus dining facility at Universal AI University, facilitating real-time inventory management, queue dispatch, order billing, and analytical sales tracking.",
-    tags: ["Software Engineering", "Java", "Python", "MySQL", "Web"],
+    tags: ["Software Engineering", "Java", "Python", "MySQL", "POS"],
     metrics: [
       { label: "Order Throughput", value: "Real-time POS" },
-      { label: "Backend", value: "Java & Python" },
-      { label: "Database", value: "Normalized SQL" },
+      { label: "Backend Core", value: "Java & Python" },
+      { label: "Database", value: "Normalized MySQL" },
+      { label: "Architecture", value: "ACID Transactions" },
     ],
     technologies: ["Java", "Python", "MySQL", "HTML5", "CSS3", "JavaScript"],
     challenges: [
@@ -222,7 +272,7 @@ export const projects: Project[] = [
       "Designed atomic database transactions and an ergonomic cashier terminal interface."
     ],
     results: [
-      "Significantly cut wait times and gave managers instant day-end revenue summaries."
+      "Significantly cut checkout queue times and gave managers instant day-end revenue summaries."
     ],
     featured: false,
     accent: "#ff6a1a",
@@ -235,11 +285,14 @@ export const projects: Project[] = [
     title: "Sports Analytics & Predictive Game Modeling",
     subtitle: "Player Tracking · Biometric Intelligence · Tactical Optimization",
     domain: "Analytics & ML",
-    description: "Applied research repository combining data science with competitive sports insights. Analyzes player efficiency ratings, spatial shot-charts, and predictive outcomes in basketball and football.",
+    category: "Research",
+    description: "Applied research repository combining data science with competitive sports insights. Analyzes player efficiency ratings (PER), spatial shot-charts, and predictive game outcomes in competitive basketball and football.",
     tags: ["Sports Analytics", "Python", "Machine Learning", "Data Visualization"],
     metrics: [
       { label: "Sports Focus", value: "Basketball & Football" },
       { label: "Metrics", value: "PER, Shot Charts, Win Shares" },
+      { label: "Analytics Stack", value: "Pandas & Seaborn" },
+      { label: "Application", value: "Tactical Playbooks" },
     ],
     technologies: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn"],
     challenges: [

@@ -33,7 +33,7 @@ export function Footer() {
               HARSH KHAMKAR<span className="text-[#ff6a1a]">.</span>
             </span>
             <p className="mt-2 font-mono text-xs text-[#ece5d5]/60 max-w-lg">
-              Data Science Engineer · B.Tech in Artificial Intelligence &amp; Data Science · Universal AI University, Mumbai.
+              AI/ML Engineer · Data Science Researcher · Financial Analytics · Universal AI University, Mumbai.
             </p>
           </div>
 

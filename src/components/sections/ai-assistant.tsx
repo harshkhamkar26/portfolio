@@ -30,14 +30,14 @@ type Message = {
 };
 
 const SUGGESTED_PROMPTS = [
+  "📈 AI Portfolio Analytics Agent",
   "📄 2 Papers Under Review",
   "📊 Choice India (128K+ Rows)",
   "🎯 Harsh's Career Goals",
   "🧠 Core ML & XAI Stack",
-  "🏀 Basketball & Leadership",
-  "💼 Why Hire Harsh?",
+  "💼 Why Hire Harsh for PL Capital?",
   "📥 1-Click ATS Resume",
-  "🚂 Cruise to Station 03 (3D Wheel)",
+  "🚂 Cruise to Station 03 (Flagship)",
   "📬 Direct Contact Details",
 ];
 
@@ -106,6 +106,27 @@ function generateResponse(rawInput: string): {
         followUps: ["📬 Direct Contact Details", "📥 1-Click ATS Resume"],
       };
     }
+  }
+
+  // Financial AI & PL Capital Technical Assessment
+  if (
+    q.includes("portfolio") ||
+    q.includes("pl capital") ||
+    q.includes("financial") ||
+    q.includes("sql safety") ||
+    q.includes("sector exposure") ||
+    q.includes("nl to sql") ||
+    q.includes("sqlite") ||
+    q.includes("assessment")
+  ) {
+    return {
+      text: `📈 **AI Portfolio Analytics Agent [PL Capital Technical Assessment]**:\n\n• **Core Purpose**: Evidence-grounded natural-language query engine for multi-asset equity portfolios.\n• **Natural-Language-to-SQL**: Converts investor inquiries into validated SQL queries over normalized SQLite schemas.\n• **AST Read-Only Safeguards**: Parses query Abstract Syntax Trees to strictly enforce SELECT statements and block mutation tokens (DROP, UPDATE, DELETE).\n• **Deterministic Calculations**: Routes mathematical calculations to Python numerical routines, eliminating LLM arithmetic hallucination.\n• **Ground-Truth Evaluation**: Benchmarked across syntactic validity, safety adherence, and financial parity.\n• **Status**: Prototype / Technical Assessment in progress.`,
+      links: [
+        { label: "Launch Financial AI Demo", url: "#financial-demo", isStationJump: true },
+        { label: "Inspect GitHub Repository", url: "https://github.com/harshkhamkar26/AI-Portfolio-Analytics-Agent", external: true },
+      ],
+      followUps: ["Explain SQL Safety Safeguards", "📄 2 Papers Under Review", "📊 Choice India (128K+ Rows)"],
+    };
   }
 
   // 1. Papers & Research Under Review
@@ -592,7 +613,8 @@ export function AIAssistant() {
               {/* Scrollable Chips Strip with High-Visibility Amber Scrollbar */}
               <div
                 ref={chipScrollRef}
-                className="flex gap-1.5 px-2 py-2 overflow-x-auto custom-scrollbar whitespace-nowrap scroll-smooth"
+                data-lenis-prevent
+                className="flex gap-1.5 px-2 py-2 overflow-x-auto custom-scrollbar whitespace-nowrap scroll-smooth overscroll-contain"
               >
                 {SUGGESTED_PROMPTS.map((prompt) => (
                   <button
@@ -619,7 +641,7 @@ export function AIAssistant() {
             <div
               ref={messagesContainerRef}
               onScroll={handleMessagesScroll}
-              className="flex-1 overflow-y-auto custom-scrollbar p-3.5 space-y-3.5 max-h-[380px] sm:max-h-[420px] bg-[#0d0f12] relative"
+              className="flex-1 overflow-y-auto custom-scrollbar p-3.5 space-y-3.5 max-h-[380px] sm:max-h-[420px] bg-[#0d0f12] relative overscroll-contain select-text" data-lenis-prevent
             >
               {messages.map((msg) => {
                 const isUser = msg.role === "user";

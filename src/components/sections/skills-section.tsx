@@ -78,7 +78,7 @@ export function SkillsSection() {
                     <span className="text-zinc-300">{skill.name}</span>
                     <span className="text-zinc-500">{skill.level}%</span>
                   </div>
-                  <Progress value={skill.level} />
+                  <Progress value={skill.level ?? 90} />
                 </div>
               ))}
             </motion.div>

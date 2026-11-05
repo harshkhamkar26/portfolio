@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Download, ShieldCheck, Trophy, Briefcase, GraduationCap } from "lucide-react";
-import { atsKeywords } from "@/lib/data/site";
+import { Download, ShieldCheck, Trophy, Briefcase, GraduationCap, CheckCircle2, FileText, ArrowUpRight } from "lucide-react";
+import { verifiableEvidence, siteConfig } from "@/lib/data/site";
 import { sounds } from "@/components/layout/sound-manager";
 import { StationBadge } from "@/components/ui/station-badge";
 
@@ -17,57 +17,57 @@ export function ProfileSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-[#ece5d5]/15">
           <div>
-<StationBadge stationNo="05" title="AGENT PROFILE & BIOMETRICS" nextStationId="expedition" nextStationName="JOURNEY" accentColor="#9dfc3f" />
+            <StationBadge stationNo="05" title="ENGINEER PROFILE & VERIFICATION" nextStationId="expedition" nextStationName="JOURNEY" accentColor="#3ad7ff" />
             <h2
               id="profile-heading"
               className="mt-2 text-3xl font-black uppercase tracking-tight text-[#ece5d5] sm:text-5xl font-display"
             >
-              ABOUT HARSH KHAMKAR
+              PROFESSIONAL PROFILE
             </h2>
           </div>
 
           <p className="max-w-md font-mono text-xs leading-relaxed text-[#ece5d5]/70">
-            A portrait of academic precision, athletic leadership, and industry engineering discipline.
+            Fusing statistical machine-learning research, corporate financial analytics, and athletic team leadership into reliable engineering execution.
           </p>
         </div>
 
         {/* Profile Content Grid */}
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 items-start">
-          {/* Left Column: Cyberpunk Tactical Photo HUD (5 Cols) */}
+          {/* Left Column: Cyber-Tactical Dossier Card (5 Cols) */}
           <div className="lg:col-span-5 flex flex-col items-center">
             <div className="relative w-full max-w-[440px] border border-[#ece5d5]/20 bg-[#16181c] p-3 shadow-2xl">
               {/* Tactical Corner Brackets */}
-              <div className="absolute -top-1.5 -left-1.5 h-5 w-5 border-t-2 border-l-2 border-[#ff6a1a]" />
-              <div className="absolute -top-1.5 -right-1.5 h-5 w-5 border-t-2 border-r-2 border-[#ff6a1a]" />
-              <div className="absolute -bottom-1.5 -left-1.5 h-5 w-5 border-b-2 border-l-2 border-[#ff6a1a]" />
-              <div className="absolute -bottom-1.5 -right-1.5 h-5 w-5 border-b-2 border-r-2 border-[#ff6a1a]" />
+              <div className="absolute -top-1.5 -left-1.5 h-5 w-5 border-t-2 border-l-2 border-[#3ad7ff]" />
+              <div className="absolute -top-1.5 -right-1.5 h-5 w-5 border-t-2 border-r-2 border-[#3ad7ff]" />
+              <div className="absolute -bottom-1.5 -left-1.5 h-5 w-5 border-b-2 border-l-2 border-[#3ad7ff]" />
+              <div className="absolute -bottom-1.5 -right-1.5 h-5 w-5 border-b-2 border-r-2 border-[#3ad7ff]" />
 
               {/* Status Header Bar */}
               <div className="flex items-center justify-between border-b border-white/10 px-2 py-1.5 font-mono text-[10px] uppercase tracking-widest text-white/60">
-                <span className="flex items-center gap-1.5 text-[#9dfc3f]">
-                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#9dfc3f] animate-ping" />
-                  ID // HK-2026-AI
+                <span className="flex items-center gap-1.5 text-[#3ad7ff]">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#3ad7ff] animate-ping" />
+                  ENGINEER DOSSIER // HK-2026
                 </span>
-                <span>STATUS: OPERATIONAL</span>
+                <span className="text-[#9dfc3f]">VERIFIED RECORD</span>
               </div>
 
               {/* Harsh's Real Photo with Cyber Holographic Frame */}
               <div className="relative mt-2 overflow-hidden border border-white/10 bg-[#0c0d10] aspect-[4/5] group">
                 <Image
                   src="/images/harsh-khamkar.jpg"
-                  alt="Harsh Khamkar - Data Science Engineer & Data Analyst"
+                  alt="Harsh Khamkar - AI/ML Engineer & Financial Analytics"
                   fill
                   sizes="(max-width: 768px) 100vw, 440px"
                   className="object-cover object-top contrast-105 transition-all duration-700 group-hover:scale-105"
                   priority
                 />
 
-                {/* Tactical Scanlines & Crosshair */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#16181c] via-transparent to-transparent opacity-70 pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 font-mono text-[10px] text-[#ece5d5] bg-black/75 backdrop-blur-md px-3 py-2 border border-white/15">
+                {/* Scanlines Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#16181c] via-transparent to-transparent opacity-75 pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 font-mono text-[10px] text-[#ece5d5] bg-black/80 backdrop-blur-md px-3 py-2 border border-white/15">
                   <div className="flex justify-between items-center">
-                    <span className="font-bold text-[#ffd23a]">HARSH KHAMKAR</span>
-                    <span className="text-[#9dfc3f]">DATA SCIENCE ENG</span>
+                    <span className="font-bold text-white">HARSH KHAMKAR</span>
+                    <span className="text-[#3ad7ff]">AI/ML &amp; FINANCIAL AI</span>
                   </div>
                   <div className="text-[9px] text-white/70 mt-0.5">
                     UNIVERSAL AI UNIVERSITY · MUMBAI, INDIA
@@ -75,15 +75,15 @@ export function ProfileSection() {
                 </div>
               </div>
 
-              {/* Bottom Telemetry Pills */}
+              {/* Bottom Verifiable Fact Pills */}
               <div className="mt-3 grid grid-cols-2 gap-2 text-center font-mono text-[10px] text-white/70">
                 <div className="border border-white/10 bg-black/30 p-2">
-                  <span className="block text-[#ff6a1a] font-bold">2+ INTERNSHIPS</span>
-                  <span>INDUSTRY READY</span>
+                  <span className="block text-[#ffd23a] font-bold">2 PAPERS UNDER REVIEW</span>
+                  <span>PEER-REVIEWED XAI</span>
                 </div>
                 <div className="border border-white/10 bg-black/30 p-2">
-                  <span className="block text-[#3ad7ff] font-bold">SPORTS PRESIDENT</span>
-                  <span>VARSITY LEADER</span>
+                  <span className="block text-[#9dfc3f] font-bold">128K+ DATA RECORDS</span>
+                  <span>CHOICE INDIA INTERNSHIP</span>
                 </div>
               </div>
 
@@ -94,86 +94,86 @@ export function ProfileSection() {
                   download="Harsh_Khamkar_Resume.pdf"
                   onClick={() => sounds.playClick()}
                   onMouseEnter={() => sounds.playHover()}
-                  className="w-full flex items-center justify-center gap-2 border-2 border-[#ff6a1a] bg-[#ff6a1a] py-3 text-center font-mono text-xs font-bold uppercase tracking-wider text-[#16181c] transition-all hover:bg-transparent hover:text-[#ff6a1a]"
+                  className="w-full flex items-center justify-center gap-2 border-2 border-[#3ad7ff] bg-[#3ad7ff] py-3 text-center font-mono text-xs font-black uppercase tracking-wider text-[#0c1017] transition-all hover:bg-transparent hover:text-[#3ad7ff] shadow-[0_0_14px_rgba(58,215,255,0.25)]"
                 >
                   <Download size={14} />
-                  <span>DOWNLOAD VERIFIED ATS RESUME</span>
+                  <span>DOWNLOAD VERIFIED ATS RESUME (PDF)</span>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Bio, Credentials & ATS Skill Matrix (7 Cols) */}
+          {/* Right Column: Bio, Competencies & Verifiable Evidence Matrix (7 Cols) */}
           <div className="lg:col-span-7 flex flex-col justify-between h-full">
             <div>
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#ff6a1a]">
-                OPERATIONAL SUMMARY
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#3ad7ff]">
+                CANDIDATE DOSSIER &amp; PHILOSOPHY
               </span>
               <h3 className="mt-2 font-display text-2xl sm:text-4xl font-black uppercase text-white leading-tight">
-                Architecting transparent AI models and high-throughput data engines.
+                Engineering transparent AI systems &amp; quantitative data engines.
               </h3>
 
-              <div className="mt-6 space-y-4 font-mono text-xs sm:text-sm leading-relaxed text-[#ece5d5]/80">
+              <div className="mt-6 space-y-4 font-mono text-xs sm:text-sm leading-relaxed text-[#ece5d5]/85">
                 <p>
-                  I am a B.Tech undergraduate at <strong className="text-white">Universal AI University, Mumbai</strong>, specializing in Artificial Intelligence, Machine Learning, and Data Science. My engineering philosophy focuses on moving beyond black-box ML models toward <strong className="text-[#9dfc3f]">auditable, explainable decision frameworks (TreeSHAP)</strong> and resilient production data pipelines.
+                  I am an undergraduate engineer pursuing a B.Tech in Artificial Intelligence, Machine Learning &amp; Data Science at <strong className="text-white">Universal AI University, Mumbai</strong> (Current CGPA: <strong className="text-[#ffd23a]">8.17</strong>). My work bridges machine-learning research discipline with practical enterprise financial analytics.
                 </p>
                 <p>
-                  As a <strong className="text-white">Data Analyst &amp; Business Analyst Intern at Choice India</strong>, I process large-scale datasets exceeding <span className="text-[#ffd23a] font-bold">128,000 records</span>, engineering automated Power BI dashboards and Zoho Analytics pipelines that power cross-departmental operations. Previously at <strong className="text-white">One Globe Build Con</strong>, I delivered production React frontends and evaluated machine learning workflows.
+                  During my internship at <strong className="text-white">Choice India (The Joy of Earning)</strong>, I processed an operational MakeMyTrip dataset exceeding <strong className="text-white">128,000 records</strong>, authored approximately three SQL/Zoho executive reports weekly, and built 11 production Power BI dashboards to track client KPIs. Previously at <strong className="text-white">One Globe Build Con LLP</strong>, I contributed to Scikit-learn machine learning workflows and modular React frontends.
                 </p>
                 <p>
-                  Beyond engineering, I serve as <strong className="text-white">President of the UAI Sports Club</strong> and compete as a <strong className="text-[#3ad7ff]">National &amp; State Level Basketball Athlete</strong>, instilling tactical composure, decisive execution, and relentless stamina under high-pressure stakes.
+                  In research, I have authored <strong className="text-[#3ad7ff]">two peer-reviewed papers currently under review</strong>—one Journal manuscript unifying Optuna Bayesian optimization with TreeSHAP stability for imbalanced tabular classification, and one Conference study delivering leak-free academic outcome predictions using ensemble and SVM architectures.
+                </p>
+                <p>
+                  Alongside engineering, I serve as <strong className="text-white">President of the UAI Sports Club</strong> and compete as a <strong className="text-[#9dfc3f]">National &amp; State Level Basketball Athlete</strong>, cultivating high-pressure tactical composure, team alignment, and resilience.
                 </p>
               </div>
 
-              {/* Academic & Leadership Highlights */}
+              {/* Verified Pillar Credentials */}
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="border border-white/10 bg-[#16181c] p-4">
-                  <GraduationCap className="text-[#ff6a1a] mb-2" size={20} />
+                  <GraduationCap className="text-[#3ad7ff] mb-2" size={20} />
                   <p className="font-mono text-[10px] text-white/50 uppercase tracking-widest">EDUCATION</p>
                   <p className="font-display font-bold text-sm text-white mt-1">Universal AI University</p>
-                  <p className="font-mono text-[10px] text-[#ece5d5]/60 mt-0.5">B.Tech AI/ML &amp; Data Science (2024–28)</p>
+                  <p className="font-mono text-[10px] text-[#ece5d5]/70 mt-0.5">B.Tech AI/ML (Expected 2028 · 8.17 CGPA)</p>
                 </div>
 
                 <div className="border border-white/10 bg-[#16181c] p-4">
-                  <Briefcase className="text-[#9dfc3f] mb-2" size={20} />
-                  <p className="font-mono text-[10px] text-white/50 uppercase tracking-widest">ACTIVE INTERNSHIP</p>
+                  <Briefcase className="text-[#ff6a1a] mb-2" size={20} />
+                  <p className="font-mono text-[10px] text-white/50 uppercase tracking-widest">ANALYTICS INTERN</p>
                   <p className="font-display font-bold text-sm text-white mt-1">Choice India</p>
-                  <p className="font-mono text-[10px] text-[#ece5d5]/60 mt-0.5">128K+ Records &amp; 11 Dashboards</p>
+                  <p className="font-mono text-[10px] text-[#ece5d5]/70 mt-0.5">128K+ Records &amp; 11 Dashboards</p>
                 </div>
 
                 <div className="border border-white/10 bg-[#16181c] p-4">
-                  <Trophy className="text-[#3ad7ff] mb-2" size={20} />
-                  <p className="font-mono text-[10px] text-white/50 uppercase tracking-widest">EXECUTIVE ATHLETICS</p>
+                  <Trophy className="text-[#ffd23a] mb-2" size={20} />
+                  <p className="font-mono text-[10px] text-white/50 uppercase tracking-widest">LEADERSHIP</p>
                   <p className="font-display font-bold text-sm text-white mt-1">Sports Club President</p>
-                  <p className="font-mono text-[10px] text-[#ece5d5]/60 mt-0.5">National Level Basketball Player</p>
+                  <p className="font-mono text-[10px] text-[#ece5d5]/70 mt-0.5">National Basketball Athlete</p>
                 </div>
               </div>
             </div>
 
-            {/* ATS Technical Skills Verification Matrix */}
+            {/* Verifiable Evidence Matrix (Replaces Arbitrary Percentages) */}
             <div className="mt-8 pt-6 border-t border-white/10">
               <div className="flex items-center justify-between mb-4">
                 <span className="font-mono text-xs uppercase tracking-wider text-white/70">
-                  ATS VERIFIED TECHNICAL COMPETENCIES
+                  VERIFIABLE ENGINEERING EVIDENCE MATRIX
                 </span>
                 <span className="font-mono text-[10px] text-[#9dfc3f] flex items-center gap-1">
-                  <ShieldCheck size={13} /> 100% RESUME-ALIGNED
+                  <ShieldCheck size={13} /> TRUTHFUL &amp; AUDITABLE
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {atsKeywords.map((item) => (
-                  <div key={item.keyword} className="border border-white/10 bg-black/25 p-3">
-                    <div className="flex justify-between font-mono text-xs mb-1.5">
-                      <span className="text-white/80">{item.keyword}</span>
-                      <span className="text-[#ff6a1a] font-bold">{item.coverage}%</span>
+                {verifiableEvidence.map((item, idx) => (
+                  <div key={idx} className="border border-white/10 bg-black/35 p-3.5 font-mono">
+                    <div className="flex items-center justify-between text-xs mb-1">
+                      <span className="text-white/60 text-[10px] uppercase tracking-wider">{item.domain}</span>
+                      <span className="text-[#3ad7ff] font-bold text-[11px]">{item.metric}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-white/10 rounded-none overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-[#ff6a1a] to-[#9dfc3f]"
-                        style={{ width: `${item.coverage}%` }}
-                      />
-                    </div>
+                    <p className="text-[11px] text-[#ece5d5]/85 leading-snug">
+                      {item.detail}
+                    </p>
                   </div>
                 ))}
               </div>

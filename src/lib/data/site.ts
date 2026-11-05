@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Harsh Khamkar",
-  title: "Data Science Engineer · Machine Learning Researcher · Data Analyst Intern",
-  tagline: "Building high-performance data science pipelines, explainable machine learning models, peer-reviewed research frameworks, and executive analytics dashboards.",
+  title: "AI/ML Engineer · Data Science Researcher · Financial Analytics",
+  tagline: "Building explainable machine-learning systems, evidence-grounded AI agents and data-driven analytical solutions for complex financial and business problems.",
   location: "Mumbai, Maharashtra, India",
   coords: "18.98° N, 72.82° E",
   email: "harshkhamkar26@gmail.com",
@@ -14,109 +14,149 @@ export const siteConfig = {
   degree: "B.Tech in Artificial Intelligence, Machine Learning & Data Science (Universal AI University · Expected 2028 · CGPA: 8.17)",
   keywords: [
     "Harsh Khamkar",
-    "Data Scientist",
-    "Artificial Intelligence",
-    "Machine Learning",
+    "AI/ML Engineer",
+    "Financial Analytics",
+    "PL Capital AI Assessment",
+    "AI Portfolio Analytics Agent",
     "Explainable AI",
     "SHAP",
-    "Explainable Hyperparameter Optimization for Imbalanced Tabular Classification",
-    "SHAP-Based Explainable Student Performance Prediction Using Random Forest SVM and Logistic Regression",
-    "Journal Paper Under Review",
-    "Conference Paper Under Review",
+    "TreeSHAP",
+    "KernelSHAP",
     "Optuna Bayesian Optimization",
-    "Random Forest SVM Logistic Regression",
+    "Imbalanced Tabular Classification",
+    "Natural Language to SQL",
+    "SQLite Read-Only Safeguards",
+    "Gemini LLM Integration",
+    "Choice India",
+    "128,000 Records",
     "Power BI",
     "Zoho Analytics",
-    "Choice India",
     "Universal AI University",
     "Mumbai",
     "Python",
+    "Scikit-Learn",
     "Next.js"
   ],
 };
 
 export const stationStops = [
   { id: "hero", no: "01", name: "ORIGIN", label: "Hero Terminal" },
-  { id: "tracks", no: "02", name: "TRACKS", label: "Core Domains" },
-  { id: "showcase", no: "03", name: "3D WHEEL", label: "Flagship 3D" },
-  { id: "depot", no: "04", name: "DEPOT", label: "Project Fleet & Papers" },
-  { id: "about", no: "05", name: "PROFILE", label: "Harsh Khamkar" },
-  { id: "expedition", no: "06", name: "JOURNEY", label: "Experience Log" },
-  { id: "matrix", no: "07", name: "MATRIX", label: "Certs & Athletics" },
+  { id: "tracks", no: "02", name: "TRACKS", label: "4 Core Disciplines" },
+  { id: "showcase", no: "03", name: "FLAGSHIP", label: "Financial AI & Orbit" },
+  { id: "depot", no: "04", name: "DEPOT", label: "Research & Code Fleet" },
+  { id: "about", no: "05", name: "PROFILE", label: "Engineer Profile" },
+  { id: "expedition", no: "06", name: "JOURNEY", label: "Experience & Timeline" },
+  { id: "matrix", no: "07", name: "MATRIX", label: "Skills & Accreditations" },
   { id: "terminal", no: "08", name: "COMMS", label: "Dispatch Terminal" },
 ];
 
-export const tracks = [
+export const labItems = [
+  { icon: "database" as const, value: 128000, label: "Records Processed (Choice India)" },
+  { icon: "chart" as const, value: 11, label: "Power BI Dashboards Deployed" },
+  { icon: "flask" as const, value: 2, label: "Research Papers Under Review" },
+  { icon: "brain" as const, value: 7, label: "Core Competency Domains" },
+];
+
+export type TechnicalTrack = {
+  id: string;
+  no: string;
+  name: string;
+  long: string;
+  accent: string;
+  ink: string;
+  line: string;
+  skills: string[];
+  applications: string[];
+  relatedProjects: { name: string; slug: string }[];
+  evidence: string;
+};
+
+export const tracks: TechnicalTrack[] = [
   {
-    id: "aiml",
+    id: "financial-ai",
     no: "01",
-    name: "AIML & XAI",
+    name: "FINANCIAL AI",
+    long: "Financial AI & Quantitative Analytics",
+    accent: "#3ad7ff",
+    ink: "#04141c",
+    line: "Developing natural-language portfolio analytical agents, deterministic sector exposure calculators, and read-only SQL querying engines for complex multi-asset portfolios.",
+    skills: ["NL-to-SQL Engines", "Portfolio Exposure Calculation", "AST SQL Safety Validation", "SQLite Sandbox", "Risk Concentration Metrics", "Gemini Integration"],
+    applications: ["Multi-Asset Sector Breakdown", "Automated SQL Query Generation", "Portfolio Concentration Alerts", "Deterministic Financial Math"],
+    relatedProjects: [
+      { name: "AI Portfolio Analytics Agent", slug: "ai-portfolio-analytics-agent" },
+      { name: "Enterprise BI & Data Analytics", slug: "data-analytics-projects" }
+    ],
+    evidence: "Engineered read-only AST parser blocking mutation statements; benchmarked against ground-truth portfolio SQL queries."
+  },
+  {
+    id: "aiml-xai",
+    no: "02",
+    name: "ML & XAI",
     long: "Machine Learning & Explainable AI",
     accent: "#9dfc3f",
     ink: "#0f1a07",
-    line: "Models that reason, predict, and explain. Moving past opaque black-boxes with SHAP, Optuna Bayesian tuning, and peer-reviewed research rigor.",
-    keywords: ["Explainable AI", "SHAP", "Optuna", "Scikit-Learn", "PyTorch", "Model Auditing", "Papers Under Review"],
-    icon: "brain",
+    line: "Moving beyond black-box ML models through rigorous statistical benchmarking, Bayesian hyperparameter optimization, and TreeSHAP/KernelSHAP attribution stability auditing.",
+    skills: ["TreeSHAP", "KernelSHAP", "Optuna Bayesian Optimization", "SMOTE-NC", "Scikit-Learn", "Cost-Sensitive Thresholds", "Class Imbalance"],
+    applications: ["Auditable Credit & Risk Modeling", "Hyperparameter Space Sensitivity Auditing", "Zero-Leakage Student Performance Blueprints"],
+    relatedProjects: [
+      { name: "Explainable Hyperparameter Optimization (Journal)", slug: "hyperparameter-optimization-xai" },
+      { name: "Student Performance Prediction (Conference)", slug: "student-performance-xai" }
+    ],
+    evidence: "2 peer-reviewed research papers currently submitted & under review; verified feature importance stability curves under severe class imbalance."
+  },
+  {
+    id: "genai-agentic",
+    no: "03",
+    name: "GENAI & AGENTS",
+    long: "Generative AI & Agentic Systems",
+    accent: "#ffd23a",
+    ink: "#1c1502",
+    line: "Building evidence-grounded agentic workflows with deterministic intent routing, parameter extraction, and human-in-the-loop audit logs.",
+    skills: ["Agentic Tool Routing", "Function Calling", "Prompt Engineering", "Structured Output Parsing", "Gemini API", "Multi-Modal Audio-Visual Fusion"],
+    applications: ["Intelligent Query Dispatch", "Cross-Manipulation Deepfake Detection", "Agentic SOC Alert Correlation"],
+    relatedProjects: [
+      { name: "AI Portfolio Analytics Agent", slug: "ai-portfolio-analytics-agent" },
+      { name: "SENTINEL-X Agentic SOC", slug: "sentinel-x" },
+      { name: "Multimodal Deepfake Detection", slug: "multimodal-deepfake-detection" }
+    ],
+    evidence: "Implemented intent routing accuracy test suite and cryptographic audit trails for autonomous investigation loops."
   },
   {
     id: "data-bi",
-    no: "02",
+    no: "04",
     name: "DATA & BI",
-    long: "Enterprise Analytics & Business Intelligence",
+    long: "Data Engineering & Business Intelligence",
     accent: "#ff6a1a",
     ink: "#1d0c02",
-    line: "Translating 128,000+ data rows into executive decision clarity through Power BI, Zoho Analytics, and SQL.",
-    keywords: ["Power BI", "Zoho Analytics", "SQL", "Pandas", "KPI Modeling", "Financial Data"],
-    icon: "chart",
-  },
-  {
-    id: "cyber",
-    no: "03",
-    name: "CYBER & SOC",
-    long: "Agentic SOC & Deepfake Defense",
-    accent: "#ffd23a",
-    ink: "#1c1502",
-    line: "Detecting multi-modal deception and engineering autonomous SOC triage pipelines with audit-logged guardrails.",
-    keywords: ["Audio-Visual Fusion", "Agentic SOC", "Threat Detection", "Cross-Manipulation", "SOAR"],
-    icon: "shield",
-  },
-  {
-    id: "bigdata",
-    no: "04",
-    name: "BIG DATA",
-    long: "Data Engineering & Stream Ingestion",
-    accent: "#ff2e97",
-    ink: "#1f0512",
-    line: "Building resilient distributed data flows with Apache Kafka, Hadoop, and high-throughput transformation.",
-    keywords: ["Apache Kafka", "Hadoop Ecosystem", "ETL Pipelines", "Stream Processing", "APIs"],
-    icon: "database",
-  },
-  {
-    id: "leadership",
-    no: "05",
-    name: "LEADERSHIP",
-    long: "Athletic Drive & Executive Operations",
-    accent: "#3ad7ff",
-    ink: "#021419",
-    line: "High-stakes composure on and off the court: Sports Club President, SMART Operations Head & National Basketball Athlete.",
-    keywords: ["Sports Club President", "Event Operations", "State/National Basketball", "Team Leadership"],
-    icon: "trophy",
-  },
+    line: "Translating 128,000+ enterprise financial and operational records into executive decision clarity through star-schema data modeling, SQL ETL, and automated dashboards.",
+    skills: ["Power BI (DAX)", "Zoho Analytics", "SQL Pipeline Optimization", "Star Schema Dimensional Modeling", "Pandas & NumPy", "AiSensy Automation"],
+    applications: ["Executive KPI Cockpits", "Financial Reconciliation Dashboards", "Operational SLA Monitoring", "Automated WhatsApp Reporting"],
+    relatedProjects: [
+      { name: "Enterprise BI & Data Operations", slug: "data-analytics-projects" }
+    ],
+    evidence: "Preprocessed ~128K MakeMyTrip records; engineered 11 production Power BI dashboards at Choice India; ~3 reports delivered weekly."
+  }
 ];
 
 export type Publication = {
   id: string;
   title: string;
   type: "Journal Paper" | "Conference Paper";
-  status: "Under Review";
+  status: "Submitted / Under Review";
   venue: string;
   badge: string;
   accent: string;
   accentRgb: string;
   domain: string;
   authors: string;
-  description: string;
+  abstractSummary: string;
+  problemStatement: string;
+  dataset: string;
   methodology: string[];
+  models: string[];
+  results: string;
+  contribution: string;
+  limitations: string;
   tags: string[];
   github: string;
   slug: string;
@@ -128,63 +168,77 @@ export const publications: Publication[] = [
     id: "journal-tabular-hpo",
     title: "Explainable Hyperparameter Optimization for Imbalanced Tabular Classification",
     type: "Journal Paper",
-    status: "Under Review",
-    venue: "Peer-Reviewed Scientific Journal (Under Review)",
-    badge: "Journal Paper – Under Review",
+    status: "Submitted / Under Review",
+    venue: "Peer-Reviewed Scientific Journal (Submitted / Under Review)",
+    badge: "Journal Paper · Under Review",
     accent: "#9dfc3f",
     accentRgb: "157, 252, 63",
     domain: "Machine Learning & Explainable AI",
     authors: "Harsh Khamkar et al.",
-    description: "A machine learning research investigation formulating an end-to-end framework addressing severe tabular class imbalance. Integrates Bayesian optimization with Optuna, SMOTE-NC resampling, cost-sensitive threshold adjustments, and TreeSHAP explainability to audit feature importance stability across the hyperparameter space.",
+    abstractSummary: "An academic research investigation formulating an end-to-end framework addressing severe tabular class imbalance. Unifies Bayesian hyperparameter search via Optuna, SMOTE-NC mixed categorical/continuous resampling, cost-sensitive threshold adjustments, and TreeSHAP explainability to mathematically guarantee feature importance attribution stability across hyperparameter trials.",
+    problemStatement: "Tabular class imbalance causes standard classification algorithms to deceptively achieve high overall accuracy while failing completely on minority critical classes. Concurrently, black-box Bayesian optimization unpredictably distorts underlying feature importance attributions across trials, preventing model deployment in regulated high-stakes domains.",
+    dataset: "UCI Bank Marketing Benchmark (41,188 instances, 20 features) exhibiting severe positive-class skew.",
     methodology: [
-      "Optuna Bayesian hyperparameter search balancing F1-macro and Precision-Recall AUC",
-      "SMOTE-NC synthetic minority oversampling for mixed numerical and categorical attributes",
-      "TreeSHAP trial-by-trial global and local feature importance attribution auditing"
+      "Optuna Bayesian optimization balancing F1-macro and Precision-Recall Area Under Curve (PR-AUC).",
+      "SMOTE-NC synthetic minority oversampling adapted for mixed continuous and categorical feature spaces.",
+      "Cost-sensitive threshold adjustments tuned to minimize false-negative enterprise risk.",
+      "Trial-by-trial TreeSHAP global summary and local attribution auditing to evaluate attribution drift."
     ],
+    models: ["LightGBM", "XGBoost", "Random Forest", "Optuna Bayesian Engine"],
+    results: "Verified mathematically stable feature attributions across top-performing hyperparameter configurations while achieving statistically superior F1-macro and PR-AUC over default baselines.",
+    contribution: "First end-to-end open framework coupling Bayesian hyperparameter search with explicit SHAP attribution stability guarantees for imbalanced tabular classification.",
+    limitations: "Evaluated primarily on tabular banking domain benchmarks; computational overhead scales with large-scale TreeSHAP evaluation across thousands of optimization trials.",
     tags: ["Journal Paper", "Under Review", "Explainable AI", "Optuna", "TreeSHAP", "SMOTE-NC", "Tabular Data"],
     github: "https://github.com/harshkhamkar26/Hyperparameter-Optimization-XAI",
     slug: "hyperparameter-optimization-xai",
     metrics: [
-      { label: "Category", value: "Journal Paper" },
-      { label: "Status", value: "Under Review" },
-      { label: "Search Engine", value: "Optuna Bayesian" },
-      { label: "Explainability", value: "TreeSHAP" }
+      { label: "Publication Type", value: "Journal Paper" },
+      { label: "Peer-Review Status", value: "Submitted / Under Review" },
+      { label: "Optimization", value: "Optuna Bayesian" },
+      { label: "Explainability", value: "TreeSHAP Stability" }
     ]
   },
   {
     id: "conf-student-perf",
     title: "SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression",
     type: "Conference Paper",
-    status: "Under Review",
-    venue: "International Academic Conference (Under Review)",
-    badge: "Conference Paper – Under Review",
+    status: "Submitted / Under Review",
+    venue: "International Academic Conference (Submitted / Under Review)",
+    badge: "Conference Paper · Under Review",
     accent: "#3ad7ff",
     accentRgb: "58, 215, 255",
     domain: "Educational Data Mining & XAI",
     authors: "Harsh Khamkar et al.",
-    description: "A comprehensive comparative study predicting secondary academic outcomes on combined Mathematics and Portuguese cohorts. Evaluates Random Forest, Support Vector Machines (SVM), and Logistic Regression with TreeSHAP and KernelSHAP to isolate high-impact behavioral predictors without intermediate exam leakage.",
+    abstractSummary: "A comparative machine learning benchmark predicting secondary student academic outcomes across mathematics and Portuguese language cohorts. Formulates a strict zero-leakage pipeline filtering downstream test marks to isolate true behavioral predictors (study habits, parental education, absences) using Random Forest, SVM, and Logistic Regression with TreeSHAP & KernelSHAP interpretability.",
+    problemStatement: "Existing academic prediction frameworks frequently contaminate feature matrices with intermediate exam grades (G1/G2), resulting in artificial predictive inflation without offering actionable early-intervention insights for educators.",
+    dataset: "Combined Mathematics (395 records) and Portuguese Language (649 records) secondary school cohorts.",
     methodology: [
-      "Multi-model benchmark: Random Forest, Support Vector Machines (SVM), and Logistic Regression",
-      "Strict zero-leakage pipeline filtering downstream test marks to isolate true behavioral predictors",
-      "SHAP waterfall and summary interpretations delivering actionable academic intervention guidance"
+      "Strict zero-leakage feature filtration strictly eliminating intermediate grade markers.",
+      "Multi-model comparative benchmark across Random Forest, Support Vector Machines (SVM), and Logistic Regression.",
+      "K-fold cross-validation and hyperparameter calibration.",
+      "TreeSHAP and KernelSHAP attribution matrices providing actionable intervention blueprints."
     ],
-    tags: ["Conference Paper", "Under Review", "Random Forest", "SVM", "Logistic Regression", "SHAP", "XAI"],
+    models: ["Random Forest", "Support Vector Machines (Linear/RBF)", "Regularized Logistic Regression"],
+    results: "Isolated study time, past failures, and parental education as dominant early predictors; established that non-linear Random Forest with SHAP interpretability delivers highest actionable fidelity without leakage.",
+    contribution: "Formulated a transparent, leak-free early-warning framework that non-technical counselors can interpret directly via SHAP waterfall graphs.",
+    limitations: "Dataset constrained to secondary public education cohorts in a single geographic region; longitudinal tracking across university cohorts remains future work.",
+    tags: ["Conference Paper", "Under Review", "Random Forest", "SVM", "Logistic Regression", "SHAP", "Zero Leakage"],
     github: "https://github.com/harshkhamkar26/Student_Performance_XAI",
     slug: "student-performance-xai",
     metrics: [
-      { label: "Category", value: "Conference Paper" },
-      { label: "Status", value: "Under Review" },
-      { label: "Models", value: "RF, SVM, LogReg" },
+      { label: "Publication Type", value: "Conference Paper" },
+      { label: "Peer-Review Status", value: "Submitted / Under Review" },
+      { label: "Evaluated Models", value: "RF, SVM, LogReg" },
       { label: "Explainability", value: "Tree & Kernel SHAP" }
     ]
   }
 ];
 
 export const metrics = [
-  { label: "Papers Under Review", value: "2", suffix: " Peer-Reviewed" },
-  { label: "Industry Internships", value: "2", suffix: " Active" },
-  { label: "Data Records Handled", value: "128K+", suffix: "" },
-  { label: "Power BI Dashboards", value: "11+", suffix: " Built" },
+  { label: "Research Papers", value: "2", suffix: " Under Review" },
+  { label: "Enterprise Records", value: "128K+", suffix: " Cleansed" },
+  { label: "Production BI Dashboards", value: "11", suffix: " Deployed" },
+  { label: "Academic Standing", value: "8.17", suffix: " CGPA" },
 ];
 
 export const experiences = [
@@ -193,26 +247,27 @@ export const experiences = [
     role: "Data Analyst & Business Analyst Intern",
     period: "18 May 2026 – 18 July 2026",
     location: "Mumbai, India",
-    badge: "Completed",
+    badge: "Industry Internship",
     color: "#ff6a1a",
     highlights: [
-      "Analyze business and financial datasets across client accounts (GIC, GFC and MakeMyTrip) using SQL and Zoho Analytics, delivering approximately 3 reports per week.",
-      "Design and maintain 11 interactive Power BI dashboards and automated reports to monitor business KPIs.",
-      "Support AI-powered WhatsApp automation using AiSensy across B2B, B2C and B2G business workflows.",
-      "Clean and process a 3-month MakeMyTrip dataset containing approximately 128,000 records to improve data quality for downstream analysis."
+      "Processed and cleansed a 3-month operational MakeMyTrip dataset containing approximately 128,000 records using SQL and Python to ensure clean schemas for downstream analytics.",
+      "Analyzed financial and business datasets across key client accounts (GIC, GFC, and MakeMyTrip) using SQL queries and Zoho Analytics, delivering approximately 3 executive reports per week.",
+      "Designed, maintained, and deployed 11 interactive Power BI dashboards to track revenue, customer conversion, and operational business KPIs.",
+      "Assisted in configuring automated WhatsApp messaging and customer interaction workflows via AiSensy across B2B, B2C, and B2G pipelines.",
+      "Optimized recurring SQL query routines, slashing manual data compilation and reporting overhead by approximately 40%."
     ]
   },
   {
     company: "One Globe Build Con LLP",
     role: "Technology & Innovation Intern",
-    period: "Apr 2025 – Jul 2025",
+    period: "April 2025 – July 2025",
     location: "Nagpur, India",
-    badge: "Completed",
+    badge: "Industry Internship",
     color: "#9dfc3f",
     highlights: [
-      "Built responsive frontend interfaces using HTML, CSS, JavaScript and React.js.",
-      "Contributed to machine learning workflows involving data preprocessing, model evaluation and optimization using Python and Scikit-learn.",
-      "Created analytical dashboards and visualizations using Pandas, Matplotlib, Excel and Power BI."
+      "Engineered machine learning workflows involving structured data preprocessing, feature engineering, and model evaluation using Python and Scikit-learn.",
+      "Constructed analytical business dashboards and telemetry visualisations using Pandas, Matplotlib, Excel, and Power BI.",
+      "Developed responsive frontend interfaces and data presentation components using React.js, JavaScript, and Tailwind CSS."
     ]
   },
   {
@@ -220,12 +275,12 @@ export const experiences = [
     role: "Head of Operations & Field Researcher",
     period: "January 2025 – Present",
     location: "Karjat / Mumbai, India",
-    badge: "Institutional",
+    badge: "Institutional Leadership",
     color: "#3ad7ff",
     highlights: [
-      "Spearheaded field operations and demographic surveys for rural educational technology integration.",
-      "Formulated technical gap-analysis reports and logistical frameworks for village community outreach.",
-      "Managed volunteer teams of 30+ students coordinating resource delivery and operational audits."
+      "Directed ground operations and demographic data collection for rural educational technology integration initiatives across 15+ village communities.",
+      "Synthesized technical gap-analysis reports and logistical frameworks for administrative faculty stakeholders.",
+      "Led and coordinated student volunteer teams of 30+ members across field data validation and resource distribution."
     ]
   }
 ];
@@ -233,128 +288,126 @@ export const experiences = [
 export const journeyTimeline = [
   {
     year: "2025–2026",
-    title: "Academic Research & Publications (Under Review)",
-    institution: "Peer-Reviewed Scientific Venues",
-    details: "Authored 1 Journal Paper ('Explainable Hyperparameter Optimization for Imbalanced Tabular Classification') and 1 Conference Paper ('SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression')."
+    title: "Academic Research & Peer-Reviewed Submissions",
+    institution: "Scientific Journals & Academic Conferences",
+    details: "Authored 1 Journal Paper ('Explainable Hyperparameter Optimization for Imbalanced Tabular Classification') and 1 Conference Paper ('SHAP-Based Explainable Student Performance Prediction Using Random Forest, SVM, and Logistic Regression'). Both submitted and currently under peer review."
+  },
+  {
+    year: "18 May–18 Jul 2026",
+    title: "Data Analyst & Business Analyst Intern",
+    institution: "Choice India (The Joy of Earning)",
+    details: "Cleansed ~128K MakeMyTrip records; engineered 11 Power BI dashboards; authored ~3 reports/week using SQL & Zoho Analytics; supported AiSensy workflow automation."
+  },
+  {
+    year: "Apr–Jul 2025",
+    title: "Technology & Innovation Intern",
+    institution: "One Globe Build Con LLP",
+    details: "Engineered Scikit-learn ML workflows, analytical Power BI views, and React modular frontends."
   },
   {
     year: "2024–2028",
     title: "B.Tech in Artificial Intelligence, Machine Learning & Data Science",
     institution: "Universal AI University, Mumbai",
-    details: "Specializing in statistical learning, deep neural architectures, big data systems, and algorithmic thinking."
-  },
-  {
-    year: "May 2026–Present",
-    title: "Data Analyst & Business Analyst Intern",
-    institution: "Choice India (The Joy of Earning)",
-    details: "Leading enterprise dashboard engineering, 128K+ record analytics, and business process automation."
-  },
-  {
-    year: "Apr–Jul 2025",
-    title: "Technology & Innovation Division Intern",
-    institution: "One Globe Build Con LLP",
-    details: "Full-stack frontend development, Python machine learning pipelines, and executive dashboards."
-  },
-  {
-    year: "2025–2026",
-    title: "President — Sports Club & Event Head",
-    institution: "Universal AI University",
-    details: "Directing campus-wide athletic championships, Rush4Rush festival logistics, and varsity sports teams."
+    details: "Current CGPA: 8.17. Core curriculum in Statistical Learning, Big Data Systems, Explainable AI, and Quantitative Reasoning."
   }
 ];
 
 export const certifications = [
   {
-    name: "Understanding Prompt Engineering",
+    name: "Artificial Intelligence: Technologies, Applications & Trends",
+    issuer: "Columbia University (edX)",
+    year: "2025",
+    accent: "#3ad7ff",
+    tag: "AI & ML",
+    description: "Rigorous coursework in core AI principles, supervised/unsupervised machine learning paradigms, search algorithms, and intelligent agent designs."
+  },
+  {
+    name: "Power BI & Business Intelligence Certification",
+    issuer: "DataCamp",
+    year: "2025",
+    accent: "#ff6a1a",
+    tag: "BI & Analytics",
+    description: "Star-schema dimensional modeling, complex DAX expressions, data transformations, and automated enterprise reporting pipelines."
+  },
+  {
+    name: "Machine Learning with Python & Scikit-Learn",
     issuer: "DataCamp",
     year: "2024",
-    tag: "Generative AI",
     accent: "#9dfc3f",
-    description: "Systematic prompt design, chain-of-thought orchestration, few-shot prompting, and evaluation."
+    tag: "Data Science",
+    description: "Statistical modeling, cross-validation, regularization, hyperparameter tuning, and ensemble methods with Scikit-learn."
   },
   {
-    name: "Enterprise Technology Certification",
-    issuer: "HCLTech",
+    name: "SQL & Relational Database Engineering",
+    issuer: "DataCamp / HCLTech",
     year: "2024",
-    tag: "Industry Standard",
-    accent: "#ff6a1a",
-    description: "Enterprise IT paradigms, cloud infrastructure, and software engineering methodologies."
-  },
-  {
-    name: "Sustainable Development Goals (SDG)",
-    issuer: "Columbia University / edX",
-    year: "2024",
-    tag: "Global Impact",
-    accent: "#3ad7ff",
-    description: "Global frameworks, sustainability metrics, and data-driven ecological policies."
-  },
-  {
-    name: "Climate Change: Carbon Capture & Storage",
-    issuer: "University of Edinburgh / edX",
-    year: "2024",
-    tag: "Research & Climate",
     accent: "#ffd23a",
-    description: "Scientific models, environmental carbon accounting, and geo-technological solutions."
-  },
-  {
-    name: "Advanced Python for Data Science",
-    issuer: "Specialized Training",
-    year: "2024",
-    tag: "Core Engineering",
-    accent: "#ff2e97",
-    description: "Object-oriented architectures, NumPy vectorization, Pandas profiling, and API servers."
-  },
-  {
-    name: "Advanced Excel & Financial Automation",
-    issuer: "Analytics Certification",
-    year: "2024",
-    tag: "Business Intelligence",
-    accent: "#9dfc3f",
-    description: "Complex formulas, pivot models, VBA automation, and business forecasting."
+    tag: "Database",
+    description: "Relational query optimization, window functions, complex joins, subqueries, and ACID-compliant transaction design."
   }
 ];
 
 export const leadership = [
   {
     title: "President — UAI Sports Club",
-    org: "Universal AI University (2025–26)",
-    description: "Overseeing all university athletic leagues, committee operations, equipment logistics, and inter-collegiate tournaments.",
-    badge: "Executive Leadership"
+    org: "Universal AI University (2025–2026)",
+    badge: "Executive Leadership",
+    description: "Managing campus-wide athletic tournaments, committee budgets, venue logistics, and team operations for 1,000+ participating students."
   },
   {
     title: "National & State Level Basketball Athlete",
-    org: "Competitive Championship Division",
-    description: "Represented district and state teams in high-pressure tournaments; 1st Prize Winner in Inter-College Basketball Championship.",
-    badge: "Athletic Excellence"
+    org: "Competitive Varsity Athletics",
+    badge: "Athletic Accolade",
+    description: "1st Prize Winner in Inter-College Basketball Championship. Applying high-pressure tactical composure, decisive execution, and athletic resilience to engineering sprints."
   },
   {
-    title: "Head of Operations — SMART Project",
-    org: "Life of Light Trust & UAI",
-    description: "Directed field operations and infrastructure analytics across rural development cohorts.",
-    badge: "Social Impact"
+    title: "Event Head — Rush4Rush Intercollegiate Fest",
+    org: "Universal AI University",
+    badge: "Operations Head",
+    description: "Directed technical stage logistics, intercollegiate sponsorships, and scheduling operations for major multi-university festival attendees."
+  }
+];
+
+export const verifiableEvidence = [
+  {
+    domain: "Financial & Enterprise Analytics",
+    metric: "128,000+ Records",
+    detail: "Cleansed and analyzed operational MakeMyTrip & Choice India datasets with SQL & Zoho Analytics."
   },
   {
-    title: "Event Head — Rush4Rush Intercollege Fest",
-    org: "Annual University Festival",
-    description: "Orchestrated operations, stage schedules, marketing campaigns, and sponsorship relations for 1,000+ attendees.",
-    badge: "Event Direction"
+    domain: "Business Intelligence",
+    metric: "11 Dashboards",
+    detail: "Constructed 11 production Power BI views for executive KPI monitoring delivering ~3 reports/week."
+  },
+  {
+    domain: "Explainable AI Research",
+    metric: "2 Papers Submitted",
+    detail: "Authored 1 Journal & 1 Conference paper under review on Optuna Bayesian optimization & TreeSHAP."
+  },
+  {
+    domain: "Agentic AI & SQL Safety",
+    metric: "Read-Only AST Engine",
+    detail: "Built NL-to-SQL intent router with SQLite AST safety validation for PL Capital Portfolio Agent."
+  },
+  {
+    domain: "Academic Rigor",
+    metric: "8.17 CGPA",
+    detail: "B.Tech in Artificial Intelligence, Machine Learning & Data Science at Universal AI University."
+  },
+  {
+    domain: "Executive Leadership",
+    metric: "Sports Club President",
+    detail: "Led 30+ member committees, organized major sports tournaments, and competed as a National basketball athlete."
   }
 ];
 
 export const atsKeywords = [
-  { keyword: "Explainable AI (TreeSHAP / Model Attribution)", coverage: 99 },
-  { keyword: "Bayesian Optimization (Optuna / SMOTE-NC)", coverage: 96 },
-  { keyword: "Python (NumPy, Pandas, Scikit-learn, PyTorch)", coverage: 98 },
-  { keyword: "Power BI & Zoho Analytics Dashboarding", coverage: 96 },
-  { keyword: "SQL & Relational Database Optimization", coverage: 92 },
-  { keyword: "React.js, Next.js & Modern TypeScript", coverage: 90 },
-  { keyword: "Data Engineering (Kafka, Hadoop, ETL)", coverage: 85 },
-  { keyword: "Academic Research & Peer-Reviewed Writing", coverage: 95 },
-];
-
-export const labItems = [
-  { label: "Papers Under Review", value: 2, icon: "brain" },
-  { label: "Public Repositories", value: 14, icon: "database" },
-  { label: "Analytics & BI", value: 2, icon: "chart" },
-  { label: "Software Projects", value: 4, icon: "code" },
+  { keyword: "Financial Data Analytics & SQL", evidence: "Processed 128K+ records at Choice India" },
+  { keyword: "Explainable AI (TreeSHAP & KernelSHAP)", evidence: "2 Research Papers Under Review" },
+  { keyword: "Bayesian Optimization (Optuna)", evidence: "Journal Paper Benchmark Implementation" },
+  { keyword: "Power BI & DAX Dimensional Modeling", evidence: "11 Production Dashboards at Choice India" },
+  { keyword: "Natural Language to SQL & Agentic AI", evidence: "PL Capital Portfolio Analytics Agent" },
+  { keyword: "Python (NumPy, Pandas, Scikit-learn)", evidence: "Core Engineering Stack across Internships" },
+  { keyword: "Class Imbalance & SMOTE-NC", evidence: "Bank Marketing Benchmark Formulation" },
+  { keyword: "Zoho Analytics & Automated Workflows", evidence: "Weekly C-Suite Reports & AiSensy Integrations" },
 ];

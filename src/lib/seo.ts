@@ -52,7 +52,7 @@ export function skillsSchema() {
         item: {
           "@type": "DefinedTerm",
           name: skill.name,
-          description: `${cat.name} — ${skill.level}% proficiency`,
+          description: `${cat.name} — ${skill.verification || cat.description}`,
         },
       }))
     ),

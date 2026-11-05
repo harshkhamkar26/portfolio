@@ -109,8 +109,8 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
             <span className="font-display text-xs sm:text-sm font-black uppercase tracking-tight text-[#ece5d5] group-hover:text-white transition-colors">
               HARSH KHAMKAR
             </span>
-            <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-[#ff6a1a]">
-              DATA SCIENCE ENG
+            <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-[#3ad7ff]">
+              AI/ML & FINANCIAL AI
             </span>
           </div>
         </Link>
@@ -120,7 +120,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
             Features live sliding active capsule, glowing track line & audio
             ───────────────────────────────────────────────────────────── */}
         <div className="hidden lg:flex items-center">
-          <div className="relative flex items-center rounded-full border border-white/15 bg-[#161820]/90 p-1 shadow-[0_4px_24px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+          <div className="relative flex items-center rounded-full border border-white/15 bg-[#161820]/90 p-0.5 xl:p-1 shadow-[0_4px_24px_rgba(0,0,0,0.8)] backdrop-blur-xl">
             {/* Background Micro-Track Rail Line */}
             <div className="pointer-events-none absolute inset-x-4 top-1/2 -translate-y-1/2 h-[1px] bg-white/10 -z-10" />
 
@@ -133,7 +133,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
                   href={`#${st.id}`}
                   onClick={(e) => handleAnchor(e, st.id)}
                   onMouseEnter={() => sounds.playHover()}
-                  className={`relative flex items-center gap-1.5 rounded-full px-2 xl:px-3 py-1 font-mono text-[10px] xl:text-[11px] uppercase tracking-wider transition-colors duration-200 select-none whitespace-nowrap shrink-0 ${
+                  className={`relative flex items-center gap-1.5 rounded-full px-1.5 xl:px-2.5 2xl:px-3 py-1 font-mono text-[9px] xl:text-[10px] 2xl:text-[11px] uppercase tracking-wider transition-colors duration-200 select-none whitespace-nowrap shrink-0 ${
                     isCurrent
                       ? "text-white font-bold"
                       : "text-[#ece5d5]/65 hover:text-white"

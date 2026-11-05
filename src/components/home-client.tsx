@@ -8,6 +8,7 @@ import { CommandPalette } from "@/components/layout/command-palette";
 import { HeroSection } from "@/components/sections/hero-section";
 import { TracksSection } from "@/components/sections/tracks-section";
 import { CircularCarousel } from "@/components/sections/circular-carousel";
+import { PortfolioAgentShowcase } from "@/components/sections/portfolio-agent-showcase";
 import { DepotSection } from "@/components/sections/depot-section";
 import { ProfileSection } from "@/components/sections/profile-section";
 import { ExpeditionSection } from "@/components/sections/expedition-section";
@@ -42,13 +43,16 @@ export function HomeClient() {
         {/* Station 01: Hero Origin */}
         <HeroSection />
 
-        {/* Station 02: 5 Core Technical Tracks */}
+        {/* Station 02: 4 Core Technical Disciplines */}
         <TracksSection />
 
-        {/* Station 03: 3D Cylinder Orbit Showcase */}
+        {/* Station 03: Flagship Work in 3D Orbit */}
         <CircularCarousel />
 
-        {/* Station 04: Project Depot Fleet & GitHub API Sync */}
+        {/* Dedicated Financial AI Technical Assessment & Architecture Preview */}
+        <PortfolioAgentShowcase />
+
+        {/* Station 04: Project Depot Fleet & Research Manuscripts */}
         <DepotSection />
 
         {/* Station 05: Data Science Engineer Profile & Arsenal */}
@@ -67,7 +71,7 @@ export function HomeClient() {
       {/* Terminal Footer */}
       <Footer />
 
-      {/* Interactive AI Locomotive Engineer Assistant */}
+      {/* Interactive AI Locomotive Engineer Assistant (Conductor AI) */}
       <AIAssistant />
 
       {/* Keyboard Command Palette (Ctrl+K) */}
