@@ -37,7 +37,7 @@ export default function ResumePage() {
               </div>
               <div>
                 <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#3ad7ff] flex items-center gap-1.5">
-                  <ShieldCheck size={14} /> PL CAPITAL CANDIDATE PROFILE · VERIFIED ATS ALIGNMENT
+                  <ShieldCheck size={14} /> ATS OPTIMIZED CANDIDATE PROFILE · VERIFIED ALIGNMENT
                 </span>
                 <h1 className="mt-1 font-display text-2xl sm:text-4xl font-black uppercase text-white">
                   Harsh Khamkar
@@ -60,7 +60,7 @@ export default function ResumePage() {
                 <Download size={15} /> Download PDF
               </a>
               <a
-                href={`mailto:${siteConfig.email}?subject=PL%20Capital%20AI%20Inquiry%20-%20Harsh%20Khamkar`}
+                href={`mailto:${siteConfig.email}?subject=Engineering%20Inquiry%20-%20Harsh%20Khamkar`}
                 className="flex items-center justify-center gap-2 border border-white/20 bg-white/5 px-4 py-2.5 font-mono text-xs text-white hover:border-[#9dfc3f] hover:text-[#9dfc3f] transition"
               >
                 <Mail size={15} /> Contact Directly

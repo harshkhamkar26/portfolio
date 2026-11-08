@@ -110,7 +110,7 @@ export function Navbar({ onCommandOpen }: { onCommandOpen: () => void }) {
               HARSH KHAMKAR
             </span>
             <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-[#3ad7ff]">
-              AI/ML & FINANCIAL AI
+              DATA SCIENCE & AI/ML
             </span>
           </div>
         </Link>

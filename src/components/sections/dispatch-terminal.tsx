@@ -37,9 +37,9 @@ export function DispatchTerminal() {
       command: "sysinfo",
       output: (
         <div className="space-y-1 text-xs font-mono text-[#ece5d5]/80">
-          <p className="text-[#3ad7ff] font-bold">SYSTEM: HK-AI-CORE v2026.4 [PL CAPITAL PREVIEW]</p>
+          <p className="text-[#3ad7ff] font-bold">SYSTEM: HK-AI-CORE v2026.4 [WORKSTATION CONSOLE]</p>
           <p>ENGINEER: Harsh Khamkar (Universal AI University, Mumbai · CGPA 8.17)</p>
-          <p>ROLE: AI/ML Engineer · Data Science Researcher · Financial Analytics</p>
+          <p>ROLE: AI/ML Engineer · Data Science Researcher</p>
           <p className="text-[#ffd23a]">
             Type <span className="underline font-bold">help</span> or click the command chips below to inspect verified outputs.
           </p>
@@ -78,7 +78,7 @@ export function DispatchTerminal() {
         output = (
           <div className="space-y-1 text-xs font-mono text-[#ece5d5]/85">
             <p className="text-[#3ad7ff] font-bold">AVAILABLE COMMANDS:</p>
-            <p>▸ <strong className="text-white">financial-ai</strong> — Architecture of the AI Portfolio Analytics Agent (PL Capital Assessment)</p>
+            <p>▸ <strong className="text-white">analytics</strong> — Choice India enterprise operations &amp; 128K+ record cleansing</p>
             <p>▸ <strong className="text-white">papers</strong> — 2 peer-reviewed research papers under review (Journal &amp; Conference)</p>
             <p>▸ <strong className="text-white">projects</strong> — Flagship AI, Machine Learning &amp; Analytics repositories</p>
             <p>▸ <strong className="text-white">experience</strong> — Choice India (128K+ records) &amp; One Globe Build Con</p>
@@ -90,16 +90,15 @@ export function DispatchTerminal() {
         );
         break;
 
-      case "financial-ai":
-      case "agent":
+      case "analytics":
+      case "choice":
         output = (
           <div className="space-y-1.5 text-xs font-mono">
-            <p className="text-[#3ad7ff] font-bold">AI PORTFOLIO ANALYTICS AGENT [PL CAPITAL ASSESSMENT]:</p>
-            <p className="text-white/80">• Purpose: Evidence-grounded natural-language query engine for multi-asset portfolio databases.</p>
-            <p className="text-white/80">• Capabilities: NL-to-SQL synthesis, sector exposure calculations, intent tool routing, and AST read-only guards.</p>
-            <p className="text-white/80">• Safety: Strict AST parser prohibiting mutation tokens (DROP, UPDATE, DELETE).</p>
-            <p className="text-[#ffd23a]">• Status: Prototype / Technical Assessment in progress.</p>
-            <p className="text-[#9dfc3f] mt-1">➔ Jump to Section #financial-demo for live interaction preview.</p>
+            <p className="text-[#3ad7ff] font-bold">ENTERPRISE DATA ANALYTICS &amp; BI [CHOICE INDIA]:</p>
+            <p className="text-white/80">• Cleansed and normalized ~128,000 MakeMyTrip transaction records across 3-month operational cycles.</p>
+            <p className="text-white/80">• Deployed 11 interactive Power BI dashboards monitoring revenue, client conversion, and executive KPIs.</p>
+            <p className="text-white/80">• Delivered ~3 executive SQL/Zoho reports weekly and automated client communication via AiSensy.</p>
+            <p className="text-[#9dfc3f] mt-1">➔ Jump to Station #depot to inspect project artifacts.</p>
           </div>
         );
         break;
@@ -258,26 +257,26 @@ export function DispatchTerminal() {
                   Harsh Khamkar
                 </h3>
                 <p className="font-mono text-[11px] text-[#9dfc3f]">
-                  AI/ML Engineer · Financial Analytics
+                  AI/ML Engineer · Data Science Researcher
                 </p>
               </div>
             </div>
 
             <p className="font-mono text-xs text-[#ece5d5]/70 leading-relaxed">
-              Based in Mumbai, India. Open for PL Capital technical assessment interviews, AI/ML internships, and quantitative research engagements.
+              Based in Mumbai, India. Open for AI/ML engineering roles, data science internships, and collaborative research engagements.
             </p>
 
-            {/* Prominent CTA for PL Capital: Explore My Financial AI Projects */}
+            {/* Prominent CTA: Explore Technical Projects */}
             <div className="mt-6">
               <a
-                href="#financial-demo"
+                href="#depot"
                 onClick={() => sounds.playClick()}
                 onMouseEnter={() => sounds.playHover()}
-                className="w-full flex items-center justify-between border-2 border-[#3ad7ff] bg-[#3ad7ff]/15 px-4 py-3 font-mono text-xs font-bold uppercase text-[#3ad7ff] hover:bg-[#3ad7ff] hover:text-[#0c1017] transition shadow-[0_0_15px_rgba(58,215,255,0.25)]"
+                className="w-full flex items-center justify-between border-2 border-[#ff6a1a] bg-[#ff6a1a]/15 px-4 py-3 font-mono text-xs font-bold uppercase text-[#ff6a1a] hover:bg-[#ff6a1a] hover:text-[#0c1017] transition shadow-[0_0_15px_rgba(255,106,26,0.25)]"
               >
                 <span className="flex items-center gap-2">
                   <Sparkles size={14} />
-                  <span>EXPLORE MY FINANCIAL AI PROJECTS</span>
+                  <span>EXPLORE RESEARCH &amp; PROJECTS DEPOT</span>
                 </span>
                 <ArrowUpRight size={15} />
               </a>
@@ -291,7 +290,7 @@ export function DispatchTerminal() {
                 </span>
                 <div className="mt-1 flex items-center justify-between gap-2">
                   <a
-                    href={`mailto:${siteConfig.email}?subject=PL%20Capital%20AI%20Evaluation%20-%20Harsh%20Khamkar`}
+                    href={`mailto:${siteConfig.email}?subject=Engineering%20Evaluation%20-%20Harsh%20Khamkar`}
                     className="font-mono text-sm sm:text-base font-bold text-white hover:text-[#3ad7ff] truncate"
                   >
                     {siteConfig.email}
@@ -427,7 +426,7 @@ export function DispatchTerminal() {
                   type="text"
                   value={terminalInput}
                   onChange={(e) => setTerminalInput(e.target.value)}
-                  placeholder="type 'financial-ai', 'papers', 'skills'..."
+                  placeholder="type 'papers', 'projects', 'skills'..."
                   className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder-white/30"
                   autoCapitalize="off"
                   autoComplete="off"

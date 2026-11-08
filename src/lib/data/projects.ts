@@ -3,7 +3,7 @@ export type Project = {
   title: string;
   subtitle: string;
   domain: string;
-  category: "Financial AI" | "Machine Learning" | "Explainable AI" | "Agentic AI" | "Data Analytics" | "Full-Stack Engineering" | "Research";
+  category: "Machine Learning" | "Explainable AI" | "Agentic AI" | "Data Analytics" | "Full-Stack Engineering" | "Research";
   description: string;
   tags: string[];
   metrics: { label: string; value: string }[];
@@ -17,47 +17,10 @@ export type Project = {
   gradient?: string;
   github: string;
   demoUrl?: string;
-  status: "Prototype / Technical Assessment" | "Submitted / Under Review" | "Implemented" | "Research in progress" | "Production Architecture";
-  isFinancialAI?: boolean;
+  status: "Submitted / Under Review" | "Implemented" | "Research in progress" | "Production Architecture";
 };
 
 export const projects: Project[] = [
-  {
-    slug: "ai-portfolio-analytics-agent",
-    title: "AI Portfolio Analytics Agent",
-    subtitle: "NL-to-SQL Engine · Sector Exposure Calculation · Read-Only Guardrails · SQLite Sandbox",
-    domain: "Financial AI & Agentic Systems",
-    category: "Financial AI",
-    isFinancialAI: true,
-    description: "An evidence-grounded financial analytics agent designed for the PL Capital technical assessment. Converts natural-language investor inquiries into validated read-only SQL queries over normalized SQLite portfolio databases, computes real-time sector exposure allocations, and enforces deterministic tool routing with ground-truth verification.",
-    tags: ["Financial AI", "NL-to-SQL", "Agentic Systems", "SQLite", "Gemini API", "Streamlit", "PL Capital"],
-    metrics: [
-      { label: "Target Scope", value: "PL Capital Assessment" },
-      { label: "Execution Sandbox", value: "SQLite (Read-Only)" },
-      { label: "Safety Verification", value: "AST Token Safeguard" },
-      { label: "Evaluation", value: "Ground-Truth Suite" },
-    ],
-    technologies: ["Python", "SQLite", "Gemini API", "Streamlit", "SQLAlchemy", "Pandas", "AST Parser", "Prompt Engineering"],
-    challenges: [
-      "Naive LLM query synthesis risks severe database mutations (e.g. DROP, UPDATE, DELETE) and hallucinated schema relationships.",
-      "Financial queries often require deterministic mathematical aggregations (e.g. precise sector concentration % and weighted cost basis) rather than unstructured prose generation.",
-      "Ambiguous investor intents (e.g., 'show risk' vs 'list holdings') require strict tool-routing boundaries before query execution."
-    ],
-    solutions: [
-      "Engineered a deterministic Intent Router classifying prompts into direct SQL querying, sector concentration calculations, or schema clarifications.",
-      "Implemented an Abstract Syntax Tree (AST) SQL safety validator strictly enforcing SELECT-only statements and blocking multi-statement or DDL/DML tokens.",
-      "Constructed a ground-truth evaluation benchmark verifying syntactic validity, parameter binding, and numerical calculation parity against known portfolio holdings."
-    ],
-    results: [
-      "Successfully built the complete architectural prototype, SQLite relational schema, intent router, and Streamlit dashboard interface ready for PL Capital technical review."
-    ],
-    featured: true,
-    accent: "#3ad7ff",
-    accentRgb: "58, 215, 255",
-    github: "https://github.com/harshkhamkar26/AI-Portfolio-Analytics-Agent",
-    demoUrl: "/#financial-demo",
-    status: "Prototype / Technical Assessment",
-  },
   {
     slug: "hyperparameter-optimization-xai",
     title: "Explainable Hyperparameter Optimization for Imbalanced Tabular Classification",
@@ -244,7 +207,7 @@ export const projects: Project[] = [
     results: [
       "Successfully deployed for university tournaments including Undergrad Premier League and intercollegiate festivals."
     ],
-    featured: false,
+    featured: true,
     accent: "#ff6a1a",
     accentRgb: "255, 106, 26",
     github: "https://github.com/harshkhamkar26/uai-sports-club-platform",
@@ -266,10 +229,11 @@ export const projects: Project[] = [
     ],
     technologies: ["Java", "Python", "MySQL", "HTML5", "CSS3", "JavaScript"],
     challenges: [
-      "Synchronizing inventory depletion with active orders to prevent stock disparities during rush periods."
+      "Synchronizing inventory depletion with active orders to prevent stock disparities during rush periods.",
+      "Designing atomic database transactions and an ergonomic cashier terminal interface."
     ],
     solutions: [
-      "Designed atomic database transactions and an ergonomic cashier terminal interface."
+      "Engineered transactional integrity checks and automated end-of-day sales rollups."
     ],
     results: [
       "Significantly cut checkout queue times and gave managers instant day-end revenue summaries."
@@ -296,10 +260,12 @@ export const projects: Project[] = [
     ],
     technologies: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn"],
     challenges: [
-      "Capturing non-box-score defensive impact and possession momentum in predictive game algorithms."
+      "Capturing non-box-score defensive impact and possession momentum in predictive game algorithms.",
+      "Delivering reproducible feature sets for dynamic game pace variations."
     ],
     solutions: [
-      "Modeled spatial shooting heatmaps and pace-adjusted efficiency coefficients."
+      "Modeled spatial shooting heatmaps and pace-adjusted efficiency coefficients.",
+      "Engineered automated aggregations on historical collegiate games."
     ],
     results: [
       "Provided data-backed strategic play recommendations for university tournament teams."

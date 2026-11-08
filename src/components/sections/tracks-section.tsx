@@ -126,7 +126,7 @@ export function TracksSection() {
                     {track.relatedProjects.map((rp) => (
                       <a
                         key={rp.slug}
-                        href={rp.slug === "ai-portfolio-analytics-agent" ? "#financial-demo" : "#depot"}
+                        href="#depot"
                         className="flex items-center justify-between font-mono text-[11px] text-white/90 hover:underline"
                         style={{ color: track.accent }}
                       >

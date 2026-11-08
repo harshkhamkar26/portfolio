@@ -27,7 +27,7 @@ export function ProfileSection() {
           </div>
 
           <p className="max-w-md font-mono text-xs leading-relaxed text-[#ece5d5]/70">
-            Fusing statistical machine-learning research, corporate financial analytics, and athletic team leadership into reliable engineering execution.
+            Fusing statistical machine-learning research, corporate data analytics, and athletic team leadership into reliable engineering execution.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export function ProfileSection() {
               <div className="relative mt-2 overflow-hidden border border-white/10 bg-[#0c0d10] aspect-[4/5] group">
                 <Image
                   src="/images/harsh-khamkar.jpg"
-                  alt="Harsh Khamkar - AI/ML Engineer & Financial Analytics"
+                  alt="Harsh Khamkar - AI/ML Engineer & Data Science Researcher"
                   fill
                   sizes="(max-width: 768px) 100vw, 440px"
                   className="object-cover object-top contrast-105 transition-all duration-700 group-hover:scale-105"
@@ -67,7 +67,7 @@ export function ProfileSection() {
                 <div className="absolute bottom-3 left-3 right-3 font-mono text-[10px] text-[#ece5d5] bg-black/80 backdrop-blur-md px-3 py-2 border border-white/15">
                   <div className="flex justify-between items-center">
                     <span className="font-bold text-white">HARSH KHAMKAR</span>
-                    <span className="text-[#3ad7ff]">AI/ML &amp; FINANCIAL AI</span>
+                    <span className="text-[#3ad7ff]">AI/ML &amp; DATA SCIENCE</span>
                   </div>
                   <div className="text-[9px] text-white/70 mt-0.5">
                     UNIVERSAL AI UNIVERSITY · MUMBAI, INDIA
@@ -115,7 +115,7 @@ export function ProfileSection() {
 
               <div className="mt-6 space-y-4 font-mono text-xs sm:text-sm leading-relaxed text-[#ece5d5]/85">
                 <p>
-                  I am an undergraduate engineer pursuing a B.Tech in Artificial Intelligence, Machine Learning &amp; Data Science at <strong className="text-white">Universal AI University, Mumbai</strong> (Current CGPA: <strong className="text-[#ffd23a]">8.17</strong>). My work bridges machine-learning research discipline with practical enterprise financial analytics.
+                  I am an undergraduate engineer pursuing a B.Tech in Artificial Intelligence, Machine Learning &amp; Data Science at <strong className="text-white">Universal AI University, Mumbai</strong> (Current CGPA: <strong className="text-[#ffd23a]">8.17</strong>). My work bridges machine-learning research discipline with practical enterprise data analytics.
                 </p>
                 <p>
                   During my internship at <strong className="text-white">Choice India (The Joy of Earning)</strong>, I processed an operational MakeMyTrip dataset exceeding <strong className="text-white">128,000 records</strong>, authored approximately three SQL/Zoho executive reports weekly, and built 11 production Power BI dashboards to track client KPIs. Previously at <strong className="text-white">One Globe Build Con LLP</strong>, I contributed to Scikit-learn machine learning workflows and modular React frontends.

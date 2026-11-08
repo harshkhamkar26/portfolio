@@ -9,10 +9,10 @@ import { StationBadge } from "@/components/ui/station-badge";
 
 export function HeroSection() {
   const marqueeItems = [
-    "PL CAPITAL AI ASSESSMENT: PORTFOLIO ANALYTICS AGENT",
+    "SENTINEL-X: AUTONOMOUS CYBERSECURITY INVESTIGATION AGENT",
     "JOURNAL PAPER (UNDER REVIEW): EXPLAINABLE HYPERPARAMETER OPTIMIZATION",
     "CONFERENCE PAPER (UNDER REVIEW): SHAP-BASED STUDENT PERFORMANCE PREDICTION",
-    "NATURAL LANGUAGE TO SQL & READ-ONLY AST SAFEGUARDS",
+    "MULTIMODAL DEEPFAKE DETECTION (AUDIO & VIDEO FUSION)",
     "128,000+ ENTERPRISE RECORDS PREPROCESSED @ CHOICE INDIA",
     "EXPLAINABLE AI (TREESHAP & KERNELSHAP)",
     "OPTUNA BAYESIAN OPTIMIZATION FOR IMBALANCED TABULAR DATA",
@@ -70,7 +70,7 @@ export function HeroSection() {
 
           <div className="inline-flex items-center gap-1.5 border border-[#3ad7ff]/50 bg-[#3ad7ff]/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#3ad7ff]">
             <Sparkles size={12} />
-            <span>PL CAPITAL AI ASSESSMENT READY</span>
+            <span>AI/ML & DATA SCIENCE ENGINEER</span>
           </div>
 
           <div className="inline-flex items-center gap-1.5 border border-[#ffd23a]/50 bg-[#ffd23a]/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#ffd23a]">
@@ -134,13 +134,13 @@ export function HeroSection() {
           className="mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4"
         >
           <a
-            href="#financial-demo"
+            href="#depot"
             onClick={() => sounds.playClick()}
             onMouseEnter={() => sounds.playHover()}
-            className="group flex items-center justify-center gap-2.5 border-2 border-[#3ad7ff] bg-[#3ad7ff] px-6 py-3 font-mono text-xs sm:text-sm font-black uppercase tracking-wider text-[#0c1017] transition-all hover:bg-transparent hover:text-[#3ad7ff] shadow-[0_0_18px_rgba(58,215,255,0.3)]"
+            className="group flex items-center justify-center gap-2.5 border-2 border-[#ff6a1a] bg-[#ff6a1a] px-6 py-3 font-mono text-xs sm:text-sm font-black uppercase tracking-wider text-[#0c1017] transition-all hover:bg-transparent hover:text-[#ff6a1a] shadow-[0_0_18px_rgba(255,106,26,0.3)]"
           >
             <Terminal size={16} />
-            <span>EXPLORE FINANCIAL AI AGENT</span>
+            <span>EXPLORE RESEARCH &amp; PROJECTS</span>
             <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
 
@@ -175,9 +175,9 @@ export function HeroSection() {
           className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-px border border-[#ece5d5]/15 bg-[#ece5d5]/15"
         >
           {[
-            { tag: "01 // FINANCIAL AI AGENT", val: "PL Capital Assessment", sub: "NL-to-SQL & SQLite Read-Only Guardrails" },
-            { tag: "02 // ACADEMIC RESEARCH", val: "2 Papers Under Review", sub: "Optuna Bayesian & SHAP Explainability" },
-            { tag: "03 // ENTERPRISE ANALYTICS", val: "128,000+ Records", sub: "Choice India · 11 Power BI Dashboards" },
+            { tag: "01 // ACADEMIC RESEARCH", val: "2 Papers Under Review", sub: "Optuna Bayesian & SHAP Explainability" },
+            { tag: "02 // ENTERPRISE ANALYTICS", val: "128,000+ Records", sub: "Choice India · 11 Power BI Dashboards" },
+            { tag: "03 // ATHLETIC LEADERSHIP", val: "UAI Sports Club", sub: "President & Varsity Athlete" },
             { tag: "04 // DEGREE & CGPA", val: "Universal AI University", sub: "B.Tech AI/ML & Data Science · 8.17 CGPA" },
           ].map((item, idx) => (
             <div key={idx} className="bg-[#16181c]/95 p-3.5 sm:p-5">

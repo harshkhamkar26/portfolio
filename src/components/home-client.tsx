@@ -8,7 +8,6 @@ import { CommandPalette } from "@/components/layout/command-palette";
 import { HeroSection } from "@/components/sections/hero-section";
 import { TracksSection } from "@/components/sections/tracks-section";
 import { CircularCarousel } from "@/components/sections/circular-carousel";
-import { PortfolioAgentShowcase } from "@/components/sections/portfolio-agent-showcase";
 import { DepotSection } from "@/components/sections/depot-section";
 import { ProfileSection } from "@/components/sections/profile-section";
 import { ExpeditionSection } from "@/components/sections/expedition-section";
@@ -48,9 +47,6 @@ export function HomeClient() {
 
         {/* Station 03: Flagship Work in 3D Orbit */}
         <CircularCarousel />
-
-        {/* Dedicated Financial AI Technical Assessment & Architecture Preview */}
-        <PortfolioAgentShowcase />
 
         {/* Station 04: Project Depot Fleet & Research Manuscripts */}
         <DepotSection />

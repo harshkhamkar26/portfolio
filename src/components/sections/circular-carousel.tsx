@@ -205,23 +205,9 @@ export function CircularCarousel() {
                           </div>
 
                           <div className="flex items-center justify-between pt-3 border-t border-white/10">
-                            {proj.isFinancialAI ? (
-                              <a
-                                href="#financial-demo"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  sounds.playClick();
-                                }}
-                                className="inline-flex items-center gap-1 font-mono text-[11px] font-bold text-[#3ad7ff] hover:underline"
-                              >
-                                <Terminal size={12} />
-                                <span>INTERACTIVE DEMO</span>
-                              </a>
-                            ) : (
-                              <span className="font-mono text-[10px] text-white/50 uppercase">
-                                VERIFIED PROJECT
-                              </span>
-                            )}
+                            <span className="font-mono text-[10px] text-white/50 uppercase">
+                              VERIFIED REPOSITORY
+                            </span>
                             <a
                               href={proj.github}
                               target="_blank"
@@ -284,16 +270,6 @@ export function CircularCarousel() {
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                {activeProject.isFinancialAI && (
-                  <a
-                    href="#financial-demo"
-                    onClick={() => sounds.playClick()}
-                    className="flex items-center gap-2 border-2 border-[#3ad7ff] bg-[#3ad7ff] px-4 py-2 font-mono text-xs font-black uppercase tracking-wider text-[#0c1017] hover:bg-transparent hover:text-[#3ad7ff] transition"
-                  >
-                    <Terminal size={14} />
-                    <span>LAUNCH ARCHITECTURE PREVIEW</span>
-                  </a>
-                )}
                 <a
                   href={activeProject.github}
                   target="_blank"

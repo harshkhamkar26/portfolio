@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Harsh Khamkar",
-  title: "AI/ML Engineer · Data Science Researcher · Financial Analytics",
+  title: "AI/ML Engineer · Data Science Researcher · Enterprise Analytics",
   tagline: "Building explainable machine-learning systems, evidence-grounded AI agents and data-driven analytical solutions for complex financial and business problems.",
   location: "Mumbai, Maharashtra, India",
   coords: "18.98° N, 72.82° E",
@@ -15,18 +15,14 @@ export const siteConfig = {
   keywords: [
     "Harsh Khamkar",
     "AI/ML Engineer",
-    "Financial Analytics",
-    "PL Capital AI Assessment",
-    "AI Portfolio Analytics Agent",
+    "Data Science Researcher",
     "Explainable AI",
     "SHAP",
     "TreeSHAP",
     "KernelSHAP",
     "Optuna Bayesian Optimization",
     "Imbalanced Tabular Classification",
-    "Natural Language to SQL",
-    "SQLite Read-Only Safeguards",
-    "Gemini LLM Integration",
+    "Enterprise Analytics",
     "Choice India",
     "128,000 Records",
     "Power BI",
@@ -42,7 +38,7 @@ export const siteConfig = {
 export const stationStops = [
   { id: "hero", no: "01", name: "ORIGIN", label: "Hero Terminal" },
   { id: "tracks", no: "02", name: "TRACKS", label: "4 Core Disciplines" },
-  { id: "showcase", no: "03", name: "FLAGSHIP", label: "Financial AI & Orbit" },
+  { id: "showcase", no: "03", name: "FLAGSHIP", label: "Flagship 3D Orbit" },
   { id: "depot", no: "04", name: "DEPOT", label: "Research & Code Fleet" },
   { id: "about", no: "05", name: "PROFILE", label: "Engineer Profile" },
   { id: "expedition", no: "06", name: "JOURNEY", label: "Experience & Timeline" },
@@ -73,68 +69,67 @@ export type TechnicalTrack = {
 
 export const tracks: TechnicalTrack[] = [
   {
-    id: "financial-ai",
-    no: "01",
-    name: "FINANCIAL AI",
-    long: "Financial AI & Quantitative Analytics",
-    accent: "#3ad7ff",
-    ink: "#04141c",
-    line: "Developing natural-language portfolio analytical agents, deterministic sector exposure calculators, and read-only SQL querying engines for complex multi-asset portfolios.",
-    skills: ["NL-to-SQL Engines", "Portfolio Exposure Calculation", "AST SQL Safety Validation", "SQLite Sandbox", "Risk Concentration Metrics", "Gemini Integration"],
-    applications: ["Multi-Asset Sector Breakdown", "Automated SQL Query Generation", "Portfolio Concentration Alerts", "Deterministic Financial Math"],
-    relatedProjects: [
-      { name: "AI Portfolio Analytics Agent", slug: "ai-portfolio-analytics-agent" },
-      { name: "Enterprise BI & Data Analytics", slug: "data-analytics-projects" }
-    ],
-    evidence: "Engineered read-only AST parser blocking mutation statements; benchmarked against ground-truth portfolio SQL queries."
-  },
-  {
     id: "aiml-xai",
-    no: "02",
-    name: "ML & XAI",
+    no: "01",
+    name: "AIML & XAI",
     long: "Machine Learning & Explainable AI",
     accent: "#9dfc3f",
     ink: "#0f1a07",
-    line: "Moving beyond black-box ML models through rigorous statistical benchmarking, Bayesian hyperparameter optimization, and TreeSHAP/KernelSHAP attribution stability auditing.",
-    skills: ["TreeSHAP", "KernelSHAP", "Optuna Bayesian Optimization", "SMOTE-NC", "Scikit-Learn", "Cost-Sensitive Thresholds", "Class Imbalance"],
-    applications: ["Auditable Credit & Risk Modeling", "Hyperparameter Space Sensitivity Auditing", "Zero-Leakage Student Performance Blueprints"],
+    line: "Developing transparent ML models through rigorous statistical benchmarking, Bayesian hyperparameter optimization with Optuna, and TreeSHAP/KernelSHAP attribution auditing.",
+    skills: ["TreeSHAP & KernelSHAP", "Optuna Bayesian Tuning", "SMOTE-NC Resampling", "Scikit-Learn", "Cost-Sensitive Thresholds", "Class Imbalance"],
+    applications: ["Transparent Credit & Risk Scoring", "Hyperparameter Space Sensitivity Auditing", "Zero-Leakage Student Performance Blueprints"],
     relatedProjects: [
       { name: "Explainable Hyperparameter Optimization (Journal)", slug: "hyperparameter-optimization-xai" },
       { name: "Student Performance Prediction (Conference)", slug: "student-performance-xai" }
     ],
-    evidence: "2 peer-reviewed research papers currently submitted & under review; verified feature importance stability curves under severe class imbalance."
-  },
-  {
-    id: "genai-agentic",
-    no: "03",
-    name: "GENAI & AGENTS",
-    long: "Generative AI & Agentic Systems",
-    accent: "#ffd23a",
-    ink: "#1c1502",
-    line: "Building evidence-grounded agentic workflows with deterministic intent routing, parameter extraction, and human-in-the-loop audit logs.",
-    skills: ["Agentic Tool Routing", "Function Calling", "Prompt Engineering", "Structured Output Parsing", "Gemini API", "Multi-Modal Audio-Visual Fusion"],
-    applications: ["Intelligent Query Dispatch", "Cross-Manipulation Deepfake Detection", "Agentic SOC Alert Correlation"],
-    relatedProjects: [
-      { name: "AI Portfolio Analytics Agent", slug: "ai-portfolio-analytics-agent" },
-      { name: "SENTINEL-X Agentic SOC", slug: "sentinel-x" },
-      { name: "Multimodal Deepfake Detection", slug: "multimodal-deepfake-detection" }
-    ],
-    evidence: "Implemented intent routing accuracy test suite and cryptographic audit trails for autonomous investigation loops."
+    evidence: "2 peer-reviewed research papers submitted & under review; verified feature attribution stability under severe class imbalance."
   },
   {
     id: "data-bi",
-    no: "04",
+    no: "02",
     name: "DATA & BI",
     long: "Data Engineering & Business Intelligence",
     accent: "#ff6a1a",
     ink: "#1d0c02",
-    line: "Translating 128,000+ enterprise financial and operational records into executive decision clarity through star-schema data modeling, SQL ETL, and automated dashboards.",
+    line: "Translating 128,000+ enterprise financial and operational records into executive decision clarity through star-schema dimensional modeling, SQL ETL pipelines, and automated Power BI reporting.",
     skills: ["Power BI (DAX)", "Zoho Analytics", "SQL Pipeline Optimization", "Star Schema Dimensional Modeling", "Pandas & NumPy", "AiSensy Automation"],
     applications: ["Executive KPI Cockpits", "Financial Reconciliation Dashboards", "Operational SLA Monitoring", "Automated WhatsApp Reporting"],
     relatedProjects: [
       { name: "Enterprise BI & Data Operations", slug: "data-analytics-projects" }
     ],
     evidence: "Preprocessed ~128K MakeMyTrip records; engineered 11 production Power BI dashboards at Choice India; ~3 reports delivered weekly."
+  },
+  {
+    id: "genai-agentic",
+    no: "03",
+    name: "GENAI & AGENTS",
+    long: "Generative AI & Autonomous Agents",
+    accent: "#3ad7ff",
+    ink: "#04141c",
+    line: "Architecting autonomous agentic investigation loops, multi-modal audio-visual neural models, and secure tool routing pipelines with verifiable audit trails.",
+    skills: ["Agentic Tool Routing", "Function Calling", "Multi-Modal Audio-Visual Fusion", "Prompt Engineering", "Structured Output Parsing", "PyTorch Deep Learning"],
+    applications: ["Agentic SOC Alert Correlation", "Cross-Manipulation Deepfake Defense", "Deterministic Tool Routing"],
+    relatedProjects: [
+      { name: "SENTINEL-X Agentic SOC", slug: "sentinel-x" },
+      { name: "Multimodal Deepfake Detection", slug: "multimodal-deepfake-detection" }
+    ],
+    evidence: "Engineered multi-modal facial/acoustic deepfake detection model and agentic security triage loop with tamper-evident logs."
+  },
+  {
+    id: "systems-fullstack",
+    no: "04",
+    name: "SYSTEMS & FULLSTACK",
+    long: "Software Systems & Full-Stack Engineering",
+    accent: "#ffd23a",
+    ink: "#1c1502",
+    line: "Building high-performance web applications, dynamic bracket tournament engines, and ACID-compliant transaction databases for real-world campus and business operations.",
+    skills: ["Next.js & React 19", "TypeScript", "Tailwind CSS", "Relational MySQL", "Java & Python POS Engines", "RESTful Architecture"],
+    applications: ["Campus Sports Tournament Management", "Cashier Queue & Inventory POS", "Optimistic Real-Time UI Updates"],
+    relatedProjects: [
+      { name: "UAI Sports Club Platform", slug: "uai-sports-club-platform" },
+      { name: "Bistro Cafe Management & POS", slug: "bistro-cafe-management-system" }
+    ],
+    evidence: "Deployed campus athletic platform powering tournaments for 1,200+ students and atomic transaction POS system cutting checkout queues."
   }
 ];
 
@@ -385,9 +380,9 @@ export const verifiableEvidence = [
     detail: "Authored 1 Journal & 1 Conference paper under review on Optuna Bayesian optimization & TreeSHAP."
   },
   {
-    domain: "Agentic AI & SQL Safety",
-    metric: "Read-Only AST Engine",
-    detail: "Built NL-to-SQL intent router with SQLite AST safety validation for PL Capital Portfolio Agent."
+    domain: "Full-Stack & Systems Engineering",
+    metric: "1,200+ Active Reach",
+    detail: "Architected UAI Sports Club tournament engine and Bistro Cafe POS relational transaction database."
   },
   {
     domain: "Academic Rigor",
@@ -406,7 +401,7 @@ export const atsKeywords = [
   { keyword: "Explainable AI (TreeSHAP & KernelSHAP)", evidence: "2 Research Papers Under Review" },
   { keyword: "Bayesian Optimization (Optuna)", evidence: "Journal Paper Benchmark Implementation" },
   { keyword: "Power BI & DAX Dimensional Modeling", evidence: "11 Production Dashboards at Choice India" },
-  { keyword: "Natural Language to SQL & Agentic AI", evidence: "PL Capital Portfolio Analytics Agent" },
+  { keyword: "Agentic AI & Autonomous Systems", evidence: "SENTINEL-X Autonomous Cybersecurity Investigation Loop" },
   { keyword: "Python (NumPy, Pandas, Scikit-learn)", evidence: "Core Engineering Stack across Internships" },
   { keyword: "Class Imbalance & SMOTE-NC", evidence: "Bank Marketing Benchmark Formulation" },
   { keyword: "Zoho Analytics & Automated Workflows", evidence: "Weekly C-Suite Reports & AiSensy Integrations" },

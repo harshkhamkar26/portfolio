@@ -30,12 +30,12 @@ type Message = {
 };
 
 const SUGGESTED_PROMPTS = [
-  "📈 AI Portfolio Analytics Agent",
+  "🛡️ Sentinel-X Autonomous SOC",
   "📄 2 Papers Under Review",
   "📊 Choice India (128K+ Rows)",
   "🎯 Harsh's Career Goals",
   "🧠 Core ML & XAI Stack",
-  "💼 Why Hire Harsh for PL Capital?",
+  "💼 Why Hire Harsh?",
   "📥 1-Click ATS Resume",
   "🚂 Cruise to Station 03 (Flagship)",
   "📬 Direct Contact Details",
@@ -108,24 +108,20 @@ function generateResponse(rawInput: string): {
     }
   }
 
-  // Financial AI & PL Capital Technical Assessment
+  // Autonomous Systems & Enterprise Analytics
   if (
-    q.includes("portfolio") ||
-    q.includes("pl capital") ||
-    q.includes("financial") ||
-    q.includes("sql safety") ||
-    q.includes("sector exposure") ||
-    q.includes("nl to sql") ||
-    q.includes("sqlite") ||
-    q.includes("assessment")
+    q.includes("sentinel") ||
+    q.includes("agent") ||
+    q.includes("soc") ||
+    q.includes("deepfake")
   ) {
     return {
-      text: `📈 **AI Portfolio Analytics Agent [PL Capital Technical Assessment]**:\n\n• **Core Purpose**: Evidence-grounded natural-language query engine for multi-asset equity portfolios.\n• **Natural-Language-to-SQL**: Converts investor inquiries into validated SQL queries over normalized SQLite schemas.\n• **AST Read-Only Safeguards**: Parses query Abstract Syntax Trees to strictly enforce SELECT statements and block mutation tokens (DROP, UPDATE, DELETE).\n• **Deterministic Calculations**: Routes mathematical calculations to Python numerical routines, eliminating LLM arithmetic hallucination.\n• **Ground-Truth Evaluation**: Benchmarked across syntactic validity, safety adherence, and financial parity.\n• **Status**: Prototype / Technical Assessment in progress.`,
+      text: `🛡️ **SENTINEL-X & Agentic Systems**:\n\n• **Core Architecture**: Autonomous multi-stage alert correlation and incident triage engine with approval-gated response playbooks.\n• **Safety Guardrails**: Strict read-only investigation phases and cryptographic audit logging.\n• **Multimodal Deepfake Defense**: Reliability temporal attention fusion detecting visual and acoustic synthetic manipulations.\n• **Framework Stack**: Python, FastAPI, PyTorch, Docker.`,
       links: [
-        { label: "Launch Financial AI Demo", url: "#financial-demo", isStationJump: true },
-        { label: "Inspect GitHub Repository", url: "https://github.com/harshkhamkar26/AI-Portfolio-Analytics-Agent", external: true },
+        { label: "Cruise to Depot (Projects)", url: "#depot", isStationJump: true },
+        { label: "SENTINEL-X Repository", url: "https://github.com/harshkhamkar26/SENTINEL-X", external: true },
       ],
-      followUps: ["Explain SQL Safety Safeguards", "📄 2 Papers Under Review", "📊 Choice India (128K+ Rows)"],
+      followUps: ["📄 2 Papers Under Review", "📊 Choice India (128K+ Rows)", "🧠 Core ML & XAI Stack"],
     };
   }
 

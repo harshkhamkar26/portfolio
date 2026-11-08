@@ -10,9 +10,8 @@ import { StationBadge } from "@/components/ui/station-badge";
 
 const REPO_FILTER_CATEGORIES = [
   "All",
-  "Financial AI",
-  "Machine Learning",
   "Explainable AI",
+  "Machine Learning",
   "Agentic AI",
   "Data Analytics",
   "Full-Stack Engineering",
@@ -29,7 +28,6 @@ export function DepotSection() {
       const matchesCategory =
         activeCategory === "All" ||
         p.category === activeCategory ||
-        (activeCategory === "Financial AI" && (p.isFinancialAI || p.domain.includes("Financial"))) ||
         (activeCategory === "Explainable AI" && (p.domain.includes("Explainable") || p.tags.includes("Explainable AI"))) ||
         (activeCategory === "Machine Learning" && (p.domain.includes("Machine Learning") || p.category === "Machine Learning")) ||
         (activeCategory === "Agentic AI" && (p.domain.includes("Agentic") || p.category === "Agentic AI")) ||
@@ -325,16 +323,7 @@ export function DepotSection() {
 
                 {/* Footer Action Links */}
                 <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono text-xs">
-                  {repo.isFinancialAI ? (
-                    <a
-                      href="#financial-demo"
-                      onClick={() => sounds.playClick()}
-                      className="inline-flex items-center gap-1 font-bold text-[#3ad7ff] hover:underline"
-                    >
-                      <Terminal size={12} />
-                      <span>LIVE DEMO</span>
-                    </a>
-                  ) : repo.demoUrl ? (
+                  {repo.demoUrl ? (
                     <a
                       href={repo.demoUrl}
                       target="_blank"
